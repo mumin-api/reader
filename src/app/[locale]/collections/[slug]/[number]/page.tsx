@@ -2,7 +2,7 @@ import React from 'react';
 import { hadithApi, Hadith } from '@/lib/api/client';
 import HadithDeepViewClient from './HadithDeepViewClient';
 import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { StructuredData, generateHadithSchema, generateBreadcrumbSchema } from '@/components/StructuredData';
 import { getRelatedHadiths } from '@/lib/seo/related';
 
@@ -10,6 +10,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string; number: string }> }): Promise<Metadata> {
     const { locale, slug, number } = await params;
+    setRequestLocale(locale);
     const hadithNumber = parseInt(number);
     const t = await getTranslations({ locale, namespace: 'Hadith' });
 
@@ -53,6 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function HadithDeepViewPage({ params }: { params: Promise<{ locale: string; slug: string; number: string }> }) {
     const { locale, slug, number } = await params;
+    setRequestLocale(locale);
     const hadithNumber = parseInt(number);
     const tNav = await getTranslations({ locale, namespace: 'Navbar' });
     const tHadith = await getTranslations({ locale, namespace: 'Hadith' });

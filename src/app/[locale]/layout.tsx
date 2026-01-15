@@ -114,7 +114,7 @@ export const viewport: Viewport = {
 
 import { StructuredData, generateSearchSchema } from "@/components/StructuredData";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
 import { GlobalPanels } from '@/components/GlobalPanels';
@@ -133,6 +133,8 @@ export default async function RootLayout({
   if (!locales.includes(locale as any)) {
     notFound();
   }
+
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 
