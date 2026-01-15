@@ -52,14 +52,15 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: '/',
+    canonical: './',
     languages: {
-      'en-US': '/en',
-      'ar-SA': '/ar',
-      'ru-RU': '/ru',
-      'ur-PK': '/ur',
-      'tr-TR': '/tr',
-      'id-ID': '/id',
+      'en': '/en',
+      'ru': '/ru',
+      'ar': '/ar',
+      'ur': '/ur',
+      'tr': '/tr',
+      'id': '/id',
+      'x-default': '/en',
     },
   },
   openGraph: {
@@ -118,6 +119,7 @@ import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
 import { GlobalPanels } from '@/components/GlobalPanels';
 import { ThemeApplier } from '@/components/ThemeApplier';
+import { Analytics } from '@/components/Analytics';
 
 export default async function RootLayout({
   children,
@@ -152,6 +154,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ThemeApplier />
+          <Analytics />
           {children}
           <GlobalPanels />
         </NextIntlClientProvider>
