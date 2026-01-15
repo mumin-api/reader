@@ -3,7 +3,7 @@ import { Navbar } from '@/components/Navbar';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { Book, Shield, Database, Github } from 'lucide-react';
+import { Book, Shield, Database, Github, Globe } from 'lucide-react';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
 
@@ -41,6 +41,11 @@ export default async function MethodologyPage({ params }: { params: Promise<{ lo
             icon: Database,
             title: t('tech_title'),
             desc: t('tech_desc')
+        },
+        {
+            icon: Globe,
+            title: t('global_title'),
+            desc: t('global_desc')
         }
     ];
 

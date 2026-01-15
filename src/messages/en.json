@@ -127,7 +127,9 @@
         "verification_title": "Verification Process",
         "verification_desc": "Every hadith undergoes a rigorous digital verification process. We cross-reference Arabic texts with established manuscripts and utilize reputable translations to ensure accuracy in meaning.",
         "tech_title": "Digital Preservation",
-        "tech_desc": "By leveraging modern web technologies, we aim to preserve these sacred texts in a format that is accessible, searchable, and resilient for future generations."
+        "tech_desc": "By leveraging modern web technologies, we aim to preserve these sacred texts in a format that is accessible, searchable, and resilient for future generations.",
+        "global_title": "Global Accessibility",
+        "global_desc": "Breaking language barriers by providing high-quality translations in multiple languages, making Prophetic wisdom accessible to the entire Ummah."
     },
     "Search": {
         "title": "Search Results",
