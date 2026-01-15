@@ -118,5 +118,22 @@
         "privacy": "Gizlilik Politikası",
         "terms": "Kullanım Şartları",
         "rights": "© 2026 Mumin. Tüm hakları saklıdır. Küresel Ümmet için ihsanla inşa edildi."
+    },
+    "Search": {
+        "title": "Arama Sonuçları",
+        "results_for": "\"{query}\" için sonuçlar",
+        "all_hadiths": "Tüm Hadisler",
+        "found_results": "{count} sonuç bulundu",
+        "showing_page": "Sayfa {page} / {total}",
+        "filters": "Filtreler",
+        "collections": "Koleksiyonlar",
+        "advanced_search": "Gelişmiş Arama",
+        "advanced_search_desc": "Belirli raviler, referanslar veya konulara göre aramanızı daraltın.",
+        "try_it_now": "Şimdi Dene",
+        "no_results": "Sonuç bulunamadı",
+        "no_results_desc": "Aramanızla eşleşen hiçbir hadis bulamadık. Farklı anahtar kelimeler deneyin veya koleksiyonlara göz atın.",
+        "clear_search": "Aramayı Temizle",
+        "error": "Arama Hatası",
+        "error_desc": "Arama sonuçları alınamadı. Lütfen tekrar deneyin."
     }
 }

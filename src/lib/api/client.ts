@@ -92,7 +92,7 @@ export const hadithApi = {
         language?: string;
     }) => {
         const response = await apiClient.get<any>('/hadiths', { params });
-        return response.data.data ? response.data : response.data; // Return full response for pagination handling in component
+        return response.data.data || response.data;
     },
 
     getHadithById: async (id: number, language: string = 'en') => {
@@ -105,9 +105,9 @@ export const hadithApi = {
         return response.data.data || response.data;
     },
 
-    searchHadiths: async (params: { q: string; language?: string; page?: number; limit?: number }) => {
+    searchHadiths: async (params: { q: string; language?: string; page?: number; limit?: number; collection?: string; grade?: string }) => {
         const response = await apiClient.get<any>('/hadiths/search', { params });
-        return response.data.data ? response.data : response.data;
+        return response.data.data || response.data;
     },
 
     getDailyHadith: async (language: string = 'en') => {

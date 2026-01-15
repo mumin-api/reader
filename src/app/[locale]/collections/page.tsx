@@ -13,9 +13,11 @@ import { Link, useRouter, usePathname } from '@/lib/navigation';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
 
-// This is a client-side only component.
+import { useParams } from 'next/navigation';
 
 export default function CollectionsPage() {
+    const params = useParams();
+    const locale = params.locale as string || 'en';
     const t = useTranslations('Collections');
     const tNav = useTranslations('Navbar');
     const [collections, setCollections] = React.useState<any[]>([]);
@@ -25,7 +27,7 @@ export default function CollectionsPage() {
     React.useEffect(() => {
         const fetchCollections = async () => {
             try {
-                const data = await hadithApi.getCollections();
+                const data = await hadithApi.getCollections(); // API doesn't seem to take language for collections list yet, but good to have context
                 setCollections(data);
             } catch (error) {
                 console.error('Failed to fetch collections:', error);

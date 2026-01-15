@@ -85,11 +85,12 @@ export default async function Image(props: { params: Promise<{ id: string }> }) 
                     <div style={{ display: 'flex', flexDirection: 'column', width: '35%', borderRight: `1px solid ${gold500}44`, paddingRight: '40px' }}>
                         {/* Logo Circle */}
                         <div style={{
-                            width: '60px', height: '60px', borderRadius: '50%', backgroundColor: emerald900,
+                            width: '120px', height: '40px', backgroundColor: emerald900,
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            color: gold500, fontWeight: 'bold', fontSize: 30, marginBottom: 30
+                            color: gold500, fontWeight: 'bold', fontSize: 18, marginBottom: 30,
+                            textTransform: 'uppercase', letterSpacing: '0.1em'
                         }}>
-                            M
+                            Mumin
                         </div>
 
                         {/* Collection Label */}

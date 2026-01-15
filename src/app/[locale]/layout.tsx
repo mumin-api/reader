@@ -117,6 +117,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
 import { GlobalPanels } from '@/components/GlobalPanels';
+import { ThemeApplier } from '@/components/ThemeApplier';
 
 export default async function RootLayout({
   children,
@@ -141,7 +142,7 @@ export default async function RootLayout({
       <body
         suppressHydrationWarning
         className={cn(
-          "min-h-screen bg-sand font-body antialiased",
+          "min-h-screen font-body antialiased",
           inter.variable,
           playfair.variable,
           amiri.variable,
@@ -149,7 +150,8 @@ export default async function RootLayout({
           poppins.variable
         )}
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <ThemeApplier />
           {children}
           <GlobalPanels />
         </NextIntlClientProvider>

@@ -29,7 +29,7 @@ export const generateHadithSchema = (hadith: any, url: string) => {
             "name": "Mumin Hadith Reader",
             "logo": {
                 "@type": "ImageObject",
-                "url": `${url}/icons/icon-512x512.png`
+                "url": `${url}/icons/logo.png`
             }
         },
         "url": `${url}/hadith/${hadith.id}`,

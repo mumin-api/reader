@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
+import Image from 'next/image';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { HadithCard } from '@/components/HadithCard';
 import { CollectionCard } from '@/components/CollectionCard';
@@ -10,6 +11,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { Link, useRouter, usePathname } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
 
 const FEATURED_COLLECTIONS = [
   {
@@ -36,6 +38,8 @@ const FEATURED_COLLECTIONS = [
 ];
 
 export default function HomePage() {
+  const params = useParams();
+  const locale = params.locale as string || 'en';
   const t = useTranslations('Home');
   const tNav = useTranslations('Navbar');
   const tFooter = useTranslations('Footer');
@@ -47,7 +51,7 @@ export default function HomePage() {
     async function loadData() {
       try {
         const [hadith, collections] = await Promise.all([
-          hadithApi.getDailyHadith(),
+          hadithApi.getDailyHadith(locale),
           hadithApi.getCollections()
         ]);
         setDailyHadith(hadith);
@@ -64,7 +68,7 @@ export default function HomePage() {
       }
     }
     loadData();
-  }, []);
+  }, [locale]);
 
   return (
     <main className="min-h-screen relative">
@@ -178,9 +182,14 @@ export default function HomePage() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center rotate-45">
-                <span className="text-emerald-900 font-bold -rotate-45">M</span>
+            <Link href="/" className="flex items-center gap-3 mb-6 transition-transform hover:scale-105">
+              <div className="relative w-12 h-12">
+                <Image
+                  src="/icons/logo.svg"
+                  alt="Mumin Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <span className="text-2xl font-display font-bold">Mumin Hadith</span>
             </Link>

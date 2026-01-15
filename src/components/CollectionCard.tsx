@@ -34,7 +34,12 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
         >
             <Link
                 href={`/collections/${slug}`}
-                className="group relative block p-6 rounded-[2.5rem] bg-white border border-emerald-900/5 shadow-islamic hover:shadow-2xl hover:border-emerald-900/10 transition-all duration-500 overflow-hidden"
+                style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--page-text)'
+                }}
+                className="group relative block p-6 rounded-[2.5rem] border shadow-islamic hover:shadow-2xl transition-all duration-500 overflow-hidden"
             >
                 {/* Background decoration */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-900/5 rounded-bl-[4rem] transition-transform duration-700 group-hover:scale-125" />

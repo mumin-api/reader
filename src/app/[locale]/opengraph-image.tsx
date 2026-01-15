@@ -63,18 +63,17 @@ export default async function Image() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: '120px',
+                            width: '240px',
                             height: '120px',
-                            borderRadius: '50%',
-                            border: `4px solid ${gold500}`,
                             marginBottom: '40px',
-                            backgroundColor: 'rgba(6, 78, 59, 0.5)',
                             color: gold500,
-                            fontSize: '60px',
+                            fontSize: '48px',
                             fontWeight: 'bold',
+                            letterSpacing: '0.1em',
+                            textTransform: 'uppercase',
                         }}
                     >
-                        M
+                        Mumin
                     </div>
 
                     <div

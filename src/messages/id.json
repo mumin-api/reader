@@ -118,5 +118,22 @@
         "privacy": "Kebijakan Privasi",
         "terms": "Ketentuan Penggunaan",
         "rights": "© 2026 Mumin. Seluruh hak cipta dilindungi. Dibangun dengan ihsaan untuk Ummah global."
+    },
+    "Search": {
+        "title": "Hasil Pencarian",
+        "results_for": "Hasil untuk \"{query}\"",
+        "all_hadiths": "Semua Hadis",
+        "found_results": "Ditemukan {count} hasil",
+        "showing_page": "Menampilkan halaman {page} dari {total}",
+        "filters": "Filter",
+        "collections": "Koleksi",
+        "advanced_search": "Pencarian Lanjutan",
+        "advanced_search_desc": "Saring pencarian Anda berdasarkan perawi, referensi, atau topik tertentu.",
+        "try_it_now": "Coba Sekarang",
+        "no_results": "Tidak ada hasil ditemukan",
+        "no_results_desc": "Kami tidak dapat menemukan hadis yang sesuai dengan kueri Anda. Coba kata kunci lain atau jelajahi koleksi.",
+        "clear_search": "Hapus Pencarian",
+        "error": "Kesalahan Pencarian",
+        "error_desc": "Gagal mengambil hasil pencarian. Silakan coba lagi."
     }
 }

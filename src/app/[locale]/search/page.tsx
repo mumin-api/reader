@@ -19,17 +19,38 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
 // We will separate the metadata to a parent server component or metadata file.
 
 
+import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+
 export default function SearchResultsPage() {
+    const params = useParams();
+    const locale = params.locale as string || 'en';
+    const t = useTranslations('Search');
+    const tNav = useTranslations('Navbar');
     const searchParams = useSearchParams();
     const query = searchParams.get('q') || '';
 
     const [results, setResults] = useState<PaginatedResponse<Hadith> | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [page, setPage] = useState(1);
     const [activeFilters, setActiveFilters] = useState({
         collection: '',
         grade: '',
     });
+
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handleFilterChange = (type: 'collection' | 'grade', value: string) => {
+        setActiveFilters(prev => ({
+            ...prev,
+            [type]: prev[type] === value ? '' : value
+        }));
+        setPage(1); // Reset to first page when filters change
+    };
 
     useEffect(() => {
         async function performSearch() {
@@ -41,26 +62,31 @@ export default function SearchResultsPage() {
             try {
                 const data = await hadithApi.searchHadiths({
                     q: query,
-                    page: 1,
-                    limit: 20
+                    page,
+                    limit: 20,
+                    language: locale,
+                    collection: activeFilters.collection,
+                    grade: activeFilters.grade
                 });
                 setResults(data);
             } catch (err) {
                 console.error('Search failed', err);
-                setError('Failed to fetch search results. Please try again.');
+                setError(t('error_desc'));
             } finally {
                 setLoading(false);
             }
         }
 
         performSearch();
-    }, [query]);
+    }, [query, locale, page, activeFilters]);
+
+    const tHadith = useTranslations('Hadith');
 
     return (
         <main className="min-h-screen relative">
             <StructuredData data={generateBreadcrumbSchema([
-                { name: 'Home', item: BASE_URL },
-                { name: 'Search', item: `${BASE_URL}/search` }
+                { name: tNav('home'), item: BASE_URL },
+                { name: t('title'), item: `${BASE_URL}/search` }
             ])} />
             <GeometricPattern opacity={0.02} />
             <Navbar />
@@ -76,7 +102,7 @@ export default function SearchResultsPage() {
                                 className="flex items-center gap-2 text-emerald-600 font-bold text-sm tracking-widest uppercase mb-4"
                             >
                                 <SearchIcon className="w-4 h-4" />
-                                Search Results
+                                {t('title')}
                             </motion.div>
                             <motion.h1
                                 initial={{ opacity: 0, y: 20 }}
@@ -84,12 +110,12 @@ export default function SearchResultsPage() {
                                 transition={{ delay: 0.1 }}
                                 className="text-4xl md:text-5xl font-display font-bold text-emerald-900"
                             >
-                                {query ? `Results for "${query}"` : 'All Hadiths'}
+                                {query ? t('results_for', { query }) : t('all_hadiths')}
                             </motion.h1>
                             {results && (
                                 <p className="mt-4 text-emerald-900/40 font-medium">
-                                    Found {results.pagination.total.toLocaleString()} results
-                                    {results.pagination.total > 0 && ` • Showing page ${results.pagination.page} of ${results.pagination.totalPages}`}
+                                    {t('found_results', { count: results.pagination.total.toLocaleString() })}
+                                    {results.pagination.total > 0 && ` • ${t('showing_page', { page: results.pagination.page, total: results.pagination.totalPages })}`}
                                 </p>
                             )}
                         </div>
@@ -102,21 +128,22 @@ export default function SearchResultsPage() {
                         >
                             <button className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white border border-emerald-900/5 shadow-sm text-sm font-bold text-emerald-900 uppercase tracking-widest hover:border-emerald-600/20 transition-all">
                                 <SlidersHorizontal className="w-4 h-4" />
-                                Filters
+                                {t('filters')}
                             </button>
                             <div className="h-10 w-px bg-emerald-900/10 hidden md:block" />
                             <div className="flex items-center gap-1">
-                                {['All', 'Sahih', 'Hasan'].map((grade) => (
+                                {['all', 'sahih', 'hasan'].map((grade) => (
                                     <button
                                         key={grade}
+                                        onClick={() => handleFilterChange('grade', grade === 'all' ? '' : grade)}
                                         className={cn(
                                             "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all",
-                                            grade === 'All'
+                                            (grade === 'all' && !activeFilters.grade) || activeFilters.grade === grade
                                                 ? "bg-emerald-900 text-white shadow-md"
                                                 : "text-emerald-900/40 hover:bg-emerald-900/5"
                                         )}
                                     >
-                                        {grade}
+                                        {grade === 'all' ? t('all_hadiths') : tHadith(`grades.${grade}`)}
                                     </button>
                                 ))}
                             </div>
@@ -129,15 +156,35 @@ export default function SearchResultsPage() {
                             <div className="p-8 rounded-[2rem] bg-emerald-900/5 border border-emerald-900/5">
                                 <h3 className="flex items-center gap-2 text-sm font-bold text-emerald-900 uppercase tracking-widest mb-6 border-b border-emerald-900/5 pb-4">
                                     <Filter className="w-4 h-4" />
-                                    Collections
+                                    {t('collections')}
                                 </h3>
                                 <div className="space-y-3">
                                     {['Bukhari', 'Muslim', 'Abu Dawud', 'Tirmidhi', 'Nasa\'i', 'Ibn Majah'].map((col) => (
-                                        <label key={col} className="flex items-center gap-3 group cursor-pointer">
-                                            <div className="w-5 h-5 rounded-md border-2 border-emerald-900/10 group-hover:border-emerald-600/30 transition-colors flex items-center justify-center">
-                                                {/* Checkmark icon if selected */}
+                                        <label
+                                            key={col}
+                                            className="flex items-center gap-3 group cursor-pointer"
+                                            onClick={() => handleFilterChange('collection', col)}
+                                        >
+                                            <div className={cn(
+                                                "w-5 h-5 rounded-md border-2 transition-all flex items-center justify-center",
+                                                activeFilters.collection === col
+                                                    ? "bg-emerald-600 border-emerald-600"
+                                                    : "border-emerald-900/10 group-hover:border-emerald-600/30"
+                                            )}>
+                                                {activeFilters.collection === col && (
+                                                    <motion.div
+                                                        initial={{ scale: 0 }}
+                                                        animate={{ scale: 1 }}
+                                                        className="w-2 h-2 bg-white rounded-full"
+                                                    />
+                                                )}
                                             </div>
-                                            <span className="text-sm font-medium text-emerald-900/60 group-hover:text-emerald-900 transition-colors">{col}</span>
+                                            <span className={cn(
+                                                "text-sm font-medium transition-colors",
+                                                activeFilters.collection === col
+                                                    ? "text-emerald-900"
+                                                    : "text-emerald-900/60 group-hover:text-emerald-900"
+                                            )}>{col}</span>
                                         </label>
                                     ))}
                                 </div>
@@ -145,12 +192,12 @@ export default function SearchResultsPage() {
 
                             <div className="p-8 rounded-[2rem] bg-gradient-to-br from-emerald-900 to-emerald-950 text-white relative overflow-hidden shadow-xl">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl" />
-                                <h3 className="text-xl font-display font-bold mb-4 relative z-10">Advanced Search</h3>
+                                <h3 className="text-xl font-display font-bold mb-4 relative z-10">{t('advanced_search')}</h3>
                                 <p className="text-emerald-100/60 text-sm leading-relaxed mb-6 relative z-10">
-                                    Refine your search by specific narrators, references, or topics.
+                                    {t('advanced_search_desc')}
                                 </p>
                                 <button className="w-full py-3 bg-gold-500 hover:bg-gold-600 text-emerald-950 font-bold rounded-xl transition-all shadow-lg relative z-10 text-sm uppercase tracking-widest">
-                                    Try it Now
+                                    {t('try_it_now')}
                                 </button>
                             </div>
                         </div>
@@ -166,7 +213,7 @@ export default function SearchResultsPage() {
                             ) : error ? (
                                 <div className="p-12 text-center bg-ruby/5 rounded-[2rem] border border-ruby/10">
                                     <AlertCircle className="w-12 h-12 text-ruby mx-auto mb-4" />
-                                    <h3 className="text-xl font-bold text-ruby mb-2">Search Error</h3>
+                                    <h3 className="text-xl font-bold text-ruby mb-2">{t('error')}</h3>
                                     <p className="text-emerald-950/60">{error}</p>
                                 </div>
                             ) : results?.data.length === 0 ? (
@@ -174,12 +221,12 @@ export default function SearchResultsPage() {
                                     <div className="w-20 h-20 bg-emerald-900/5 rounded-full flex items-center justify-center mx-auto mb-8">
                                         <SearchIcon className="w-10 h-10 text-emerald-900/20" />
                                     </div>
-                                    <h3 className="text-2xl font-display font-bold text-emerald-900 mb-4">No results found</h3>
+                                    <h3 className="text-2xl font-display font-bold text-emerald-900 mb-4">{t('no_results')}</h3>
                                     <p className="text-emerald-900/60 max-w-sm mx-auto mb-8">
-                                        We couldn't find any hadiths matching your query. Try different keywords or browse by collection.
+                                        {t('no_results_desc')}
                                     </p>
                                     <button className="px-8 py-3 bg-emerald-900 text-white font-bold rounded-full text-sm tracking-widest uppercase hover:scale-105 transition-all shadow-lg">
-                                        Clear Search
+                                        {t('clear_search')}
                                     </button>
                                 </div>
                             ) : (
@@ -191,14 +238,22 @@ export default function SearchResultsPage() {
                                     {/* Pagination */}
                                     {results && results.pagination.totalPages > 1 && (
                                         <div className="flex items-center justify-center gap-2 pt-8">
-                                            <button className="px-6 py-3 rounded-xl border border-emerald-900/10 text-emerald-900 font-bold text-sm tracking-widest uppercase hover:bg-emerald-900/5 transition-all disabled:opacity-30" disabled={!results.pagination.hasPrev}>
-                                                Previous
+                                            <button
+                                                onClick={() => handlePageChange(results.pagination.page - 1)}
+                                                className="px-6 py-3 rounded-xl border border-emerald-900/10 text-emerald-900 font-bold text-sm tracking-widest uppercase hover:bg-emerald-900/5 transition-all disabled:opacity-30"
+                                                disabled={!results.pagination.hasPrev || loading}
+                                            >
+                                                {tHadith('previous')}
                                             </button>
                                             <div className="px-6 py-3 font-bold text-emerald-900">
-                                                Page {results.pagination.page} / {results.pagination.totalPages}
+                                                {t('showing_page', { page: results.pagination.page, total: results.pagination.totalPages })}
                                             </div>
-                                            <button className="px-6 py-3 rounded-xl border border-emerald-900/10 text-emerald-900 font-bold text-sm tracking-widest uppercase hover:bg-emerald-900/5 transition-all disabled:opacity-30" disabled={!results.pagination.hasNext}>
-                                                Next
+                                            <button
+                                                onClick={() => handlePageChange(results.pagination.page + 1)}
+                                                className="px-6 py-3 rounded-xl border border-emerald-900/10 text-emerald-900 font-bold text-sm tracking-widest uppercase hover:bg-emerald-900/5 transition-all disabled:opacity-30"
+                                                disabled={!results.pagination.hasNext || loading}
+                                            >
+                                                {tHadith('next')}
                                             </button>
                                         </div>
                                     )}

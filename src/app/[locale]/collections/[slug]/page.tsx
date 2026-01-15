@@ -53,10 +53,8 @@ export default function CollectionDetailPage() {
                     language: locale
                 });
 
-                // Handle both wrapped and unwrapped responses
-                const responseData = response.data || response;
-                setHadiths(responseData.data || responseData);
-                setTotalPages(responseData.pagination?.totalPages || 1);
+                setHadiths(response.data);
+                setTotalPages(response.pagination?.totalPages || 1);
             } catch (err) {
                 console.error('Failed to load hadiths', err);
                 setHadiths([]);
@@ -81,10 +79,8 @@ export default function CollectionDetailPage() {
                 language: locale
             });
 
-            // Handle both wrapped and unwrapped responses
-            const responseData = response.data || response;
-            setHadiths(responseData.data || responseData);
-            setTotalPages(responseData.pagination?.totalPages || 1);
+            setHadiths(response.data);
+            setTotalPages(response.pagination?.totalPages || 1);
             setPage(1);
         } catch (err) {
             console.error('Search failed', err);

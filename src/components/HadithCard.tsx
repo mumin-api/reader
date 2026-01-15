@@ -9,12 +9,12 @@ import {
     Info,
     Check
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn, getCollectionSlug } from '@/lib/utils';
 import { Hadith } from '@/lib/api/client';
 import { useReadingSettings } from '@/store/useReadingSettings';
 import { useBookmarks } from '@/store/useBookmarks';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
 
 interface HadithCardProps {
@@ -120,12 +120,14 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            style={{
+                backgroundColor: 'var(--card-bg)',
+                borderColor: 'var(--border-color)',
+                color: 'var(--page-text)'
+            }}
             className={cn(
-                "group relative p-6 md:p-8 rounded-[2rem] border transition-all duration-500 overflow-hidden",
-                mode === 'light' && "bg-white border-emerald-900/5 shadow-islamic hover:shadow-2xl hover:border-emerald-900/10",
-                mode === 'sepia' && "bg-[#f4ecd8] border-[#433422]/10 text-[#433422]",
-                mode === 'dark' && "bg-[#0a1a16] border-white/5 text-[#e0e0e0] shadow-none",
-                mode === 'contrast' && "bg-black border-white/20 text-white"
+                "group relative p-6 md:p-8 rounded-[2rem] border transition-all duration-500 overflow-hidden shadow-sm",
+                mode === 'light' && "shadow-islamic hover:shadow-2xl hover:border-emerald-900/10"
             )}
         >
             {/* Background decoration */}
@@ -217,7 +219,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         {showIsnad ? t('hide_isnad') : t('isnad')}
                     </button>
                     <Link
-                        href={`/collections/${hadith.collection}/${hadith.hadithNumber}`}
+                        href={`/collections/${getCollectionSlug(hadith.collection)}/${hadith.hadithNumber}`}
                         className="flex items-center gap-2 text-xs font-bold text-emerald-900/40 hover:text-emerald-900 transition-colors uppercase tracking-widest"
                     >
                         <ExternalLink className="w-4 h-4" />

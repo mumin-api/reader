@@ -19,12 +19,19 @@ export function truncate(text: string, length: number): string {
 }
 
 export function getCollectionSlug(name: string): string {
+    if (!name) return '';
+
     const mapping: Record<string, string> = {
         'Sahih al-Bukhari': 'sahih-bukhari',
+        'Sahih al Bukhari': 'sahih-bukhari',
+        'Sahih Bukhari': 'sahih-bukhari',
         'Sahih Muslim': 'sahih-muslim',
         'Sunan Abi Dawud': 'sunan-abu-dawud',
+        'Sunan Abu Dawood': 'sunan-abu-dawud',
         'Jami` at-Tirmidhi': 'jami-at-tirmidhi',
+        'Jami at-Tirmidhi': 'jami-at-tirmidhi',
         'Sunan an-Nasa\'i': 'sunan-an-nasai',
+        'Sunan an-Nasai': 'sunan-an-nasai',
         'Sunan Ibn Majah': 'sunan-ibn-majah',
         'Muwatta Malik': 'muwatta-malik',
         'Musnad Ahmad bin Hanbal': 'musnad-ahmad',
@@ -32,10 +39,10 @@ export function getCollectionSlug(name: string): string {
 
     if (mapping[name]) return mapping[name];
 
+    // Fallback: standard slugify
     return name
         .toLowerCase()
-        .replace(/sahih|sunan|jami`|musnad|muwatta/g, '')
-        .trim()
-        .replace(/\s+/g, '-')
-        .replace(/[^\w-]+/g, '');
+        .replace(/[`']/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
 }

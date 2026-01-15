@@ -10,11 +10,26 @@
   --ivory: #fafaf9;
   --charcoal: #18181b;
   --sand: #f5f5f4;
+
+  /* Theme defaults (Light) */
+  --page-bg: var(--sand);
+  --page-text: var(--charcoal);
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: #ffffff;
+  --input-bg: rgba(255, 255, 255, 0.5);
+  --input-focus-bg: #ffffff;
+  --dropdown-bg: #ffffff;
+  --border-color: rgba(6, 78, 59, 0.1);
+  --muted-text: rgba(6, 78, 59, 0.4);
+  --transition-speed: 0.5s;
 }
 
 @layer base {
   body {
-    @apply bg-sand text-charcoal font-sans antialiased;
+    @apply font-sans antialiased;
+    background-color: var(--page-bg);
+    color: var(--page-text);
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
   }
 
   h1,
@@ -23,8 +38,73 @@
   h4,
   h5,
   h6 {
-    @apply font-display;
+    @apply font-display text-emerald-900;
   }
+}
+
+/* Theme variable overrides */
+.reading-light {
+  --page-bg: #fdfdfd;
+  --page-text: #1a1a1a;
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: #ffffff;
+  --input-bg: rgba(255, 255, 255, 0.5);
+  --input-focus-bg: #ffffff;
+  --dropdown-bg: #ffffff;
+  --border-color: rgba(6, 78, 59, 0.1);
+  --muted-text: rgba(6, 78, 59, 0.4);
+}
+
+.reading-dark {
+  --page-bg: #0a1a16;
+  --page-text: #e0e0e0;
+  --nav-bg: rgba(6, 78, 59, 0.8);
+  --card-bg: #0d2822;
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-focus-bg: rgba(255, 255, 255, 0.1);
+  --dropdown-bg: #0d2822;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --muted-text: rgba(255, 255, 255, 0.4);
+}
+
+.reading-sepia {
+  --page-bg: #f4ecd8;
+  --page-text: #433422;
+  --nav-bg: rgba(244, 236, 216, 0.8);
+  --card-bg: #fdf6e3;
+  --input-bg: rgba(0, 0, 0, 0.05);
+  --input-focus-bg: rgba(0, 0, 0, 0.08);
+  --dropdown-bg: #fdf6e3;
+  --border-color: rgba(67, 52, 34, 0.1);
+  --muted-text: rgba(67, 52, 34, 0.4);
+}
+
+.reading-contrast {
+  --page-bg: #000000;
+  --page-text: #ffffff;
+  --nav-bg: rgba(0, 0, 0, 0.9);
+  --card-bg: #000000;
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-focus-bg: rgba(255, 255, 255, 0.2);
+  --dropdown-bg: #000000;
+  --border-color: #ffffff;
+  --muted-text: rgba(255, 255, 255, 0.6);
+}
+
+/* Ensure headings adapt in dark/contrast modes */
+.reading-dark h1,
+.reading-dark h2,
+.reading-dark h3,
+.reading-dark h4,
+.reading-dark h5,
+.reading-dark h6,
+.reading-contrast h1,
+.reading-contrast h2,
+.reading-contrast h3,
+.reading-contrast h4,
+.reading-contrast h5,
+.reading-contrast h6 {
+  @apply text-white;
 }
 
 @layer components {
@@ -66,23 +146,6 @@
   /* Gradient text */
   .gradient-text {
     @apply bg-gradient-to-r from-emerald-600 to-gold-500 text-transparent bg-clip-text;
-  }
-
-  /* Reading Modes */
-  .reading-light {
-    @apply bg-[#fdfdfd] text-[#1a1a1a];
-  }
-
-  .reading-dark {
-    @apply bg-[#0a1a16] text-[#e0e0e0];
-  }
-
-  .reading-sepia {
-    @apply bg-[#f4ecd8] text-[#433422];
-  }
-
-  .reading-contrast {
-    @apply bg-black text-white;
   }
 }
 

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useRouter, usePathname } from '@/lib/navigation';
+import Image from 'next/image';
 import {
     Home,
     BookOpen,
@@ -44,9 +45,14 @@ export const Navbar: React.FC = () => {
 
     return (
         <nav
+            style={{
+                backgroundColor: isScrolled ? 'var(--nav-bg)' : 'transparent',
+                borderColor: 'var(--border-color)',
+                color: 'var(--page-text)'
+            }}
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 py-3",
-                isScrolled ? "bg-white/80 backdrop-blur-lg border-b border-emerald-900/10 shadow-sm" : "bg-transparent"
+                isScrolled ? "backdrop-blur-lg border-b shadow-sm" : ""
             )}
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -55,14 +61,22 @@ export const Navbar: React.FC = () => {
                     href="/"
                     className="flex items-center gap-2 group shrink-0"
                 >
-                    <div className="w-8 h-8 md:w-10 md:h-10 bg-emerald-900 rounded-xl flex items-center justify-center rotate-45 group-hover:rotate-90 transition-transform duration-500 shadow-lg">
-                        <span className="text-white font-bold -rotate-45 group-hover:-rotate-90 transition-transform duration-500">M</span>
+                    <div className="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                        <Image
+                            src="/icons/logo.svg"
+                            alt="Mumin Logo"
+                            fill
+                            className="object-contain"
+                            priority
+                        />
                     </div>
-                    <span className="text-xl md:text-2xl font-display font-bold text-emerald-900 hidden sm:block">Mumin</span>
                 </Link>
 
                 {/* Desktop Navigation */}
-                <div className="hidden lg:flex items-center gap-1 bg-emerald-900/5 p-1 rounded-full">
+                <div
+                    style={{ backgroundColor: 'var(--input-bg)' }}
+                    className="hidden lg:flex items-center gap-1 p-1 rounded-full"
+                >
                     {navLinks.map((link) => {
                         const Icon = link.icon;
                         const isActive = pathname === link.href;
@@ -71,11 +85,12 @@ export const Navbar: React.FC = () => {
                                 key={link.href}
                                 href={link.href}
                                 className={cn(
-                                    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all",
+                                    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all text-emerald-900 border border-transparent",
                                     isActive
                                         ? "bg-emerald-900 text-white shadow-md scale-105"
-                                        : "text-emerald-900/60 hover:text-emerald-900 hover:bg-emerald-900/5"
+                                        : "opacity-60 hover:opacity-100 hover:bg-emerald-900/5"
                                 )}
+                                style={!isActive ? { color: 'var(--page-text)' } : {}}
                             >
                                 <Icon className="w-4 h-4" />
                                 {link.name}
@@ -93,7 +108,8 @@ export const Navbar: React.FC = () => {
                 <div className="flex items-center gap-2">
                     <Link
                         href="/bookmarks"
-                        className="p-2 text-emerald-900/60 hover:text-emerald-900 hover:bg-emerald-900/5 rounded-full transition-colors relative"
+                        className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-900/5 rounded-full transition-colors relative"
+                        style={{ color: 'var(--page-text)' }}
                         title={t('bookmarks')}
                     >
                         <Bookmark className="w-5 h-5" />
@@ -101,7 +117,8 @@ export const Navbar: React.FC = () => {
 
                     <button
                         onClick={toggleLanguage}
-                        className="p-2 text-emerald-900/60 hover:text-emerald-900 hover:bg-emerald-900/5 rounded-full transition-colors"
+                        className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-900/5 rounded-full transition-colors"
+                        style={{ color: 'var(--page-text)' }}
                         title={t('language')}
                     >
                         <Globe className="w-5 h-5" />
@@ -109,7 +126,8 @@ export const Navbar: React.FC = () => {
 
                     <button
                         onClick={toggleSettings}
-                        className="p-2 text-emerald-900/60 hover:text-emerald-900 hover:bg-emerald-900/5 rounded-full transition-colors"
+                        className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-900/5 rounded-full transition-colors"
+                        style={{ color: 'var(--page-text)' }}
                         title={t('settings')}
                     >
                         <Settings className="w-5 h-5" />
@@ -118,7 +136,8 @@ export const Navbar: React.FC = () => {
                     {/* Mobile Menu Toggle */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="p-2 lg:hidden text-emerald-900 hover:bg-emerald-900/5 rounded-full transition-colors"
+                        className="p-2 lg:hidden rounded-full transition-colors"
+                        style={{ color: 'var(--page-text)' }}
                     >
                         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
@@ -127,7 +146,10 @@ export const Navbar: React.FC = () => {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div className="fixed inset-0 top-[65px] bg-white z-40 lg:hidden animate-fade-in p-4">
+                <div
+                    style={{ backgroundColor: 'var(--page-bg)', color: 'var(--page-text)' }}
+                    className="fixed inset-0 top-[65px] z-40 lg:hidden animate-fade-in p-4"
+                >
                     <div className="flex flex-col gap-2 mt-4">
                         <div className="md:hidden mb-6">
                             <SearchBar />

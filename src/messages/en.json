@@ -118,5 +118,22 @@
         "privacy": "Privacy Policy",
         "terms": "Terms of Use",
         "rights": "© 2026 Mumin. All rights reserved. Built with ihsaan for the global Ummah."
+    },
+    "Search": {
+        "title": "Search Results",
+        "results_for": "Results for \"{query}\"",
+        "all_hadiths": "All Hadiths",
+        "found_results": "Found {count} results",
+        "showing_page": "Showing page {page} of {total}",
+        "filters": "Filters",
+        "collections": "Collections",
+        "advanced_search": "Advanced Search",
+        "advanced_search_desc": "Refine your search by specific narrators, references, or topics.",
+        "try_it_now": "Try it Now",
+        "no_results": "No results found",
+        "no_results_desc": "We couldn't find any hadiths matching your query. Try different keywords or browse by collection.",
+        "clear_search": "Clear Search",
+        "error": "Search Error",
+        "error_desc": "Failed to fetch search results. Please try again."
     }
 }
