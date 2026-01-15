@@ -41,11 +41,6 @@ export default async function MethodologyPage({ params }: { params: Promise<{ lo
             icon: Database,
             title: t('tech_title'),
             desc: t('tech_desc')
-        },
-        {
-            icon: Github,
-            title: t('open_source_title'),
-            desc: t('open_source_desc')
         }
     ];
 
@@ -95,16 +90,13 @@ export default async function MethodologyPage({ params }: { params: Promise<{ lo
                         <div className="relative z-10 max-w-2xl mx-auto">
                             <h2 className="text-3xl font-display font-bold mb-6">Join Our Mission</h2>
                             <p className="text-emerald-100/70 mb-8 text-lg">
-                                We are always looking for contributors, scholars, and developers to help us serve the Ummah better.
+                                We are always looking for contributors and scholars to help us serve the Ummah better.
                             </p>
                             <a
-                                href="https://github.com/abubakrmuminov/mumin-api-reader"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="mailto:contact@mumin.ink"
                                 className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-emerald-900 font-bold hover:scale-105 transition-transform"
                             >
-                                <Github className="w-5 h-5" />
-                                Contribute on GitHub
+                                Contact Us
                             </a>
                         </div>
                     </div>
