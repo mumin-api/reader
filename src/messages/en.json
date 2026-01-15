@@ -119,6 +119,18 @@
         "terms": "Terms of Use",
         "rights": "© 2026 Mumin. All rights reserved. Built with ihsaan for the global Ummah."
     },
+    "Methodology": {
+        "title": "Our Methodology",
+        "description": "Our commitment to authenticity, scholarly rigor, and digital excellence.",
+        "sources_title": "Authentic Sources",
+        "sources_desc": "We derive our hadiths exclusively from the most trusted and canonically accepted collections in the Islamic tradition, known as 'Kutub al-Sittah' (The Six Books) and other major works authenticated by scholars.",
+        "verification_title": "Verification Process",
+        "verification_desc": "Every hadith undergoes a rigorous digital verification process. We cross-reference Arabic texts with established manuscripts and utilize reputable translations to ensure accuracy in meaning.",
+        "tech_title": "Digital Preservation",
+        "tech_desc": "By leveraging modern web technologies, we aim to preserve these sacred texts in a format that is accessible, searchable, and resilient for future generations.",
+        "open_source_title": "Open Source",
+        "open_source_desc": "We believe knowledge should be free. Our platform code is open source, allowing the community to audit, contribute, and improve the tools we use to serve the Ummah."
+    },
     "Search": {
         "title": "Search Results",
         "results_for": "Results for \"{query}\"",
