@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { OG_PALETTE } from '@/lib/og-helper'; // Removed fetchFont for now
+import { OG_PALETTE } from '@/lib/og-helper';
 
 export const runtime = 'edge';
 
@@ -23,7 +23,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
         ? 'Свет Достоверной Мудрости'
         : 'The Light of Authentic Wisdom';
 
-    console.log('Generating Main OG Image (No Fonts) for locale:', locale);
+    console.log('Generating Main OG Image (Flat Version) for locale:', locale);
 
     // Load fonts - DISABLED FOR DEBUGGING
     // try {
@@ -42,63 +42,52 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: OG_PALETTE.midnightGreen,
+                        backgroundColor: OG_PALETTE.midnightGreen, // Solid color
                         color: OG_PALETTE.cream,
                         position: 'relative',
-                        overflow: 'hidden',
-                        fontFamily: 'serif', // Fallback font
+                        // overflow: 'hidden', // Removing overflow for safety
+                        fontFamily: 'sans-serif', // Basic font
                     }}
                 >
-                    {/* Background Texture & Gradients */}
-                    <div style={{
+                    {/* Background Texture & Gradients - REMOVED for Flat Version */}
+                    {/* <div style={{
                         position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
                         background: `linear-gradient(135deg, ${OG_PALETTE.midnightGreen} 0%, ${OG_PALETTE.forest} 100%)`,
-                    }} />
+                    }} /> */}
 
-                    {/* Golden Glow Top */}
-                    <div style={{
+                    {/* Golden Glow Top - REMOVED */}
+                    {/* <div style={{
                         position: 'absolute', top: '-100px', left: '50%', transform: 'translateX(-50%)',
                         width: '800px', height: '300px',
                         background: `${OG_PALETTE.gold}20`,
                         borderRadius: '100%',
-                    }} />
+                    }} /> */}
 
-                    {/* Islamic Pattern Overlay (Abstract) */}
-                    <svg style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.05 }} width="100%" height="100%">
+                    {/* Islamic Pattern Overlay (Abstract) - REMOVED */}
+                    {/* <svg style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.05 }} width="100%" height="100%">
                         <pattern id="pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
                             <path d="M20 0L40 20L20 40L0 20Z" fill="none" stroke={OG_PALETTE.cream} strokeWidth="1" />
                         </pattern>
                         <rect width="100%" height="100%" fill="url(#pattern)" />
-                    </svg>
+                    </svg> */}
 
-                    {/* Decorative Frame */}
+                    {/* Decorative Frame - SIMPLIFIED */}
                     <div style={{
                         position: 'absolute',
                         top: '40px', left: '40px', right: '40px', bottom: '40px',
-                        border: `1px solid ${OG_PALETTE.border}`,
+                        border: `2px solid ${OG_PALETTE.gold}`, // Thicker solid border
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}>
-                        <div style={{
+                        {/* Inner Border - REMOVED */}
+                        {/* <div style={{
                             position: 'absolute', top: '4px', left: '4px', right: '4px', bottom: '4px',
                             border: `1px solid ${OG_PALETTE.border}`,
                             opacity: 0.5,
-                        }} />
+                        }} /> */}
 
-                        {/* Corner Ornaments */}
-                        {[0, 90, 180, 270].map((deg, i) => (
-                            <svg key={i} width="60" height="60" viewBox="0 0 60 60" style={{
-                                position: 'absolute',
-                                left: deg === 0 || deg === 270 ? -1 : undefined,
-                                right: deg === 90 || deg === 180 ? -1 : undefined,
-                                top: deg === 0 || deg === 90 ? -1 : undefined,
-                                bottom: deg === 180 || deg === 270 ? -1 : undefined,
-                                transform: `rotate(${deg}deg)`,
-                            }}>
-                                <path d="M0 0 H60 V2 H20 C10 2 2 10 2 20 V60 H0 V0Z" fill={OG_PALETTE.gold} />
-                            </svg>
-                        ))}
+                        {/* Corner Ornaments - REMOVED */}
                     </div>
 
                     {/* Content Container */}
@@ -109,60 +98,58 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                         zIndex: 10,
                         gap: '20px',
                     }}>
-                        {/* Logo Icon */}
+                        {/* Logo Icon - Kept simple */}
                         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z"
-                                stroke={OG_PALETTE.gold} strokeWidth="1.5" fill={`${OG_PALETTE.gold}20`} />
+                                stroke={OG_PALETTE.gold} strokeWidth="2" />
                         </svg>
 
-                        {/* Main Title */}
+                        {/* Main Title - FLAT COLOR */}
                         <div style={{
                             marginTop: '20px',
-                            // fontFamily: '"Cinzel"', // Disabled
-                            fontSize: '120px',
-                            fontWeight: 700,
-                            letterSpacing: '0.2em',
+                            fontSize: '100px', // Slightly smaller
+                            fontWeight: 900,
+                            letterSpacing: '0.1em',
                             lineHeight: 1,
-                            textShadow: `0 0 40px ${OG_PALETTE.gold}60`,
-                            backgroundImage: `linear-gradient(180deg, ${OG_PALETTE.cream} 0%, ${OG_PALETTE.goldLight} 100%)`,
-                            backgroundClip: 'text',
-                            color: 'transparent',
+                            // textShadow: `0 0 40px ${OG_PALETTE.gold}60`, // Removed
+                            // backgroundImage: `linear-gradient(180deg, ${OG_PALETTE.cream} 0%, ${OG_PALETTE.goldLight} 100%)`, // Removed
+                            // backgroundClip: 'text', // Removed
+                            color: OG_PALETTE.cream, // Solid color
                         }}>
                             {title}
                         </div>
 
-                        {/* Separator */}
+                        {/* Separator - SIMPLIFIED */}
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
                             gap: '20px',
                             marginTop: '10px',
                             marginBottom: '10px',
-                            opacity: 0.8,
+                            // opacity: 0.8,
                         }}>
-                            <div style={{ width: '60px', height: '1px', background: OG_PALETTE.gold }} />
-                            <div style={{ width: '6px', height: '6px', background: OG_PALETTE.gold, transform: 'rotate(45deg)' }} />
-                            <div style={{ width: '60px', height: '1px', background: OG_PALETTE.gold }} />
+                            <div style={{ width: '60px', height: '2px', background: OG_PALETTE.gold }} />
+                            {/* <div style={{ width: '6px', height: '6px', background: OG_PALETTE.gold, transform: 'rotate(45deg)' }} /> */}
+                            <div style={{ width: '60px', height: '2px', background: OG_PALETTE.gold }} />
                         </div>
 
-                        {/* Subtitle */}
+                        {/* Subtitle - FLAT COLOR */}
                         <div style={{
-                            // fontFamily: '"Cinzel"', // Disabled
                             fontSize: '32px',
                             color: OG_PALETTE.silver,
                             letterSpacing: '0.15em',
                             textTransform: 'uppercase',
+                            textAlign: 'center',
                         }}>
                             {subtitle}
                         </div>
 
-                        {/* Tagline / Arabic touch */}
+                        {/* Tagline - FLAT COLOR */}
                         <div style={{
-                            // fontFamily: '"Amiri"', // Disabled
-                            fontSize: '28px',
+                            fontSize: '24px',
                             color: OG_PALETTE.gold,
                             marginTop: '10px',
-                            opacity: 0.9,
+                            // opacity: 0.9,
                             fontStyle: 'italic',
                         }}>
                             {tagline}
@@ -173,11 +160,10 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                     <div style={{
                         position: 'absolute',
                         bottom: '60px',
-                        // fontFamily: '"Cinzel"', // Disabled
                         fontSize: '16px',
                         letterSpacing: '0.3em',
                         color: OG_PALETTE.silver,
-                        opacity: 0.5,
+                        // opacity: 0.5,
                     }}>
                         HADITH.MUMIN.INK
                     </div>
@@ -185,7 +171,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
             ),
             {
                 ...size,
-                // fonts: [], // No custom fonts
+                // fonts: [],
             }
         );
     } catch (e: any) {
