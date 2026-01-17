@@ -111,6 +111,7 @@ import { locales } from '@/i18n';
 import { GlobalPanels } from '@/components/GlobalPanels';
 import { ThemeApplier } from '@/components/ThemeApplier';
 import { Analytics } from '@/components/Analytics';
+import { ClientOnly } from '@/components/ClientOnly';
 
 export default async function RootLayout({
   children,
@@ -146,10 +147,14 @@ export default async function RootLayout({
         )}
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <ThemeApplier />
+          <ClientOnly>
+            <ThemeApplier />
+          </ClientOnly>
           <Analytics />
           {children}
-          <GlobalPanels />
+          <ClientOnly>
+            <GlobalPanels />
+          </ClientOnly>
         </NextIntlClientProvider>
       </body>
     </html>

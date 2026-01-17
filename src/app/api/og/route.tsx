@@ -13,11 +13,22 @@ const deepForest = '#064e3b';
 const logoSrc = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyQzIgMTcuNTIgNi40OCAyMiAxMiAyMkMxNy41MiAyMiAyMiAxNy41MiAyMiAxMkMyMiA2LjQ4IDE3LjUyIDIgMTIgMlpNMTIgNEwxNi45NSAxMC41TDE5LjUgMTJMMTYuOTUgMTMuNUwxMiAyMEw3LjA1IDEzLjVMMC41IDEyTDcuMDUgMTAuNUwxMiA0WiIgZmlsbD0iIzA2NGUzYiIvPgo8L3N2Zz4=";
 
 async function getHadith(id: string) {
-    const API_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.hadith.mumin.ink';
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.hadith.mumin.ink/v1';
+    const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
     try {
-        const res = await fetch(`${API_URL}/hadiths/${id}`);
-        if (!res.ok) return null;
-        return res.json();
+        const res = await fetch(`${API_URL}/hadiths/${id}`, {
+            headers: {
+                'X-API-Key': API_KEY || '',
+            }
+        });
+        if (!res.ok) {
+            console.error(`OG Fetch Error: ${res.status} ${res.statusText}`);
+            return null;
+        }
+        const data = await res.json();
+        // Handle both { data: ... } and direct models
+        return data.data || data;
     } catch (e) {
         console.error('OG Image Fetch Exception:', e);
         return null;
