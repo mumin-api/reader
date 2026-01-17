@@ -12,5 +12,6 @@ export const config = {
     // - API routes
     // - Static files (_next, images, etc.)
     // - Metadata files (favicon.ico, sitemap.xml, robots.txt)
-    matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+    // - BUT explicit exception for opengraph-image to allow next-intl to handle it
+    matcher: ['/((?!api|_next|_vercel|.*\\..*).*)', '/(.*)/opengraph-image', '/(.*)/icon']
 };
