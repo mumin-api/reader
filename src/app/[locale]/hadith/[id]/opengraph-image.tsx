@@ -71,35 +71,64 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                     position: 'relative',
                 }}
             >
-                {/* Layer 1: Split Gradients */}
+                {/* Enhanced Background Gradients */}
                 <div style={{
                     position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundImage: `radial-gradient(circle at top left, ${lightEmerald}, transparent)`,
+                    backgroundImage: `radial-gradient(circle at 20% 30%, ${lightEmerald}, transparent 50%)`,
                     display: 'flex'
                 }} />
 
                 <div style={{
                     position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundImage: `radial-gradient(circle at bottom right, ${goldSpiritual}20, transparent)`,
+                    backgroundImage: `radial-gradient(circle at 80% 70%, ${goldSpiritual}25, transparent 50%)`,
                     display: 'flex'
                 }} />
 
-                {/* Layer 2: Manuscript Frames */}
+                {/* Subtle Pattern Overlay */}
                 <div style={{
-                    position: 'absolute', top: '40px', left: '40px', right: '40px', bottom: '40px',
-                    border: `1px solid ${emeraldRadiant}30`,
-                    borderRadius: '32px',
+                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundImage: `repeating-linear-gradient(45deg, ${emeraldRadiant}03 0px, ${emeraldRadiant}03 1px, transparent 1px, transparent 60px)`,
+                    display: 'flex'
+                }} />
+
+                {/* Decorative Islamic Corner Ornaments */}
+                <div style={{
+                    position: 'absolute', top: '30px', left: '30px',
+                    width: '80px', height: '80px',
+                    borderTop: `3px solid ${emeraldRadiant}40`,
+                    borderLeft: `3px solid ${emeraldRadiant}40`,
+                    borderTopLeftRadius: '12px',
                     display: 'flex'
                 }} />
 
                 <div style={{
-                    position: 'absolute', top: '50px', left: '50px', right: '50px', bottom: '50px',
-                    border: `1px solid ${goldSpiritual}40`,
-                    borderRadius: '24px',
+                    position: 'absolute', top: '30px', right: '30px',
+                    width: '80px', height: '80px',
+                    borderTop: `3px solid ${goldSpiritual}50`,
+                    borderRight: `3px solid ${goldSpiritual}50`,
+                    borderTopRightRadius: '12px',
                     display: 'flex'
                 }} />
 
-                {/* Main Content Card */}
+                <div style={{
+                    position: 'absolute', bottom: '30px', left: '30px',
+                    width: '80px', height: '80px',
+                    borderBottom: `3px solid ${goldSpiritual}50`,
+                    borderLeft: `3px solid ${goldSpiritual}50`,
+                    borderBottomLeftRadius: '12px',
+                    display: 'flex'
+                }} />
+
+                <div style={{
+                    position: 'absolute', bottom: '30px', right: '30px',
+                    width: '80px', height: '80px',
+                    borderBottom: `3px solid ${emeraldRadiant}40`,
+                    borderRight: `3px solid ${emeraldRadiant}40`,
+                    borderBottomRightRadius: '12px',
+                    display: 'flex'
+                }} />
+
+                {/* Main Content Card with Enhanced Shadow */}
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -107,62 +136,144 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                     justifyContent: 'center',
                     width: '900px',
                     padding: '60px',
-                    background: 'white',
+                    background: 'rgba(255, 255, 255, 0.95)',
                     borderRadius: '48px',
-                    border: `1px solid ${emeraldRadiant}15`,
+                    border: `2px solid ${emeraldRadiant}20`,
+                    boxShadow: `0 25px 50px -12px ${deepForest}15, 0 0 0 1px ${goldSpiritual}20`,
                     zIndex: 10,
                     textAlign: 'center',
                 }}>
+                    {/* Logo Badge with Glow Effect */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
                         <div style={{
-                            width: '64px', height: '64px', background: emeraldRadiant,
-                            borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            marginBottom: '24px'
+                            width: '72px', 
+                            height: '72px', 
+                            background: `linear-gradient(135deg, ${emeraldRadiant}, ${emeraldRadiant}dd)`,
+                            borderRadius: '24px', 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'center',
+                            marginBottom: '24px',
+                            boxShadow: `0 8px 24px ${emeraldRadiant}40, 0 0 0 4px ${emeraldRadiant}10`
                         }}>
-                            <svg width="32" height="32" viewBox="0 0 24 24">
+                            <svg width="36" height="36" viewBox="0 0 24 24">
                                 <LogoPath color="white" />
                             </svg>
                         </div>
 
                         <div style={{
-                            color: emeraldRadiant, fontSize: '14px', fontWeight: 800, letterSpacing: '0.3em',
-                            textTransform: 'uppercase', marginBottom: '8px', display: 'flex'
+                            color: emeraldRadiant, 
+                            fontSize: '15px', 
+                            fontWeight: 800, 
+                            letterSpacing: '0.25em',
+                            textTransform: 'uppercase', 
+                            marginBottom: '10px', 
+                            display: 'flex',
+                            background: `linear-gradient(90deg, ${emeraldRadiant}, ${goldSpiritual})`,
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
                         }}>
                             {collection}
                         </div>
 
-                        <div style={{ color: deepForest, fontSize: '20px', opacity: 0.4, fontWeight: 500, display: 'flex' }}>
+                        <div style={{ 
+                            color: deepForest, 
+                            fontSize: '18px', 
+                            opacity: 0.5, 
+                            fontWeight: 600, 
+                            display: 'flex',
+                            letterSpacing: '0.05em'
+                        }}>
                             {locale === 'ru' ? `Хадис №${num}` : `Hadith #${num}`}
                         </div>
                     </div>
 
+                    {/* Enhanced Quote Text */}
                     <div style={{
                         color: deepForest,
                         fontSize: truncatedText.length > 120 ? '32px' : '40px',
-                        lineHeight: 1.5,
+                        lineHeight: 1.6,
                         fontWeight: 600,
-                        letterSpacing: '-0.01em',
+                        letterSpacing: '-0.02em',
                         marginBottom: '40px',
                         padding: '0 20px',
                         fontStyle: 'italic',
-                        display: 'flex'
+                        display: 'flex',
+                        textShadow: `0 1px 2px ${deepForest}10`
                     }}>
                         "{truncatedText}"
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', width: '200px', justifyContent: 'space-between' }}>
-                        <div style={{ height: '1px', flex: 1, backgroundImage: `linear-gradient(to right, transparent, ${goldSpiritual})` }} />
-                        <div style={{ width: '8px', height: '8px', background: goldSpiritual, transform: 'rotate(45deg)', margin: '0 15px' }} />
-                        <div style={{ height: '1px', flex: 1, backgroundImage: `linear-gradient(to left, transparent, ${goldSpiritual})` }} />
+                    {/* Elegant Divider with Enhanced Design */}
+                    <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        width: '240px', 
+                        justifyContent: 'space-between' 
+                    }}>
+                        <div style={{ 
+                            height: '2px', 
+                            flex: 1, 
+                            background: `linear-gradient(to right, transparent, ${goldSpiritual}60, ${goldSpiritual})` 
+                        }} />
+                        <div style={{ 
+                            width: '10px', 
+                            height: '10px', 
+                            background: `linear-gradient(135deg, ${emeraldRadiant}, ${goldSpiritual})`, 
+                            transform: 'rotate(45deg)', 
+                            margin: '0 20px',
+                            boxShadow: `0 0 12px ${goldSpiritual}60`
+                        }} />
+                        <div style={{ 
+                            height: '2px', 
+                            flex: 1, 
+                            background: `linear-gradient(to left, transparent, ${goldSpiritual}60, ${goldSpiritual})` 
+                        }} />
                     </div>
                 </div>
 
+                {/* Enhanced Footer Branding */}
                 <div style={{
-                    position: 'absolute', bottom: '80px', display: 'flex', alignItems: 'center', zIndex: 10
+                    position: 'absolute', 
+                    bottom: '70px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    zIndex: 10,
+                    padding: '16px 32px',
+                    background: `${nobleCream}90`,
+                    borderRadius: '100px',
+                    border: `1px solid ${emeraldRadiant}15`
                 }}>
-                    <span style={{ color: deepForest, fontSize: '18px', fontWeight: 900, letterSpacing: '0.1em', display: 'flex' }}>MUMIN</span>
-                    <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: emeraldRadiant, margin: '0 12px', display: 'flex' }} />
-                    <span style={{ color: deepForest, fontSize: '18px', fontWeight: 400, opacity: 0.4, display: 'flex' }}>hadith.mumin.ink</span>
+                    <span style={{ 
+                        color: deepForest, 
+                        fontSize: '20px', 
+                        fontWeight: 900, 
+                        letterSpacing: '0.12em', 
+                        display: 'flex',
+                        background: `linear-gradient(90deg, ${deepForest}, ${emeraldRadiant})`,
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                    }}>
+                        MUMIN
+                    </span>
+                    <div style={{ 
+                        width: '5px', 
+                        height: '5px', 
+                        borderRadius: '50%', 
+                        background: emeraldRadiant, 
+                        margin: '0 16px', 
+                        display: 'flex',
+                        boxShadow: `0 0 8px ${emeraldRadiant}`
+                    }} />
+                    <span style={{ 
+                        color: deepForest, 
+                        fontSize: '18px', 
+                        fontWeight: 500, 
+                        opacity: 0.6, 
+                        display: 'flex' 
+                    }}>
+                        hadith.mumin.ink
+                    </span>
                 </div>
             </div>
         ),
