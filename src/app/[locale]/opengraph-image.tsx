@@ -39,6 +39,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                 }}
             >
                 {/* весь твой остальной JSX */}
+                {/* Background with rich radial gradient */}
                 <div
                     style={{
                         position: 'absolute',
@@ -46,63 +47,58 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        backgroundImage: `
-                            radial-gradient(circle at 100% 0%, ${emerald800} 0%, transparent 25%),
-                            radial-gradient(circle at 0% 100%, ${emerald800} 0%, transparent 25%),
-                            linear-gradient(to bottom, ${emerald950}, ${emerald900})
-                        `,
-                    }}
-                />
-
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '20px',
-                        left: '20px',
-                        right: '20px',
-                        bottom: '20px',
-                        border: `1px solid ${gold500}`,
-                        borderRadius: '0px',
-                        opacity: 0.3,
-                    }}
-                />
-
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '26px',
-                        left: '26px',
-                        right: '26px',
-                        bottom: '26px',
-                        border: `1px solid ${gold500}`,
-                        opacity: 0.15,
-                    }}
-                />
-
-                <div
-                    style={{
-                        position: 'absolute',
-                        width: '500px',
-                        height: '500px',
-                        transform: 'rotate(45deg)',
-                        border: `2px solid ${emerald800}`,
-                        backgroundColor: 'rgba(6, 78, 59, 0.3)',
+                        background: `radial-gradient(circle at center, ${emerald900} 0%, ${emerald950} 100%)`,
                         display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        zIndex: '1',
                     }}
-                >
+                />
+
+                {/* Decorative Islamic Geometric Patterns (Corners) */}
+                {[0, 1, 2, 3].map((i) => (
                     <div
+                        key={i}
                         style={{
-                            width: '480px',
-                            height: '480px',
-                            border: `1px solid ${gold500}`,
-                            opacity: 0.2,
+                            position: 'absolute',
+                            width: '400px',
+                            height: '400px',
+                            opacity: 0.1,
+                            border: `2px solid ${gold500}`,
+                            transform: `rotate(${i * 22.5}deg) scale(1.2)`,
+                            top: i < 2 ? '-200px' : 'auto',
+                            bottom: i >= 2 ? '-200px' : 'auto',
+                            left: i % 2 === 0 ? '-200px' : 'auto',
+                            right: i % 2 !== 0 ? '-200px' : 'auto',
+                            display: 'flex',
                         }}
                     />
-                </div>
+                ))}
 
+                {/* Outer decorative borders */}
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '40px',
+                        left: '40px',
+                        right: '40px',
+                        bottom: '40px',
+                        border: `1px solid ${gold500}`,
+                        opacity: 0.4,
+                        display: 'flex',
+                    }}
+                />
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '55px',
+                        left: '55px',
+                        right: '55px',
+                        bottom: '55px',
+                        border: `3px solid ${gold500}`,
+                        opacity: 0.2,
+                        display: 'flex',
+                    }}
+                />
+
+                {/* Main Content Container */}
                 <div
                     style={{
                         display: 'flex',
@@ -110,57 +106,85 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                         alignItems: 'center',
                         justifyContent: 'center',
                         zIndex: '10',
-                        transform: 'translateY(-10px)',
                     }}
                 >
-                    <img
-                        src={logoSrc}
-                        width="120"
-                        height="120"
-                        style={{
-                            marginBottom: '30px',
-                        }}
-                        alt="Logo"
-                    />
+                    {/* Logo with subtle glow */}
+                    <div style={{
+                        display: 'flex',
+                        padding: '20px',
+                        backgroundColor: 'rgba(212,175,55,0.05)',
+                        borderRadius: '50%',
+                        marginBottom: '40px',
+                        border: `1px solid ${gold500}`,
+                    }}>
+                        <img
+                            src={logoSrc}
+                            width="140"
+                            height="140"
+                            alt="Logo"
+                        />
+                    </div>
 
+                    {/* App Name with Premium Typography */}
                     <div
                         style={{
-                            color: cream,
-                            fontSize: '72px',
-                            fontWeight: 900,
-                            letterSpacing: '-0.03em',
-                            lineHeight: 1.1,
-                            marginBottom: '20px',
-                            textShadow: '0 4px 20px rgba(0,0,0,0.5)',
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
                         }}
                     >
-                        <span>Mumin Reader</span>
-                    </div>
-
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '12px',
-                        }}
-                    >
-                        <div style={{ width: '40px', height: '1px', backgroundColor: gold500 }} />
                         <div
                             style={{
-                                color: gold400,
-                                fontSize: '24px',
-                                fontWeight: 600,
-                                letterSpacing: '0.2em',
+                                color: gold500,
+                                fontSize: '88px',
+                                fontWeight: 900,
+                                letterSpacing: '-0.02em',
+                                marginBottom: '10px',
+                                textShadow: '0 4px 15px rgba(0,0,0,0.4)',
+                            }}
+                        >
+                            Mumin Reader
+                        </div>
+
+                        {/* Decorative Divider */}
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            width: '100%',
+                            gap: '20px',
+                            margin: '10px 0',
+                        }}>
+                            <div style={{ flex: 1, height: '1px', background: `linear-gradient(to right, transparent, ${gold500})` }} />
+                            <div style={{ color: gold400, fontSize: '32px' }}>✦</div>
+                            <div style={{ flex: 1, height: '1px', background: `linear-gradient(to left, transparent, ${gold500})` }} />
+                        </div>
+
+                        <div
+                            style={{
+                                color: cream,
+                                fontSize: '28px',
+                                fontWeight: 500,
+                                letterSpacing: '0.4em',
                                 textTransform: 'uppercase',
-                                fontFamily: 'monospace',
+                                opacity: 0.9,
+                                marginTop: '10px',
                             }}
                         >
                             Authentic Prophetic Wisdom
                         </div>
-                        <div style={{ width: '40px', height: '1px', backgroundColor: gold500 }} />
+                    </div>
+
+                    {/* Subdomain Branding */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '-120px',
+                        color: gold400,
+                        fontSize: '20px',
+                        opacity: 0.6,
+                        letterSpacing: '0.1em',
+                        display: 'flex',
+                    }}>
+                        hadith.mumin.ink
                     </div>
                 </div>
             </div>
