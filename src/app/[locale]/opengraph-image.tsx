@@ -117,7 +117,6 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                         fontSize: '120px',
                         fontWeight: 700,
                         letterSpacing: '0.2em',
-                        letterSpacing: '0.2em',
                         lineHeight: 1,
                         textShadow: `0 0 40px ${OG_PALETTE.gold}60`,
                         backgroundImage: `linear-gradient(180deg, ${OG_PALETTE.cream} 0%, ${OG_PALETTE.goldLight} 100%)`,
