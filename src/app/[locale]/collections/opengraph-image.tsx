@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { OG_PALETTE, fetchFont } from '@/lib/og-helper';
 
-// export const runtime = 'edge'; // Disabled for debugging
+export const runtime = 'edge';
 
 
 export const alt = 'Mumin Reader - Collections';
