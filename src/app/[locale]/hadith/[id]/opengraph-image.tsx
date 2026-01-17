@@ -9,12 +9,15 @@ export const size = {
 };
 export const contentType = 'image/png';
 
-// Celestial Miracle Palette (Premium Edition)
+// Enhanced Color Palette
 const nobleCream = '#fffdf9';
 const emeraldRadiant = '#10b981';
 const goldSpiritual = '#fbbf24';
 const deepForest = '#064e3b';
 const lightEmerald = '#d1fae5';
+const teal = '#14b8a6';
+const amber = '#f59e0b';
+const emeraldDark = '#047857';
 
 const LogoPath = ({ color = deepForest }: { color?: string }) => (
     <path
@@ -67,210 +70,320 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: nobleCream,
+                    background: `linear-gradient(135deg, ${deepForest} 0%, ${emeraldDark} 50%, ${teal} 100%)`,
                     position: 'relative',
+                    overflow: 'hidden',
                 }}
             >
-                {/* Enhanced Background Gradients */}
+                {/* Massive Glowing Orbs */}
                 <div style={{
-                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundImage: `radial-gradient(circle at 20% 30%, ${lightEmerald}, transparent 50%)`,
+                    position: 'absolute',
+                    top: '-200px',
+                    left: '-200px',
+                    width: '600px',
+                    height: '600px',
+                    borderRadius: '50%',
+                    background: `radial-gradient(circle, ${emeraldRadiant}60, transparent 70%)`,
+                    filter: 'blur(80px)',
                     display: 'flex'
                 }} />
 
                 <div style={{
-                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundImage: `radial-gradient(circle at 80% 70%, ${goldSpiritual}25, transparent 50%)`,
-                    display: 'flex'
-                }} />
-
-                {/* Subtle Pattern Overlay */}
-                <div style={{
-                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundImage: `repeating-linear-gradient(45deg, ${emeraldRadiant}03 0px, ${emeraldRadiant}03 1px, transparent 1px, transparent 60px)`,
-                    display: 'flex'
-                }} />
-
-                {/* Decorative Islamic Corner Ornaments */}
-                <div style={{
-                    position: 'absolute', top: '30px', left: '30px',
-                    width: '80px', height: '80px',
-                    borderTop: `3px solid ${emeraldRadiant}40`,
-                    borderLeft: `3px solid ${emeraldRadiant}40`,
-                    borderTopLeftRadius: '12px',
+                    position: 'absolute',
+                    bottom: '-250px',
+                    right: '-250px',
+                    width: '700px',
+                    height: '700px',
+                    borderRadius: '50%',
+                    background: `radial-gradient(circle, ${goldSpiritual}50, transparent 70%)`,
+                    filter: 'blur(100px)',
                     display: 'flex'
                 }} />
 
                 <div style={{
-                    position: 'absolute', top: '30px', right: '30px',
-                    width: '80px', height: '80px',
-                    borderTop: `3px solid ${goldSpiritual}50`,
-                    borderRight: `3px solid ${goldSpiritual}50`,
-                    borderTopRightRadius: '12px',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '500px',
+                    height: '500px',
+                    borderRadius: '50%',
+                    background: `radial-gradient(circle, ${teal}30, transparent 70%)`,
+                    filter: 'blur(90px)',
+                    display: 'flex'
+                }} />
+
+                {/* Islamic Geometric Patterns */}
+                <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.08 }}>
+                    {/* Stars pattern */}
+                    {[...Array(12)].map((_, i) => (
+                        <circle
+                            key={`star-${i}`}
+                            cx={100 + (i % 4) * 300}
+                            cy={100 + Math.floor(i / 4) * 200}
+                            r="80"
+                            fill="none"
+                            stroke={nobleCream}
+                            strokeWidth="2"
+                        />
+                    ))}
+                    {/* Connecting lines */}
+                    {[...Array(8)].map((_, i) => (
+                        <line
+                            key={`line-${i}`}
+                            x1={i * 150}
+                            y1="0"
+                            x2={i * 150}
+                            y2="630"
+                            stroke={nobleCream}
+                            strokeWidth="1"
+                            opacity="0.3"
+                        />
+                    ))}
+                </svg>
+
+                {/* Floating Decorative Shapes */}
+                <div style={{
+                    position: 'absolute',
+                    top: '100px',
+                    right: '120px',
+                    width: '140px',
+                    height: '140px',
+                    borderRadius: '30px',
+                    background: `linear-gradient(135deg, ${emeraldRadiant}30, ${teal}20)`,
+                    transform: 'rotate(15deg)',
+                    border: `2px solid ${emeraldRadiant}40`,
                     display: 'flex'
                 }} />
 
                 <div style={{
-                    position: 'absolute', bottom: '30px', left: '30px',
-                    width: '80px', height: '80px',
-                    borderBottom: `3px solid ${goldSpiritual}50`,
-                    borderLeft: `3px solid ${goldSpiritual}50`,
-                    borderBottomLeftRadius: '12px',
+                    position: 'absolute',
+                    bottom: '120px',
+                    left: '80px',
+                    width: '100px',
+                    height: '100px',
+                    borderRadius: '50%',
+                    background: `linear-gradient(135deg, ${goldSpiritual}35, ${amber}25)`,
+                    border: `2px solid ${goldSpiritual}50`,
                     display: 'flex'
                 }} />
 
                 <div style={{
-                    position: 'absolute', bottom: '30px', right: '30px',
-                    width: '80px', height: '80px',
-                    borderBottom: `3px solid ${emeraldRadiant}40`,
-                    borderRight: `3px solid ${emeraldRadiant}40`,
-                    borderBottomRightRadius: '12px',
+                    position: 'absolute',
+                    top: '250px',
+                    left: '100px',
+                    width: '80px',
+                    height: '80px',
+                    background: `linear-gradient(135deg, ${teal}25, ${emeraldRadiant}20)`,
+                    transform: 'rotate(45deg)',
+                    border: `2px solid ${teal}40`,
                     display: 'flex'
                 }} />
 
-                {/* Main Content Card with Enhanced Shadow */}
+                <div style={{
+                    position: 'absolute',
+                    bottom: '200px',
+                    right: '150px',
+                    width: '120px',
+                    height: '120px',
+                    borderRadius: '20px',
+                    background: `linear-gradient(135deg, ${amber}20, ${goldSpiritual}30)`,
+                    transform: 'rotate(-20deg)',
+                    border: `2px solid ${amber}35`,
+                    display: 'flex'
+                }} />
+
+                {/* Intricate Corner Ornaments */}
+                <div style={{
+                    position: 'absolute',
+                    top: '30px',
+                    left: '30px',
+                    width: '120px',
+                    height: '120px',
+                    display: 'flex'
+                }}>
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <path d="M0,0 L120,0 L120,40 Q90,40 90,70 Q60,70 60,100 L0,100 Z" fill={`${emeraldRadiant}40`} />
+                        <circle cx="60" cy="60" r="25" fill="none" stroke={goldSpiritual} strokeWidth="3" />
+                    </svg>
+                </div>
+
+                <div style={{
+                    position: 'absolute',
+                    top: '30px',
+                    right: '30px',
+                    width: '120px',
+                    height: '120px',
+                    display: 'flex',
+                    transform: 'scaleX(-1)'
+                }}>
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <path d="M0,0 L120,0 L120,40 Q90,40 90,70 Q60,70 60,100 L0,100 Z" fill={`${goldSpiritual}40`} />
+                        <circle cx="60" cy="60" r="25" fill="none" stroke={emeraldRadiant} strokeWidth="3" />
+                    </svg>
+                </div>
+
+                {/* Main Content Card - Glassmorphism */}
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    width: '900px',
-                    padding: '60px',
-                    background: 'rgba(255, 255, 255, 0.95)',
+                    width: '880px',
+                    padding: '70px 60px',
+                    background: 'rgba(255, 255, 255, 0.12)',
+                    backdropFilter: 'blur(20px)',
                     borderRadius: '48px',
-                    border: `2px solid ${emeraldRadiant}20`,
-                    boxShadow: `0 25px 50px -12px ${deepForest}15, 0 0 0 1px ${goldSpiritual}20`,
+                    border: `2px solid rgba(255, 255, 255, 0.25)`,
+                    boxShadow: `0 30px 60px rgba(0, 0, 0, 0.3), 
+                                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                                0 0 80px ${emeraldRadiant}20`,
                     zIndex: 10,
                     textAlign: 'center',
                 }}>
-                    {/* Logo Badge with Glow Effect */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
+                    {/* Logo with Stunning Glow */}
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '50px' }}>
                         <div style={{
-                            width: '72px', 
-                            height: '72px', 
-                            background: `linear-gradient(135deg, ${emeraldRadiant}, ${emeraldRadiant}dd)`,
-                            borderRadius: '24px', 
+                            width: '90px', 
+                            height: '90px', 
+                            background: `linear-gradient(135deg, ${emeraldRadiant}, ${teal})`,
+                            borderRadius: '28px', 
                             display: 'flex', 
                             alignItems: 'center', 
                             justifyContent: 'center',
-                            marginBottom: '24px',
-                            boxShadow: `0 8px 24px ${emeraldRadiant}40, 0 0 0 4px ${emeraldRadiant}10`
+                            marginBottom: '28px',
+                            boxShadow: `0 0 40px ${emeraldRadiant}80, 
+                                       0 0 80px ${emeraldRadiant}50,
+                                       0 20px 40px rgba(0, 0, 0, 0.3),
+                                       inset 0 1px 0 rgba(255, 255, 255, 0.3)`,
+                            border: `3px solid rgba(255, 255, 255, 0.3)`,
+                            position: 'relative'
                         }}>
-                            <svg width="36" height="36" viewBox="0 0 24 24">
+                            <div style={{
+                                position: 'absolute',
+                                width: '100%',
+                                height: '100%',
+                                background: `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent)`,
+                                borderRadius: '28px',
+                                display: 'flex'
+                            }} />
+                            <svg width="48" height="48" viewBox="0 0 24 24" style={{ position: 'relative', zIndex: 1 }}>
                                 <LogoPath color="white" />
                             </svg>
                         </div>
 
                         <div style={{
-                            color: emeraldRadiant, 
-                            fontSize: '15px', 
-                            fontWeight: 800, 
-                            letterSpacing: '0.25em',
+                            color: nobleCream, 
+                            fontSize: '16px', 
+                            fontWeight: 900, 
+                            letterSpacing: '0.3em',
                             textTransform: 'uppercase', 
-                            marginBottom: '10px', 
+                            marginBottom: '12px', 
                             display: 'flex',
-                            background: `linear-gradient(90deg, ${emeraldRadiant}, ${goldSpiritual})`,
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
+                            textShadow: `0 0 20px ${goldSpiritual}80, 0 0 40px ${goldSpiritual}40, 0 2px 4px rgba(0,0,0,0.3)`,
                         }}>
                             {collection}
                         </div>
 
                         <div style={{ 
-                            color: deepForest, 
-                            fontSize: '18px', 
-                            opacity: 0.5, 
-                            fontWeight: 600, 
+                            color: lightEmerald, 
+                            fontSize: '20px', 
+                            fontWeight: 700, 
                             display: 'flex',
-                            letterSpacing: '0.05em'
+                            letterSpacing: '0.08em',
+                            textShadow: '0 2px 8px rgba(0,0,0,0.4)'
                         }}>
                             {locale === 'ru' ? `Хадис №${num}` : `Hadith #${num}`}
                         </div>
                     </div>
 
-                    {/* Enhanced Quote Text */}
+                    {/* Quote with Beautiful Typography */}
                     <div style={{
-                        color: deepForest,
-                        fontSize: truncatedText.length > 120 ? '32px' : '40px',
-                        lineHeight: 1.6,
+                        color: nobleCream,
+                        fontSize: truncatedText.length > 120 ? '34px' : '42px',
+                        lineHeight: 1.7,
                         fontWeight: 600,
-                        letterSpacing: '-0.02em',
-                        marginBottom: '40px',
-                        padding: '0 20px',
+                        letterSpacing: '-0.01em',
+                        marginBottom: '50px',
+                        padding: '0 30px',
                         fontStyle: 'italic',
                         display: 'flex',
-                        textShadow: `0 1px 2px ${deepForest}10`
+                        textShadow: `0 4px 12px rgba(0, 0, 0, 0.5), 0 0 40px ${emeraldRadiant}30`
                     }}>
                         "{truncatedText}"
                     </div>
 
-                    {/* Elegant Divider with Enhanced Design */}
+                    {/* Gorgeous Divider */}
                     <div style={{ 
                         display: 'flex', 
                         alignItems: 'center', 
-                        width: '240px', 
-                        justifyContent: 'space-between' 
+                        width: '280px', 
+                        justifyContent: 'center',
+                        gap: '16px'
                     }}>
                         <div style={{ 
-                            height: '2px', 
+                            height: '3px', 
                             flex: 1, 
-                            background: `linear-gradient(to right, transparent, ${goldSpiritual}60, ${goldSpiritual})` 
+                            background: `linear-gradient(to right, transparent, ${goldSpiritual}, ${goldSpiritual}80)`,
+                            borderRadius: '10px',
+                            boxShadow: `0 0 10px ${goldSpiritual}60`
                         }} />
                         <div style={{ 
-                            width: '10px', 
-                            height: '10px', 
-                            background: `linear-gradient(135deg, ${emeraldRadiant}, ${goldSpiritual})`, 
-                            transform: 'rotate(45deg)', 
-                            margin: '0 20px',
-                            boxShadow: `0 0 12px ${goldSpiritual}60`
+                            width: '16px', 
+                            height: '16px', 
+                            background: `linear-gradient(135deg, ${goldSpiritual}, ${amber})`, 
+                            transform: 'rotate(45deg)',
+                            boxShadow: `0 0 20px ${goldSpiritual}90, 0 0 40px ${goldSpiritual}50`,
+                            border: `2px solid rgba(255, 255, 255, 0.5)`
                         }} />
                         <div style={{ 
-                            height: '2px', 
+                            height: '3px', 
                             flex: 1, 
-                            background: `linear-gradient(to left, transparent, ${goldSpiritual}60, ${goldSpiritual})` 
+                            background: `linear-gradient(to left, transparent, ${goldSpiritual}, ${goldSpiritual}80)`,
+                            borderRadius: '10px',
+                            boxShadow: `0 0 10px ${goldSpiritual}60`
                         }} />
                     </div>
                 </div>
 
-                {/* Enhanced Footer Branding */}
+                {/* Premium Footer Badge */}
                 <div style={{
                     position: 'absolute', 
-                    bottom: '70px', 
+                    bottom: '50px', 
                     display: 'flex', 
                     alignItems: 'center', 
                     zIndex: 10,
-                    padding: '16px 32px',
-                    background: `${nobleCream}90`,
+                    padding: '20px 40px',
+                    background: `linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08))`,
+                    backdropFilter: 'blur(10px)',
                     borderRadius: '100px',
-                    border: `1px solid ${emeraldRadiant}15`
+                    border: `2px solid rgba(255, 255, 255, 0.25)`,
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
                 }}>
                     <span style={{ 
-                        color: deepForest, 
-                        fontSize: '20px', 
+                        color: nobleCream, 
+                        fontSize: '24px', 
                         fontWeight: 900, 
-                        letterSpacing: '0.12em', 
+                        letterSpacing: '0.15em', 
                         display: 'flex',
-                        background: `linear-gradient(90deg, ${deepForest}, ${emeraldRadiant})`,
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
+                        textShadow: `0 0 20px ${emeraldRadiant}60, 0 2px 4px rgba(0, 0, 0, 0.4)`
                     }}>
                         MUMIN
                     </span>
                     <div style={{ 
-                        width: '5px', 
-                        height: '5px', 
+                        width: '8px', 
+                        height: '8px', 
                         borderRadius: '50%', 
-                        background: emeraldRadiant, 
-                        margin: '0 16px', 
+                        background: goldSpiritual, 
+                        margin: '0 20px', 
                         display: 'flex',
-                        boxShadow: `0 0 8px ${emeraldRadiant}`
+                        boxShadow: `0 0 12px ${goldSpiritual}90, 0 0 24px ${goldSpiritual}50`
                     }} />
                     <span style={{ 
-                        color: deepForest, 
-                        fontSize: '18px', 
-                        fontWeight: 500, 
-                        opacity: 0.6, 
-                        display: 'flex' 
+                        color: lightEmerald, 
+                        fontSize: '20px', 
+                        fontWeight: 600, 
+                        display: 'flex',
+                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.4)'
                     }}>
                         hadith.mumin.ink
                     </span>
