@@ -21,10 +21,13 @@ export default async function Image() {
     const cream = '#fffdf9';
 
     // Load Logo
-    // Load Logo (use fetch for Vercel/Edge compatibility)
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
-    const logoUrl = `${baseUrl}/icons/logo.png`;
-    const logoBuffer = await fetch(logoUrl).then((res) => res.arrayBuffer());
+    // Load Logo (Stable GitHub URL to avoid Vercel filesystem/localhost issues)
+    // This ensures reliable generation regardless of deployment phase
+    const logoUrl = 'https://raw.githubusercontent.com/abubakrmuminov/mumin-api-reader/main/reader/public/icons/logo.png';
+    const logoBuffer = await fetch(logoUrl).then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch logo');
+        return res.arrayBuffer();
+    });
     const logoSrc = `data:image/png;base64,${Buffer.from(logoBuffer).toString('base64')}`;
 
     return new ImageResponse(
