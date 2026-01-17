@@ -21,9 +21,11 @@ export default async function Image() {
     const cream = '#fffdf9';
 
     // Load Logo
-    const logoPath = join(process.cwd(), 'public', 'icons', 'logo.png');
-    const logoData = await readFile(logoPath);
-    const logoSrc = `data:image/png;base64,${logoData.toString('base64')}`;
+    // Load Logo (use fetch for Vercel/Edge compatibility)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
+    const logoUrl = `${baseUrl}/icons/logo.png`;
+    const logoBuffer = await fetch(logoUrl).then((res) => res.arrayBuffer());
+    const logoSrc = `data:image/png;base64,${Buffer.from(logoBuffer).toString('base64')}`;
 
     return new ImageResponse(
         (
