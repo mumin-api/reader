@@ -13,12 +13,12 @@ const nobleCream = '#fffdf9';
 const emeraldRadiant = '#10b981';
 const goldSpiritual = '#fbbf24';
 const deepForest = '#064e3b';
+const lightEmerald = '#d1fae5';
 
-// Direct SVG path for logo
-const LogoPath = () => (
+const LogoPath = ({ color = deepForest }: { color?: string }) => (
     <path
         d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 4L16.95 10.5L19.5 12L16.95 13.5L12 20L7.05 13.5L4.5 12L7.05 10.5L12 4Z"
-        fill={deepForest}
+        fill={color}
     />
 );
 
@@ -27,7 +27,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
     const { locale } = params;
 
     const isRu = locale === 'ru';
-    const title = isRu ? 'Коллекции Хадисов' : 'Hadith Collections';
+    const title = isRu ? 'Сборники Хадисов' : 'Hadith Collections';
     const subtitle = isRu
         ? 'Все великие сборники в одном месте'
         : 'All major authentic collections in one place';
@@ -43,30 +43,21 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                     alignItems: 'center',
                     justifyContent: 'center',
                     backgroundColor: nobleCream,
-                    padding: '80px',
                     position: 'relative',
+                    padding: '60px',
                 }}
             >
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', opacity: 0.03 }}>
-                    <svg width="100%" height="100%">
-                        <defs>
-                            <pattern id="stars-cols" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                                <path d="M50 15l5 15 15 5-15 5-5 15-5-15-15-5 15-5z" fill={deepForest} />
-                            </pattern>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#stars-cols)" />
-                    </svg>
-                </div>
+                <div style={{
+                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                    background: `radial-gradient(circle at 0% 0%, ${lightEmerald} 0%, transparent 50%), radial-gradient(circle at 100% 100%, ${goldSpiritual}15 0%, transparent 50%)`,
+                    display: 'flex'
+                }} />
 
                 <div style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    width: '800px',
-                    height: '800px',
-                    background: `radial-gradient(circle, ${goldSpiritual}20 0%, transparent 70%)`,
-                    transform: 'translate(-50%, -50%)',
-                    display: 'flex',
+                    position: 'absolute', top: '40px', left: '40px', right: '40px', bottom: '40px',
+                    border: `1px solid ${emeraldRadiant}30`,
+                    borderRadius: '32px',
+                    display: 'flex'
                 }} />
 
                 <div style={{
@@ -74,24 +65,16 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    background: 'white',
-                    borderRadius: '48px',
-                    border: `2px solid rgba(6, 78, 59, 0.08)`,
-                    padding: '60px 100px',
-                    boxShadow: '0 30px 60px rgba(6, 78, 59, 0.08)',
                     zIndex: 10,
                     textAlign: 'center',
                 }}>
                     <div style={{
-                        display: 'flex',
-                        padding: '16px',
-                        background: 'white',
-                        borderRadius: '24px',
-                        marginBottom: '30px',
-                        border: '1px solid rgba(6, 78, 59, 0.1)',
+                        width: '80px', height: '80px', background: emeraldRadiant,
+                        borderRadius: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        marginBottom: '40px', boxShadow: `0 15px 30px ${emeraldRadiant}30`
                     }}>
-                        <svg width="60" height="60" viewBox="0 0 24 24">
-                            <LogoPath />
+                        <svg width="40" height="40" viewBox="0 0 24 24">
+                            <LogoPath color="white" />
                         </svg>
                     </div>
 
@@ -100,16 +83,24 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                         fontSize: '72px',
                         fontWeight: 900,
                         margin: 0,
-                        marginBottom: '15px',
+                        marginBottom: '16px',
                         letterSpacing: '-0.02em',
                         display: 'flex',
                     }}>
                         {title}
                     </h1>
 
+                    <div style={{
+                        display: 'flex', alignItems: 'center', width: '300px', justifyContent: 'space-between', marginBottom: '32px'
+                    }}>
+                        <div style={{ height: '2px', flex: 1, background: `linear-gradient(to right, transparent, ${goldSpiritual})` }} />
+                        <div style={{ width: '6px', height: '6px', background: goldSpiritual, transform: 'rotate(45deg)', margin: '0 12px' }} />
+                        <div style={{ height: '2px', flex: 1, background: `linear-gradient(to left, transparent, ${goldSpiritual})` }} />
+                    </div>
+
                     <p style={{
                         color: deepForest,
-                        fontSize: '28px',
+                        fontSize: '32px',
                         fontWeight: 500,
                         opacity: 0.6,
                         margin: 0,
@@ -120,18 +111,9 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                 </div>
 
                 <div style={{
-                    position: 'absolute',
-                    bottom: '50px',
-                    padding: '12px 32px',
-                    background: emeraldRadiant,
-                    borderRadius: '100px',
-                    color: 'white',
-                    fontSize: '20px',
-                    fontWeight: 800,
-                    zIndex: 10,
-                    display: 'flex',
+                    position: 'absolute', bottom: '80px', display: 'flex', alignItems: 'center', zIndex: 10
                 }}>
-                    hadith.mumin.ink
+                    <span style={{ color: deepForest, fontSize: '18px', fontWeight: 400, opacity: 0.4 }}>hadith.mumin.ink</span>
                 </div>
             </div>
         ),
