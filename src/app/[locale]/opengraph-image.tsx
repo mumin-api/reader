@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { OG_PALETTE } from '@/lib/og-helper';
+import { OG_PALETTE, fetchFont } from '@/lib/og-helper';
 
 export const runtime = 'edge';
 
