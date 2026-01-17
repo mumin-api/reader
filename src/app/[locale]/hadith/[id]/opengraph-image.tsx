@@ -144,7 +144,7 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                     color: 'white'
                 }}>
                     <div style={{ display: 'flex', fontSize: '24px', fontWeight: 600 }}>Mumin Reader</div>
-                    <div style={{ display: 'flex', fontSize: '20px', opacity: 0.8 }}>Read more at mumin.ink</div>
+                    <div style={{ display: 'flex', fontSize: '20px', opacity: 0.8 }}>Read more at hadith.mumin.ink</div>
                 </div>
             </div>
         ),

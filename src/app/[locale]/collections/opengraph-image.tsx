@@ -96,7 +96,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                         fontSize: '24px',
                     }}
                 >
-                    mumin.ink
+                    hadith.mumin.ink
                 </div>
             </div>
         ),

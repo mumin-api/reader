@@ -30,7 +30,7 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
