@@ -1,7 +1,8 @@
 import { ImageResponse } from 'next/og';
 import { OG_PALETTE, fetchFont } from '@/lib/og-helper';
 
-export const runtime = 'edge';
+// export const runtime = 'edge'; // Disabled for debugging
+
 
 export const alt = 'Mumin Reader - Collections';
 export const size = {
@@ -42,7 +43,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
             >
                 {/* Background: Abstract Library shelves sensation */}
                 <div style={{
-                    position: 'absolute', inset: 0,
+                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
                     background: `linear-gradient(90deg, ${OG_PALETTE.midnightGreen} 0%, #05332f 50%, ${OG_PALETTE.midnightGreen} 100%)`,
                 }} />
 
@@ -75,7 +76,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                 }}>
                     {/* Inner Border */}
                     <div style={{
-                        position: 'absolute', inset: '12px',
+                        position: 'absolute', top: '12px', left: '12px', right: '12px', bottom: '12px',
                         border: `1px solid ${OG_PALETTE.gold}40`,
                         display: 'flex',
                         flexDirection: 'column',

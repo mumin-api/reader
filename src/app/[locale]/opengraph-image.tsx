@@ -1,7 +1,8 @@
 import { ImageResponse } from 'next/og';
 import { OG_PALETTE, fetchFont } from '@/lib/og-helper';
 
-export const runtime = 'edge';
+// export const runtime = 'edge'; // Disabled for debugging/local
+
 
 export const alt = 'Mumin Reader - Authentic Hadith';
 export const size = {
@@ -46,7 +47,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
             >
                 {/* Background Texture & Gradients */}
                 <div style={{
-                    position: 'absolute', inset: 0,
+                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
                     background: `radial-gradient(circle at center, ${OG_PALETTE.forest}40 0%, transparent 70%)`,
                 }} />
 
@@ -59,7 +60,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                 }} />
 
                 {/* Islamic Pattern Overlay (Abstract) */}
-                <svg style={{ position: 'absolute', inset: 0, opacity: 0.05 }} width="100%" height="100%">
+                <svg style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.05 }} width="100%" height="100%">
                     <pattern id="pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
                         <path d="M20 0L40 20L20 40L0 20Z" fill="none" stroke={OG_PALETTE.cream} strokeWidth="1" />
                     </pattern>
@@ -76,7 +77,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                     justifyContent: 'center',
                 }}>
                     <div style={{
-                        position: 'absolute', inset: '4px',
+                        position: 'absolute', top: '4px', left: '4px', right: '4px', bottom: '4px',
                         border: `1px solid ${OG_PALETTE.border}`,
                         opacity: 0.5,
                     }} />
