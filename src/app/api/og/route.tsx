@@ -1,43 +1,48 @@
-import { ImageResponse } from '@vercel/og';
+import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
+
+// Celestial Miracle Colors
+const nobleCream = '#fffdf9';
+const emeraldRadiant = '#10b981';
+const goldSpiritual = '#fbbf24';
+const tealEthereal = '#2dd4bf';
+const indigoSoft = '#818cf8';
+const deepForest = '#064e3b';
+
+const logoSrc = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyQzIgMTcuNTIgNi40OCAyMiAxMiAyMkMxNy41MiAyMiAyMiAxNy41MiAyMiAxMkMyMiA2LjQ4IDE3LjUyIDIgMTIgMlpNMTIgNEwxNi45NSAxMC41TDE5LjUgMTJMMTYuOTUgMTMuNUwxMiAyMEw3LjA1IDEzLjVMMC41IDEyTDcuMDUgMTAuNUwxMiA0WiIgZmlsbD0iIzA2NGUzYiIvPgo8L3N2Zz4=";
+
+async function getHadith(id: string) {
+    const API_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.hadith.mumin.ink';
+    try {
+        const res = await fetch(`${API_URL}/hadiths/${id}`);
+        if (!res.ok) return null;
+        return res.json();
+    } catch (e) {
+        console.error('OG Image Fetch Exception:', e);
+        return null;
+    }
+}
 
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
+        const locale = searchParams.get('locale') || 'en';
 
         if (!id) {
             return new Response('Missing ID', { status: 400 });
         }
 
-        // Use native fetch instead of Axios for Edge compatibility
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333/v1';
-        const response = await fetch(`${API_URL}/hadiths/${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                // Add API Key if needed, though for public read it might not be strictly required or can be exposed for this internal route
-            },
-            next: { revalidate: 86400 } // Cache for 24h
-        });
+        const hadith = await getHadith(id);
 
-        if (!response.ok) {
+        if (!hadith) {
             return new Response('Hadith not found', { status: 404 });
         }
 
-        const data = await response.json();
-        const hadith = data.data || data;
-
         const text = hadith.translation?.text || '';
-        const arabicText = hadith.arabicText || '';
-        const reference = `${hadith.collection} ${hadith.hadithNumber}`;
-
-        // Truncate text for the image
-        const truncatedText = text.length > 280 ? text.substring(0, 280) + '...' : text;
-        const truncatedArabic = arabicText.length > 200 ? arabicText.substring(0, 200) + '...' : arabicText;
-
-        // Load fonts (optional but recommended for better look)
-        // For now we'll use system fonts as fetch might be slow on edge without caching
+        const collection = hadith.collection || 'Sahih Collection';
+        const num = hadith.hadithNumber;
 
         return new ImageResponse(
             (
@@ -46,68 +51,110 @@ export async function GET(request: Request) {
                         height: '100%',
                         width: '100%',
                         display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#fffdf9', // sand light
-                        backgroundImage: 'radial-gradient(circle at 25px 25px, #064e3b05 2%, transparent 0%), radial-gradient(circle at 75px 75px, #064e3b05 2%, transparent 0%)',
-                        backgroundSize: '100px 100px',
-                        padding: '60px',
+                        flexDirection: 'row',
+                        backgroundColor: nobleCream,
                         position: 'relative',
+                        overflow: 'hidden',
+                        fontFamily: 'sans-serif',
                     }}
                 >
-                    {/* Logo/Brand */}
-                    <div style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: 40, left: 60 }}>
-                        <div style={{ width: 40, height: 40, backgroundColor: '#064e3b', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
-                            <span style={{ color: 'white', fontSize: 24, fontWeight: 'bold', marginLeft: 10 }}>M</span>
-                        </div>
-                        <span style={{ fontSize: 24, fontWeight: 700, color: '#064e3b', marginLeft: 15 }}>Mumin Hadith</span>
-                    </div>
+                    {/* 1. LAYERED LIGHT MESH */}
+                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', background: nobleCream }} />
 
-                    <div style={{ display: 'flex', alignItems: 'center', position: 'absolute', top: 40, right: 60 }}>
-                        <span style={{ fontSize: 18, fontWeight: 600, color: '#064e3b40', letterSpacing: '0.1em' }}>{reference}</span>
-                    </div>
-
-                    {/* Hadith Content */}
-                    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', marginTop: 20 }}>
-                        {/* Arabic Text */}
-                        <p
-                            style={{
-                                fontSize: 32,
-                                color: '#064e3b',
-                                textAlign: 'right',
-                                lineHeight: 1.6,
-                                marginBottom: 40,
-                                direction: 'rtl',
-                                fontWeight: 600,
-                            }}
-                        >
-                            {truncatedArabic}
-                        </p>
-
-                        {/* Translation Text */}
-                        <p
-                            style={{
-                                fontSize: 24,
-                                color: '#064e3b80',
-                                lineHeight: 1.5,
-                                fontWeight: 500,
-                            }}
-                        >
-                            {truncatedText}
-                        </p>
-                    </div>
-
-                    {/* Footer Decoration */}
                     <div style={{
-                        position: 'absolute',
-                        bottom: 40,
-                        left: 60,
-                        right: 60,
-                        height: '4px',
-                        backgroundColor: '#d4af3720', // gold light
-                        borderRadius: '2px',
+                        position: 'absolute', top: '-10%', right: '-10%', width: '100%', height: '100%',
+                        background: `radial-gradient(circle, ${emeraldRadiant} 0%, transparent 70%)`, opacity: 0.15, display: 'flex'
                     }} />
+
+                    <div style={{
+                        position: 'absolute', bottom: '-20%', left: '-10%', width: '70%', height: '70%',
+                        background: `radial-gradient(circle, ${goldSpiritual} 0%, transparent 70%)`, opacity: 0.15, display: 'flex'
+                    }} />
+
+                    {/* 2. SIDEBAR CONTENT */}
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '420px',
+                        padding: '80px 60px',
+                        justifyContent: 'space-between',
+                        background: 'rgba(255, 255, 255, 0.4)',
+                        backdropFilter: 'blur(30px)',
+                        borderRight: '1px solid rgba(6, 78, 59, 0.05)',
+                        zIndex: 20,
+                    }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div style={{
+                                display: 'flex',
+                                padding: '16px',
+                                background: 'white',
+                                borderRadius: '24px',
+                                border: '1px solid rgba(6, 78, 59, 0.1)',
+                                alignSelf: 'flex-start',
+                                marginBottom: '60px',
+                                boxShadow: '0 10px 30px rgba(6, 78, 59, 0.05)',
+                            }}>
+                                <img src={logoSrc} width="50" height="50" alt="Logo" />
+                            </div>
+
+                            <div style={{ color: emeraldRadiant, fontSize: '14px', fontWeight: 800, letterSpacing: '0.2em', marginBottom: '12px', textTransform: 'uppercase' }}>
+                                {locale === 'ru' ? 'КОЛЛЕКЦИЯ' : 'COLLECTION'}
+                            </div>
+                            <div style={{ color: deepForest, fontSize: '42px', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: '30px' }}>
+                                {collection}
+                            </div>
+
+                            <div style={{
+                                display: 'flex',
+                                padding: '12px 24px',
+                                background: 'white',
+                                borderRadius: '12px',
+                                border: `2px solid ${goldSpiritual}`,
+                                alignSelf: 'flex-start'
+                            }}>
+                                <span style={{ color: deepForest, fontSize: '20px', fontWeight: 800 }}>
+                                    {locale === 'ru' ? `Хадис №${num}` : `Hadith #${num}`}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <span style={{ color: 'rgba(6, 78, 59, 0.4)', fontSize: '16px', letterSpacing: '0.1em', fontWeight: 700 }}>MUMIN READER</span>
+                            <span style={{ color: 'rgba(6, 78, 59, 0.2)', fontSize: '14px', fontWeight: 600 }}>hadith.mumin.ink</span>
+                        </div>
+                    </div>
+
+                    {/* 3. MAIN AREA */}
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flex: 1,
+                        padding: '100px',
+                        justifyContent: 'center',
+                        zIndex: 20,
+                        position: 'relative',
+                    }}>
+                        <div style={{
+                            color: deepForest,
+                            fontSize: text.length > 400 ? '28px' : '38px',
+                            lineHeight: 1.5,
+                            fontWeight: 600,
+                            letterSpacing: '-0.01em',
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}>
+                            {text.length > 600 ? text.substring(0, 600) + '...' : text}
+                        </div>
+
+                        <div style={{
+                            display: 'flex',
+                            height: '4px',
+                            width: '100px',
+                            background: `linear-gradient(to right, ${emeraldRadiant}, ${goldSpiritual})`,
+                            marginTop: '40px',
+                            borderRadius: '2px',
+                        }} />
+                    </div>
                 </div>
             ),
             {
@@ -116,9 +163,7 @@ export async function GET(request: Request) {
             }
         );
     } catch (e: any) {
-        console.log(`${e.message}`);
-        return new Response(`Failed to generate the image`, {
-            status: 500,
-        });
+        console.error('OG API Error:', e);
+        return new Response('Internal Server Error', { status: 500 });
     }
 }
