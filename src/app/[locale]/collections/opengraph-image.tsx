@@ -44,12 +44,18 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                     justifyContent: 'center',
                     backgroundColor: nobleCream,
                     position: 'relative',
-                    padding: '60px',
                 }}
             >
+                {/* Layer 1: Split Gradients */}
                 <div style={{
                     position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    background: `radial-gradient(circle at 0% 0%, ${lightEmerald} 0%, transparent 50%), radial-gradient(circle at 100% 100%, ${goldSpiritual}15 0%, transparent 50%)`,
+                    backgroundImage: `radial-gradient(circle at top left, ${lightEmerald}, transparent)`,
+                    display: 'flex'
+                }} />
+
+                <div style={{
+                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundImage: `radial-gradient(circle at bottom right, ${goldSpiritual}20, transparent)`,
                     display: 'flex'
                 }} />
 
@@ -71,7 +77,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                     <div style={{
                         width: '80px', height: '80px', background: emeraldRadiant,
                         borderRadius: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        marginBottom: '40px', boxShadow: `0 15px 30px ${emeraldRadiant}30`
+                        marginBottom: '40px'
                     }}>
                         <svg width="40" height="40" viewBox="0 0 24 24">
                             <LogoPath color="white" />
@@ -93,9 +99,9 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                     <div style={{
                         display: 'flex', alignItems: 'center', width: '300px', justifyContent: 'space-between', marginBottom: '32px'
                     }}>
-                        <div style={{ height: '2px', flex: 1, background: `linear-gradient(to right, transparent, ${goldSpiritual})` }} />
+                        <div style={{ height: '2px', flex: 1, backgroundImage: `linear-gradient(to right, transparent, ${goldSpiritual})` }} />
                         <div style={{ width: '6px', height: '6px', background: goldSpiritual, transform: 'rotate(45deg)', margin: '0 12px' }} />
-                        <div style={{ height: '2px', flex: 1, background: `linear-gradient(to left, transparent, ${goldSpiritual})` }} />
+                        <div style={{ height: '2px', flex: 1, backgroundImage: `linear-gradient(to left, transparent, ${goldSpiritual})` }} />
                     </div>
 
                     <p style={{
@@ -113,7 +119,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                 <div style={{
                     position: 'absolute', bottom: '80px', display: 'flex', alignItems: 'center', zIndex: 10
                 }}>
-                    <span style={{ color: deepForest, fontSize: '18px', fontWeight: 400, opacity: 0.4 }}>hadith.mumin.ink</span>
+                    <span style={{ color: deepForest, fontSize: '18px', fontWeight: 400, opacity: 0.4, display: 'flex' }}>hadith.mumin.ink</span>
                 </div>
             </div>
         ),
