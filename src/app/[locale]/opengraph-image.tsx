@@ -214,7 +214,7 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        zIndex: 10,
+                        // zIndex removed: Satori uses document order
                         gap: '16px',
                         textAlign: 'center',
                         padding: '0 80px',
@@ -245,20 +245,12 @@ export default async function Image(props: { params: Promise<{ locale: string }>
                                         <stop offset="50%" stopColor={OG_PALETTE.gold} />
                                         <stop offset="100%" stopColor="#b8860b" />
                                     </linearGradient>
-                                    <filter id="starGlow">
-                                        <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-                                        <feMerge>
-                                            <feMergeNode in="coloredBlur" />
-                                            <feMergeNode in="SourceGraphic" />
-                                        </feMerge>
-                                    </filter>
                                 </defs>
                                 <path
                                     d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z"
                                     fill="url(#starGrad)"
                                     stroke={OG_PALETTE.goldLight}
                                     strokeWidth="1.5"
-                                    filter="url(#starGlow)"
                                 />
                             </svg>
                         </div>
