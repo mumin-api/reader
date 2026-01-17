@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'nodejs'; // верни обратно nodejs
+export const runtime = 'edge';
 
 export const alt = 'Mumin Reader - Authentic Hadiths';
 export const size = {
@@ -12,7 +12,8 @@ export const contentType = 'image/png';
 // Убери generateImageMetadata совсем!
 // Вместо этого просто принимай params
 
-export default async function Image({ params }: { params: { locale: string } }) {
+export default async function Image(props: { params: Promise<{ locale: string }> }) {
+    const { locale } = await props.params;
     const emerald950 = '#022c22';
     const emerald900 = '#064e3b';
     const emerald800 = '#065f46';

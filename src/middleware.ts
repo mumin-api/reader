@@ -13,5 +13,5 @@ export const config = {
     // - Static files (_next, images, etc.)
     // - Metadata files (favicon.ico, sitemap.xml, robots.txt)
     // - BUT explicit exception for opengraph-image to allow next-intl to handle it
-    matcher: ['/((?!api|_next|_vercel|.*\\..*).*)', '/(.*)/opengraph-image', '/(.*)/icon']
+    matcher: ['/((?!api|_next|_vercel|.*\\..*|opengraph-image|twitter-image|icon).*)']
 };

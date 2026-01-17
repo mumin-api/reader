@@ -33,7 +33,7 @@ async function getHadith(id: string) {
     }
 }
 
-export default async function Image(props: { params: Promise<{ id: string }> }) {
+export default async function Image(props: { params: Promise<{ locale: string; id: string }> }) {
     const params = await props.params;
     const hadith = await getHadith(params.id);
 

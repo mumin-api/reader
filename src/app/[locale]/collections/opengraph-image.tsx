@@ -10,7 +10,8 @@ export const size = {
 };
 export const contentType = 'image/png';
 
-export default async function Image() {
+export default async function Image(props: { params: Promise<{ locale: string }> }) {
+    const { locale } = await props.params;
     const emerald900 = '#064e3b';
     const emerald950 = '#022c22';
     const gold500 = '#d4af37';
