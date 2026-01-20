@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import Script from 'next/script';
 import { usePathname } from 'next/navigation';
-import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
+import { Analytics as VercelAnalytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const METRICA_ID = process.env.NEXT_PUBLIC_YANDEX_METRICA || '99602444'; // Example ID
