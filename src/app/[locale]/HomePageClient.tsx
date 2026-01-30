@@ -172,6 +172,7 @@ export default function HomePageClient({
             <ul className="space-y-4 text-emerald-100/60">
               <li><Link href="/about" className="hover:text-white transition-colors">{tFooter('mission')}</Link></li>
               <li><Link href="/methodology" className="hover:text-white transition-colors">{tFooter('methodology')}</Link></li>
+              <li><Link href="/developers" className="hover:text-white transition-colors">{tFooter('developers')}</Link></li>
               <li><Link href="/privacy" className="hover:text-white transition-colors">{tFooter('privacy')}</Link></li>
               <li><Link href="/terms" className="hover:text-white transition-colors">{tFooter('terms')}</Link></li>
             </ul>

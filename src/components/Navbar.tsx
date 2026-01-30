@@ -11,7 +11,8 @@ import {
     Settings,
     Globe,
     Menu,
-    X
+    X,
+    Code
 } from 'lucide-react';
 import { SearchBar } from './SearchBar';
 import { cn } from '@/lib/utils';
@@ -33,6 +34,7 @@ export const Navbar: React.FC = () => {
         { name: t('home'), href: '/', icon: Home },
         { name: t('collections'), href: '/collections', icon: BookOpen },
         { name: t('random'), href: '/random', icon: Shuffle },
+        { name: t('developers'), href: '/developers', icon: Code },
     ];
 
     useEffect(() => {

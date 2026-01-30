@@ -21,10 +21,12 @@
         "bookmarks": "Bookmarks",
         "language": "Language",
         "settings": "Settings",
+        "developers": "Developers",
         "recent_searches": "Recent Searches",
         "clear": "Clear",
         "search_for": "Search for",
-        "search_results": "Search Results"
+        "search_results": "Search Results",
+        "developers": "Developers"
     },
     "Collections": {
         "title": "Hadith Collections",
@@ -117,6 +119,7 @@
         "methodology": "Methodology",
         "privacy": "Privacy Policy",
         "terms": "Terms of Use",
+        "developers": "Developers",
         "rights": "© 2026 Mumin. All rights reserved. Built with ihsaan for the global Ummah."
     },
     "Methodology": {
@@ -147,5 +150,27 @@
         "clear_search": "Clear Search",
         "error": "Search Error",
         "error_desc": "Failed to fetch search results. Please try again."
+    },
+    "Developers": {
+        "title": "Developers & Ecosystem",
+        "subtitle": "Empowering Islamic technology with our advanced toolset.",
+        "api_title": "Mumin Hadith API",
+        "api_description": "A powerful, fast, and free API giving you access to the most extensive database of authentic Hadiths.",
+        "api_feature_1_title": "Fuzzy Search",
+        "api_feature_1_desc": "Search with typo tolerance and morphology across multiple languages.",
+        "api_feature_2_title": "Multilingual",
+        "api_feature_2_desc": "Access texts in Arabic, Russian, English, and more.",
+        "api_feature_3_title": "High Performance",
+        "api_feature_3_desc": "Optimized infrastructure for instantaneous responses.",
+        "bot_title": "Telegram Bot",
+        "bot_description": "Explore Hadiths directly in your messenger with our advanced bot.",
+        "bot_feature_1_title": "Daily Hadith",
+        "bot_feature_1_desc": "Daily inspirational notifications at your preferred time.",
+        "bot_feature_2_title": "Personal Account",
+        "bot_feature_2_desc": "Manage your settings and top up your balance for advanced features.",
+        "bot_feature_3_title": "CryptoBot Payments",
+        "bot_feature_3_desc": "Secure and fast cryptocurrency payments to support the project.",
+        "try_bot": "Launch Bot",
+        "read_docs": "API Documentation"
     }
 }
