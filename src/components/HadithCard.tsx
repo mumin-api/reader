@@ -32,10 +32,10 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
     const t = useTranslations('Hadith');
 
     const GRADES = {
-        sahih: { label: t('grades.sahih'), color: 'bg-emerald-500' },
+        sahih: { label: t('grades.sahih'), color: 'bg-emerald-600' },
         hasan: { label: t('grades.hasan'), color: 'bg-amber-500' },
-        daif: { label: t('grades.daif'), color: 'bg-ruby' },
-        mawdu: { label: t('grades.mawdu'), color: 'bg-gray-500' },
+        daif: { label: t('grades.daif'), color: 'bg-red-500' },
+        mawdu: { label: t('grades.mawdu'), color: 'bg-zinc-500' },
     };
 
     const bookmarked = isBookmarked(hadith.id);
@@ -126,18 +126,17 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                 color: 'var(--page-text)'
             }}
             className={cn(
-                "group relative p-6 md:p-8 rounded-[2rem] border transition-all duration-500 overflow-hidden shadow-sm",
-                mode === 'light' && "shadow-islamic hover:shadow-2xl hover:border-emerald-900/10"
+                "group relative p-6 md:p-8 rounded-[2rem] border transition-all duration-500 overflow-hidden shadow-sm hover:shadow-2xl hover:border-emerald-600/20"
             )}
         >
             {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-900/5 rounded-bl-[5rem] -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-[5rem] -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
 
             {/* Header */}
             <div className="flex items-center justify-between mb-8 relative z-10">
                 <div className="flex items-center gap-3">
-                    <div className="px-4 py-1.5 rounded-full bg-emerald-900/5 border border-emerald-900/10 backdrop-blur-md">
-                        <span className="text-xs font-bold tracking-widest text-emerald-900 uppercase">
+                    <div className="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-md">
+                        <span className="text-xs font-bold tracking-widest text-emerald-600 uppercase">
                             {hadith.collection} • {hadith.hadithNumber}
                         </span>
                     </div>
@@ -151,21 +150,21 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         onClick={handleBookmark}
                         className={cn(
                             "p-2.5 rounded-full transition-all duration-300",
-                            bookmarked ? "text-gold-500 bg-gold-500/10" : "text-emerald-900/30 hover:bg-emerald-900/5"
+                            bookmarked ? "text-gold-500 bg-gold-500/10" : "opacity-30 hover:opacity-100 hover:bg-emerald-600/5"
                         )}
                     >
                         <Heart className={cn("w-5 h-5", bookmarked && "fill-current scale-110")} />
                     </button>
                     <button
                         onClick={copyToClipboard}
-                        className="p-2.5 rounded-full text-emerald-900/30 hover:bg-emerald-900/5 transition-all"
+                        className="p-2.5 rounded-full opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
                         title={t('copy')}
                     >
                         <Copy className="w-5 h-5" />
                     </button>
                     <button
                         onClick={handleShare}
-                        className="p-2.5 rounded-full text-emerald-900/30 hover:bg-emerald-900/5 transition-all"
+                        className="p-2.5 rounded-full opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
                         title={t('share')}
                     >
                         <Share2 className="w-5 h-5" />
@@ -188,15 +187,14 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
 
             {/* Translation */}
             {showTranslation && hadith.translation && (
-                <div className="mt-8 pt-8 border-t border-emerald-900/5 relative z-10">
-                    <div className="flex items-center gap-2 mb-4 text-emerald-900/30">
+                <div className="mt-8 pt-8 border-t border-[var(--card-border)] relative z-10">
+                    <div className="flex items-center gap-2 mb-4 opacity-30">
                         <Globe className="w-4 h-4" />
                         <span className="text-xs font-bold uppercase tracking-widest">{t('translation')}</span>
                     </div>
                     <p className={cn(
-                        "leading-relaxed font-sans",
-                        currentSize.english,
-                        mode === 'light' ? "text-emerald-950/80" : "text-inherit opacity-80"
+                        "leading-relaxed font-sans opacity-80",
+                        currentSize.english
                     )}>
                         {hadith.translation.text}
                     </p>
@@ -213,14 +211,14 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => setShowIsnad(!showIsnad)}
-                        className="flex items-center gap-2 text-xs font-bold text-emerald-900/40 hover:text-emerald-900 transition-colors uppercase tracking-widest"
+                        className="flex items-center gap-2 text-xs font-bold opacity-40 hover:opacity-100 transition-opacity uppercase tracking-widest"
                     >
                         <Info className="w-4 h-4" />
                         {showIsnad ? t('hide_isnad') : t('isnad')}
                     </button>
                     <Link
-                        href={`/collections/${getCollectionSlug(hadith.collection)}/${hadith.hadithNumber}`}
-                        className="flex items-center gap-2 text-xs font-bold text-emerald-900/40 hover:text-emerald-900 transition-colors uppercase tracking-widest"
+                        href={`/collections/${hadith.collection.toLowerCase().replace(/\s+/g, '-')}/${hadith.hadithNumber}`}
+                        className="flex items-center gap-2 text-xs font-bold opacity-40 hover:opacity-100 transition-opacity uppercase tracking-widest"
                     >
                         <ExternalLink className="w-4 h-4" />
                         {t('reference')}
@@ -237,11 +235,11 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         exit={{ opacity: 0, height: 0 }}
                         className="mt-6 pt-6 border-t border-emerald-900/10 relative z-10"
                     >
-                        <div className="flex items-center gap-2 mb-3 text-emerald-900/40">
+                        <div className="flex items-center gap-2 mb-3 opacity-40">
                             <Info className="w-4 h-4" />
                             <span className="text-xs font-bold uppercase tracking-widest">{t('chain_of_narration')}</span>
                         </div>
-                        <p className="text-sm text-emerald-900/60 leading-relaxed" dir="rtl">
+                        <p className="text-sm opacity-60 leading-relaxed" dir="rtl">
                             {hadith.arabicNarrator}
                         </p>
                     </motion.div>
@@ -255,7 +253,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute top-4 right-4 bg-emerald-900 text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 z-20"
+                        className="absolute top-4 right-4 bg-emerald-600 text-white px-4 py-2 rounded-full shadow-xl flex items-center gap-2 z-20"
                     >
                         <Check className="w-4 h-4" />
                         <span className="text-sm font-medium">{t('copied')}</span>

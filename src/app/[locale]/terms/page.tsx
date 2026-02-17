@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export default function TermsPage() {
     return (
-        <main className="min-h-screen relative">
+        <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500">
             <GeometricPattern opacity={0.02} />
             <Navbar />
 
@@ -16,12 +16,12 @@ export default function TermsPage() {
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl font-display font-bold text-emerald-900 mb-12"
+                        className="text-4xl font-display font-bold mb-12"
                     >
                         Terms of Use
                     </motion.h1>
 
-                    <div className="prose prose-emerald prose-lg text-emerald-950/70">
+                    <div className="prose prose-emerald dark:prose-invert prose-lg opacity-70">
                         <h2 className="text-emerald-900">1. Acceptance of Terms</h2>
                         <p>
                             By accessing Mumin Hadith Reader, you agree to be bound by these terms.

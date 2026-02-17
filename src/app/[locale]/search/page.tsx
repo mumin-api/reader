@@ -83,7 +83,7 @@ export default function SearchResultsPage() {
     const tHadith = useTranslations('Hadith');
 
     return (
-        <main className="min-h-screen relative">
+        <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500">
             <StructuredData data={generateBreadcrumbSchema([
                 { name: tNav('home'), item: BASE_URL },
                 { name: t('title'), item: `${BASE_URL}/search` }
@@ -108,12 +108,12 @@ export default function SearchResultsPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="text-4xl md:text-5xl font-display font-bold text-emerald-900"
+                                className="text-4xl md:text-5xl font-display font-bold"
                             >
                                 {query ? t('results_for', { query }) : t('all_hadiths')}
                             </motion.h1>
                             {results && (
-                                <p className="mt-4 text-emerald-900/40 font-medium">
+                                <p className="mt-4 opacity-40 font-medium">
                                     {t('found_results', { count: results.pagination.total.toLocaleString() })}
                                     {results.pagination.total > 0 && ` • ${t('showing_page', { page: results.pagination.page, total: results.pagination.totalPages })}`}
                                 </p>
@@ -126,11 +126,11 @@ export default function SearchResultsPage() {
                             transition={{ delay: 0.2 }}
                             className="flex items-center gap-3"
                         >
-                            <button className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white border border-emerald-900/5 shadow-sm text-sm font-bold text-emerald-900 uppercase tracking-widest hover:border-emerald-600/20 transition-all">
+                            <button className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-sm text-sm font-bold uppercase tracking-widest hover:border-emerald-600/20 transition-all">
                                 <SlidersHorizontal className="w-4 h-4" />
                                 {t('filters')}
                             </button>
-                            <div className="h-10 w-px bg-emerald-900/10 hidden md:block" />
+                            <div className="h-10 w-px bg-current opacity-10 hidden md:block" />
                             <div className="flex items-center gap-1">
                                 {['all', 'sahih', 'hasan'].map((grade) => (
                                     <button
@@ -139,8 +139,8 @@ export default function SearchResultsPage() {
                                         className={cn(
                                             "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all",
                                             (grade === 'all' && !activeFilters.grade) || activeFilters.grade === grade
-                                                ? "bg-emerald-900 text-white shadow-md"
-                                                : "text-emerald-900/40 hover:bg-emerald-900/5"
+                                                ? "bg-emerald-600 text-white shadow-md"
+                                                : "opacity-40 hover:opacity-100 hover:bg-emerald-600/5"
                                         )}
                                     >
                                         {grade === 'all' ? t('all_hadiths') : tHadith(`grades.${grade}`)}
@@ -154,7 +154,7 @@ export default function SearchResultsPage() {
                         {/* Sidebar Filters - Desktop */}
                         <div className="hidden lg:block space-y-8">
                             <div className="p-8 rounded-[2rem] bg-emerald-900/5 border border-emerald-900/5">
-                                <h3 className="flex items-center gap-2 text-sm font-bold text-emerald-900 uppercase tracking-widest mb-6 border-b border-emerald-900/5 pb-4">
+                                <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-6 border-b border-current opacity-10 pb-4">
                                     <Filter className="w-4 h-4" />
                                     {t('collections')}
                                 </h3>
@@ -169,7 +169,7 @@ export default function SearchResultsPage() {
                                                 "w-5 h-5 rounded-md border-2 transition-all flex items-center justify-center",
                                                 activeFilters.collection === col
                                                     ? "bg-emerald-600 border-emerald-600"
-                                                    : "border-emerald-900/10 group-hover:border-emerald-600/30"
+                                                    : "border-current opacity-10 group-hover:opacity-30"
                                             )}>
                                                 {activeFilters.collection === col && (
                                                     <motion.div
@@ -180,10 +180,10 @@ export default function SearchResultsPage() {
                                                 )}
                                             </div>
                                             <span className={cn(
-                                                "text-sm font-medium transition-colors",
+                                                "text-sm font-medium transition-opacity",
                                                 activeFilters.collection === col
-                                                    ? "text-emerald-900"
-                                                    : "text-emerald-900/60 group-hover:text-emerald-900"
+                                                    ? "opacity-100"
+                                                    : "opacity-60 group-hover:opacity-100"
                                             )}>{col}</span>
                                         </label>
                                     ))}
@@ -217,7 +217,7 @@ export default function SearchResultsPage() {
                                     <p className="text-emerald-950/60">{error}</p>
                                 </div>
                             ) : results?.data.length === 0 ? (
-                                <div className="p-20 text-center bg-white rounded-[3rem] border border-emerald-900/5 shadow-islamic">
+                                <div className="p-20 text-center bg-[var(--card-bg)] rounded-[3rem] border border-[var(--card-border)] shadow-islamic">
                                     <div className="w-20 h-20 bg-emerald-900/5 rounded-full flex items-center justify-center mx-auto mb-8">
                                         <SearchIcon className="w-10 h-10 text-emerald-900/20" />
                                     </div>
@@ -225,7 +225,7 @@ export default function SearchResultsPage() {
                                     <p className="text-emerald-900/60 max-w-sm mx-auto mb-8">
                                         {t('no_results_desc')}
                                     </p>
-                                    <button className="px-8 py-3 bg-emerald-900 text-white font-bold rounded-full text-sm tracking-widest uppercase hover:scale-105 transition-all shadow-lg">
+                                    <button className="px-8 py-3 bg-emerald-600 text-white font-bold rounded-full text-sm tracking-widest uppercase hover:scale-105 transition-all shadow-lg shadow-emerald-600/20">
                                         {t('clear_search')}
                                     </button>
                                 </div>
@@ -240,7 +240,7 @@ export default function SearchResultsPage() {
                                         <div className="flex items-center justify-center gap-2 pt-8">
                                             <button
                                                 onClick={() => handlePageChange(results.pagination.page - 1)}
-                                                className="px-6 py-3 rounded-xl border border-emerald-900/10 text-emerald-900 font-bold text-sm tracking-widest uppercase hover:bg-emerald-900/5 transition-all disabled:opacity-30"
+                                                className="px-6 py-3 rounded-xl border border-[var(--card-border)] font-bold text-sm tracking-widest uppercase hover:bg-emerald-600/5 transition-all disabled:opacity-30"
                                                 disabled={!results.pagination.hasPrev || loading}
                                             >
                                                 {tHadith('previous')}
@@ -250,7 +250,7 @@ export default function SearchResultsPage() {
                                             </div>
                                             <button
                                                 onClick={() => handlePageChange(results.pagination.page + 1)}
-                                                className="px-6 py-3 rounded-xl border border-emerald-900/10 text-emerald-900 font-bold text-sm tracking-widest uppercase hover:bg-emerald-900/5 transition-all disabled:opacity-30"
+                                                className="px-6 py-3 rounded-xl border border-[var(--card-border)] font-bold text-sm tracking-widest uppercase hover:bg-emerald-600/5 transition-all disabled:opacity-30"
                                                 disabled={!results.pagination.hasNext || loading}
                                             >
                                                 {tHadith('next')}

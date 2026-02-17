@@ -157,5 +157,27 @@
         "clear_search": "Qidiruvni Tozalash",
         "error": "Qidiruv Xatosi",
         "error_desc": "Qidiruv natijalarini olib kelishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring."
+    },
+    "Developers": {
+        "title": "Dasturchilar va Ekotizim",
+        "subtitle": "Murakkab asboblar to'plamimiz bilan islomiy texnologiyalarni rivojlantirish.",
+        "api_title": "Mumin Hadis API",
+        "api_description": "Sahih hadislarning eng keng ma'lumotlar bazasiga kirish imkonini beruvchi kuchli, tezkor va bepul API.",
+        "api_feature_1_title": "Noaniq Qidiruv",
+        "api_feature_1_desc": "Bir nechta tillarda imlo xatolariga chidamlilik va morfologiya bilan qidiring.",
+        "api_feature_2_title": "Ko'p tilli",
+        "api_feature_2_desc": "Arab, rus, ingliz va boshqa tillardagi matnlarga kiring.",
+        "api_feature_3_title": "Yuqori unumdorlik",
+        "api_feature_3_desc": "Tezkor javoblar uchun optimallashtirilgan infratuzilma.",
+        "bot_title": "Telegram Bot",
+        "bot_description": "Murakkab botimiz bilan to'g'ridan-to'g'ri messenjeringizda hadislarni o'rganing.",
+        "bot_feature_1_title": "Kundalik Hadis",
+        "bot_feature_1_desc": "Siz tanlagan vaqtda kundalik ilhomlantiruvchi bildirishnomalar.",
+        "bot_feature_2_title": "Shaxsiy Kabinet",
+        "bot_feature_2_desc": "Sozlamalaringizni boshqaring va qo'shimcha funktsiyalar uchun balansingizni to'ldiring.",
+        "bot_feature_3_title": "CryptoBot To'lovlari",
+        "bot_feature_3_desc": "Loyihani qo'llab-quvvatlash uchun xavfsiz va tezkor kriptovalyuta to'lovlari.",
+        "try_bot": "Botni ishga tushirish",
+        "read_docs": "API Hujjatlari"
     }
 }

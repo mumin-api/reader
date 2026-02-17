@@ -88,7 +88,7 @@ export default function TopicDetailPage() {
     };
 
     return (
-        <main className="min-h-screen relative">
+        <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500">
             <GeometricPattern opacity={0.02} />
             <Navbar />
 
@@ -99,7 +99,7 @@ export default function TopicDetailPage() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="w-24 h-24 rounded-[2rem] bg-emerald-900 flex items-center justify-center shadow-xl mb-8 group overflow-hidden relative"
+                            className="w-24 h-24 rounded-[2rem] bg-emerald-600 flex items-center justify-center shadow-xl mb-8 group overflow-hidden relative"
                         >
                              <div className="absolute inset-0 bg-gold-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                              <Moon className="w-12 h-12 text-gold-500 relative z-10" />
@@ -108,7 +108,7 @@ export default function TopicDetailPage() {
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-6xl font-display font-bold text-emerald-900 mb-4"
+                            className="text-5xl md:text-6xl font-display font-bold mb-4"
                         >
                             {topicName}
                         </motion.h1>
@@ -117,19 +117,19 @@ export default function TopicDetailPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-xl text-emerald-900/60 max-w-2xl mb-12"
+                            className="text-xl opacity-60 max-w-2xl mb-12"
                         >
                             {slug === 'ramadan' ? tHome('ramadan_subtitle') : t('browse_hadiths')}
                         </motion.p>
 
                         <form onSubmit={handleSearch} className="relative max-w-2xl w-full">
-                            <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-900/40" />
+                            <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 opacity-40" />
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder={t('search_within')}
-                                className="w-full pl-14 pr-6 py-5 rounded-[2rem] border border-emerald-900/10 bg-white shadow-islamic focus:outline-none focus:ring-4 focus:ring-emerald-600/5 transition-all text-lg"
+                                className="w-full pl-14 pr-6 py-5 rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] shadow-islamic focus:outline-none focus:ring-4 focus:ring-emerald-600/5 transition-all text-lg"
                             />
                         </form>
                     </div>
@@ -161,7 +161,7 @@ export default function TopicDetailPage() {
                                         <button
                                             onClick={() => setPage(p => Math.max(1, p - 1))}
                                             disabled={page === 1}
-                                            className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-white border border-emerald-900/5 shadow-sm text-sm font-bold text-emerald-900 uppercase tracking-widest hover:bg-emerald-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                                            className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-sm text-sm font-bold uppercase tracking-widest hover:bg-emerald-600/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                                         >
                                             <ChevronLeft className="w-5 h-5" />
                                             {tHadith('previous')}
@@ -172,7 +172,7 @@ export default function TopicDetailPage() {
                                         <button
                                             onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                                             disabled={page === totalPages}
-                                            className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-white border border-emerald-900/5 shadow-sm text-sm font-bold text-emerald-900 uppercase tracking-widest hover:bg-emerald-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                                            className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-sm text-sm font-bold uppercase tracking-widest hover:bg-emerald-600/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                                         >
                                             {tHadith('next')}
                                             <ChevronRight className="w-5 h-5" />
@@ -181,9 +181,9 @@ export default function TopicDetailPage() {
                                 )}
                             </>
                         ) : (
-                            <div className="p-20 text-center bg-white rounded-[3rem] border border-emerald-900/5 shadow-islamic">
-                                <h3 className="text-2xl font-display font-bold text-emerald-900 mb-4">{t('no_hadiths')}</h3>
-                                <p className="text-emerald-900/60 mb-8">{t('no_hadiths_subtitle')}</p>
+                            <div className="p-20 text-center bg-[var(--card-bg)] rounded-[3rem] border border-[var(--card-border)] shadow-islamic">
+                                <h3 className="text-2xl font-display font-bold mb-4">{t('no_hadiths')}</h3>
+                                <p className="text-opacity-60 mb-8">{t('no_hadiths_subtitle')}</p>
                                 <Link href="/" className="text-emerald-600 font-bold uppercase tracking-widest text-sm hover:underline">
                                     {tNav('home')}
                                 </Link>

@@ -157,5 +157,27 @@
         "clear_search": "Aramayı Temizle",
         "error": "Arama Hatası",
         "error_desc": "Arama sonuçları alınamadı. Lütfen tekrar deneyin."
+    },
+    "Developers": {
+        "title": "Geliştiriciler ve Ekosistem",
+        "subtitle": "Gelişmiş araç setimizle İslami teknolojiyi güçlendiriyoruz.",
+        "api_title": "Mumin Hadis API",
+        "api_description": "En kapsamlı sahih Hadis veritabanına erişim sağlayan güçlü, hızlı ve ücretsiz bir API.",
+        "api_feature_1_title": "Bulanık Arama",
+        "api_feature_1_desc": "Birden fazla dilde yazım hatası toleransı ve morfoloji ile arama yapın.",
+        "api_feature_2_title": "Çok Dilli",
+        "api_feature_2_desc": "Arapça, Rusça, İngilizce ve daha fazlasındaki metinlere erişin.",
+        "api_feature_3_title": "Yüksek Performans",
+        "api_feature_3_desc": "Anlık yanıtlar için optimize edilmiş altyapı.",
+        "bot_title": "Telegram Botu",
+        "bot_description": "Gelişmiş botumuzla doğrudan mesajlaşma uygulamanızda Hadisleri keşfedin.",
+        "bot_feature_1_title": "Günlük Hadis",
+        "bot_feature_1_desc": "Tercih ettiğiniz saatte günlük ilham verici bildirimler.",
+        "bot_feature_2_title": "Kişisel Hesap",
+        "bot_feature_2_desc": "Ayarlarınızı yönetin ve gelişmiş özellikler için bakiyenizi yükleyin.",
+        "bot_feature_3_title": "CryptoBot Ödemeleri",
+        "bot_feature_3_desc": "Projeyi desteklemek için güvenli ve hızlı kripto para ödemeleri.",
+        "try_bot": "Botu Başlat",
+        "read_docs": "API Dokümantasyonu"
     }
 }

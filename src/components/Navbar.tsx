@@ -87,10 +87,10 @@ export const Navbar: React.FC = () => {
                                 key={link.href}
                                 href={link.href}
                                 className={cn(
-                                    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all text-emerald-900 border border-transparent",
+                                    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all border border-transparent",
                                     isActive
-                                        ? "bg-emerald-900 text-white shadow-md scale-105"
-                                        : "opacity-60 hover:opacity-100 hover:bg-emerald-900/5"
+                                        ? "bg-emerald-600 text-white shadow-md scale-105"
+                                        : "opacity-60 hover:opacity-100 hover:bg-emerald-600/5"
                                 )}
                                 style={!isActive ? { color: 'var(--page-text)' } : {}}
                             >
@@ -110,7 +110,7 @@ export const Navbar: React.FC = () => {
                 <div className="flex items-center gap-2">
                     <Link
                         href="/bookmarks"
-                        className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-900/5 rounded-full transition-colors relative"
+                        className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-600/5 rounded-full transition-colors relative"
                         style={{ color: 'var(--page-text)' }}
                         title={t('bookmarks')}
                     >
@@ -128,7 +128,7 @@ export const Navbar: React.FC = () => {
 
                     <button
                         onClick={toggleSettings}
-                        className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-900/5 rounded-full transition-colors"
+                        className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-600/5 rounded-full transition-colors"
                         style={{ color: 'var(--page-text)' }}
                         title={t('settings')}
                     >
@@ -164,8 +164,8 @@ export const Navbar: React.FC = () => {
                                 className={cn(
                                     "flex items-center gap-4 p-4 rounded-2xl text-lg font-medium transition-all",
                                     pathname === link.href
-                                        ? "bg-emerald-900 text-white"
-                                        : "text-emerald-900/60 hover:bg-emerald-900/5"
+                                        ? "bg-emerald-600 text-white"
+                                        : "opacity-60 hover:opacity-100 hover:bg-emerald-600/5"
                                 )}
                             >
                                 <link.icon className="w-6 h-6" />
@@ -178,8 +178,8 @@ export const Navbar: React.FC = () => {
                             className={cn(
                                 "flex items-center gap-4 p-4 rounded-2xl text-lg font-medium transition-all",
                                 pathname === '/bookmarks'
-                                    ? "bg-emerald-900 text-white"
-                                    : "text-emerald-900/60 hover:bg-emerald-900/5"
+                                    ? "bg-emerald-600 text-white"
+                                    : "opacity-60 hover:opacity-100 hover:bg-emerald-600/5"
                             )}
                         >
                             <Bookmark className="w-6 h-6" />

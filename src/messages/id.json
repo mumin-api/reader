@@ -157,5 +157,27 @@
         "clear_search": "Hapus Pencarian",
         "error": "Kesalahan Pencarian",
         "error_desc": "Gagal mengambil hasil pencarian. Silakan coba lagi."
+    },
+    "Developers": {
+        "title": "Pengembang & Ekosistem",
+        "subtitle": "Memberdayakan teknologi Islami dengan set alat canggih kami.",
+        "api_title": "Mumin Hadith API",
+        "api_description": "API yang kuat, cepat, dan gratis yang memberi Anda akses ke database paling luas dari Hadis-hadis shahih.",
+        "api_feature_1_title": "Pencarian Fuzzy",
+        "api_feature_1_desc": "Cari dengan toleransi salah ketik dan morfologi di berbagai bahasa.",
+        "api_feature_2_title": "Multilingual",
+        "api_feature_2_desc": "Akses teks dalam bahasa Arab, Rusia, Inggris, dan banyak lagi.",
+        "api_feature_3_title": "Performa Tinggi",
+        "api_feature_3_desc": "Infrastruktur yang dioptimalkan untuk respons instan.",
+        "bot_title": "Bot Telegram",
+        "bot_description": "Jelajahi Hadis langsung di messenger Anda dengan bot canggih kami.",
+        "bot_feature_1_title": "Hadis Harian",
+        "bot_feature_1_desc": "Notifikasi inspirasional harian pada waktu yang Anda pilih.",
+        "bot_feature_2_title": "Akun Pribadi",
+        "bot_feature_2_desc": "Kelola pengaturan Anda dan isi ulang saldo Anda untuk fitur-fitur canggih.",
+        "bot_feature_3_title": "Pembayaran CryptoBot",
+        "bot_feature_3_desc": "Pembayaran mata uang kripto yang aman dan cepat untuk mendukung proyek.",
+        "try_bot": "Luncurkan Bot",
+        "read_docs": "Dokumentasi API"
     }
 }

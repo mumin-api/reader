@@ -36,41 +36,41 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     };
 
     return (
-        <main className="min-h-screen relative">
+        <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500">
             <StructuredData data={aboutSchema} />
             <GeometricPattern opacity={0.03} />
             <Navbar />
 
             <section className="pt-32 pb-20 px-4">
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-5xl md:text-6xl font-display font-bold text-emerald-900 mb-8">{t('mission')}</h1>
+                    <h1 className="text-5xl md:text-6xl font-display font-bold mb-8">{t('mission')}</h1>
 
-                    <div className="prose prose-lg prose-emerald max-w-none">
-                        <p className="lead text-xl text-emerald-900/60 mb-12">
+                    <div className="prose prose-lg prose-emerald dark:prose-invert max-w-none">
+                        <p className="lead text-xl opacity-60 mb-12">
                             {t('description')}
                         </p>
 
-                        <h2 className="text-3xl font-display font-bold text-emerald-900 mt-16 mb-6">Our Methodology</h2>
+                        <h2 className="text-3xl font-display font-bold mt-16 mb-6">Our Methodology</h2>
                         <p>
                             Mumin Hadith Reader is built on the foundation of authenticity and scholarly rigor. We source our hadiths exclusively from established collections, primarily the *Kutub al-Sittah* (The Six Major Books).
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
-                            <div className="p-8 rounded-3xl bg-emerald-900/5 border border-emerald-900/5">
-                                <h3 className="text-xl font-bold text-emerald-900 mb-4">Authentic Sources</h3>
-                                <p className="text-sm text-emerald-900/60">
+                            <div className="p-8 rounded-3xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-sm">
+                                <h3 className="text-xl font-bold mb-4">Authentic Sources</h3>
+                                <p className="text-sm opacity-60">
                                     Every narration is cross-referenced with classical manuscripts and authorized modern publications.
                                 </p>
                             </div>
-                            <div className="p-8 rounded-3xl bg-emerald-900/5 border border-emerald-900/5">
-                                <h3 className="text-xl font-bold text-emerald-900 mb-4">Preservation</h3>
-                                <p className="text-sm text-emerald-900/60">
+                            <div className="p-8 rounded-3xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-sm">
+                                <h3 className="text-xl font-bold mb-4">Preservation</h3>
+                                <p className="text-sm opacity-60">
                                     We maintain the original Arabic text alongside precise translations to preserve the nuances of the Sunnah.
                                 </p>
                             </div>
                         </div>
 
-                        <h2 className="text-3xl font-display font-bold text-emerald-900 mt-16 mb-6">Technological Excellence</h2>
+                        <h2 className="text-3xl font-display font-bold mt-16 mb-6">Technological Excellence</h2>
                         <p>
                             We believe that sacred knowledge deserves a premium digital experience. Our platform uses state-of-the-art technologies (SSR, ISR, and Advanced SEO) to ensure that prophetic wisdom is accessible and discoverable by millions globally.
                         </p>

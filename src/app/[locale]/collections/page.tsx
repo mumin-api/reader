@@ -46,7 +46,7 @@ export default function CollectionsPage() {
     const displayCollections = filteredCollections.length > 0 ? filteredCollections : (isLoading ? [] : []);
 
     return (
-        <main className="min-h-screen relative">
+        <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500">
             <StructuredData data={generateBreadcrumbSchema([
                 { name: tNav('home'), item: BASE_URL },
                 { name: tNav('collections'), item: `${BASE_URL}/collections` }
@@ -66,11 +66,11 @@ export default function CollectionsPage() {
                                 <BookOpen className="w-4 h-4" />
                                 {t('library')}
                             </motion.div>
-                            <motion.h1
+                             <motion.h1
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="text-5xl font-display font-bold text-emerald-900 mb-6"
+                                className="text-5xl font-display font-bold mb-6"
                             >
                                 {t('title')}
                             </motion.h1>
@@ -78,7 +78,7 @@ export default function CollectionsPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
-                                className="text-lg text-emerald-900/60 leading-relaxed"
+                                className="text-lg opacity-60 leading-relaxed"
                             >
                                 {t('subtitle')}
                             </motion.p>
@@ -95,9 +95,9 @@ export default function CollectionsPage() {
                                 placeholder={t('filter_placeholder')}
                                 value={filter}
                                 onChange={(e) => setFilter(e.target.value)}
-                                className="w-full px-6 py-4 rounded-2xl bg-white border border-emerald-900/5 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/10 focus:border-emerald-600/20 transition-all font-medium"
+                                className="w-full px-6 py-4 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600/10 focus:border-emerald-600/20 transition-all font-medium"
                             />
-                            <Search className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-900/20" />
+                            <Search className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 opacity-20" />
                         </motion.div>
                     </div>
 
@@ -130,7 +130,7 @@ export default function CollectionsPage() {
                 </div>
             </section>
 
-            <section className="py-20 bg-emerald-900/5 border-y border-emerald-900/5 mt-20">
+            <section className="py-20 bg-[var(--page-bg-soft)] border-y border-[var(--card-border)] mt-20">
                 <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
                     <div>
                         <p className="text-4xl font-display font-bold text-emerald-900 mb-2">{t('stats.hadiths')}</p>

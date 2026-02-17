@@ -81,7 +81,7 @@ export default function HomePageClient({
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden transition-colors duration-1000 bg-white">
+      <section className="relative pt-32 pb-20 px-4 overflow-hidden transition-[background-color] duration-1000 bg-transparent">
         {/* Decorative Ornaments for Ramadan */}
         {ramadanEvent && <IslamicOrnaments />}
         
@@ -100,7 +100,7 @@ export default function HomePageClient({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 text-emerald-900"
+              className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6"
             >
               {ramadanEvent ? (
                 <span className="gradient-text">{t('ramadan_title')}</span>
@@ -116,7 +116,7 @@ export default function HomePageClient({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl max-w-2xl mx-auto text-emerald-900/60"
+              className="text-lg md:text-xl max-w-2xl mx-auto opacity-60"
             >
               {ramadanEvent ? t('ramadan_hero_subtitle') : t('hero_subtitle')}
             </motion.p>
@@ -127,11 +127,11 @@ export default function HomePageClient({
           {/* Daily Hadith Hero Card */}
           <div className="max-w-4xl mx-auto mb-32">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-display font-bold text-emerald-900">
+              <h2 className="text-2xl font-display font-bold">
                 {t('daily_hadith')}
               </h2>
-              <div className="h-px flex-1 mx-8 bg-emerald-900/10" />
-              <button className="text-sm font-bold text-emerald-900/40 hover:text-emerald-900 transition-colors uppercase tracking-widest flex items-center gap-2">
+              <div className="h-px flex-1 mx-8 bg-current opacity-10" />
+              <button className="text-sm font-bold opacity-40 hover:opacity-100 transition-opacity uppercase tracking-widest flex items-center gap-2">
                 {t('refresh')} <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -151,12 +151,12 @@ export default function HomePageClient({
           <div className="mb-20">
             <div className="flex items-center justify-between mb-12">
               <div>
-                <h2 className="text-3xl font-display font-bold text-emerald-900 mb-2">{t('explore_collections')}</h2>
-                <p className="text-emerald-900/60">{t('explore_collections_subtitle')}</p>
+                <h2 className="text-3xl font-display font-bold mb-2">{t('explore_collections')}</h2>
+                <p className="opacity-60">{t('explore_collections_subtitle')}</p>
               </div>
               <Link
                 href="/collections"
-                className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-900 text-white font-bold text-sm tracking-widest uppercase hover:scale-105 transition-all shadow-lg"
+                className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-600 text-white font-bold text-sm tracking-widest uppercase hover:scale-105 transition-all shadow-lg"
               >
                 {t('view_all')} <ArrowRight className="w-4 h-4" />
               </Link>
@@ -178,7 +178,7 @@ export default function HomePageClient({
             <div className="mt-12 text-center md:hidden">
               <Link
                 href="/collections"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-900 text-white font-bold text-sm tracking-widest uppercase shadow-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 text-white font-bold text-sm tracking-widest uppercase shadow-lg"
               >
                 {t('view_all_collections')}
               </Link>
@@ -188,7 +188,7 @@ export default function HomePageClient({
       </section>
 
       {/* Footer */}
-      <footer className="bg-emerald-900 text-white py-20 relative z-10 overflow-hidden">
+      <footer className="bg-emerald-600 text-white py-20 relative z-10 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
           <div className="col-span-1 md:col-span-2">
@@ -223,7 +223,7 @@ export default function HomePageClient({
 
           <div>
             <h4 className="font-bold uppercase tracking-widest text-sm mb-6 text-gold-500">{tFooter('about')}</h4>
-            <ul className="space-y-4 text-emerald-100/60">
+            <ul className="space-y-4 text-white/40">
               <li><Link href="/about" className="hover:text-white transition-colors">{tFooter('mission')}</Link></li>
               <li><Link href="/methodology" className="hover:text-white transition-colors">{tFooter('methodology')}</Link></li>
               <li><Link href="/developers" className="hover:text-white transition-colors">{tFooter('developers')}</Link></li>
@@ -233,7 +233,7 @@ export default function HomePageClient({
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t border-white/5 text-center text-emerald-100/20 text-xs">
+        <div className="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t border-white/5 text-center text-white/20 text-xs">
           {tFooter('rights')}
         </div>
       </footer>
