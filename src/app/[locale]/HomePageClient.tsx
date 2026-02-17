@@ -81,10 +81,7 @@ export default function HomePageClient({
       <Navbar />
 
       {/* Hero Section */}
-      <section className={cn(
-        "relative pt-32 pb-20 px-4 overflow-hidden transition-colors duration-1000",
-        ramadanEvent ? "bg-emerald-950" : "bg-white"
-      )}>
+      <section className="relative pt-32 pb-20 px-4 overflow-hidden transition-colors duration-1000 bg-white">
         {/* Decorative Ornaments for Ramadan */}
         {ramadanEvent && <IslamicOrnaments />}
         
@@ -103,10 +100,7 @@ export default function HomePageClient({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className={cn(
-                "text-5xl md:text-7xl font-display font-bold leading-tight mb-6 transition-colors duration-1000",
-                ramadanEvent ? "text-gold-500" : "text-emerald-900"
-              )}
+              className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 text-emerald-900"
             >
               {ramadanEvent ? (
                 <span className="gradient-text">{t('ramadan_title')}</span>
@@ -122,10 +116,7 @@ export default function HomePageClient({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className={cn(
-                "text-lg md:text-xl max-w-2xl mx-auto transition-colors duration-1000",
-                ramadanEvent ? "text-emerald-100/60" : "text-emerald-900/60"
-              )}
+              className="text-lg md:text-xl max-w-2xl mx-auto text-emerald-900/60"
             >
               {ramadanEvent ? t('ramadan_hero_subtitle') : t('hero_subtitle')}
             </motion.p>
@@ -136,10 +127,7 @@ export default function HomePageClient({
           {/* Daily Hadith Hero Card */}
           <div className="max-w-4xl mx-auto mb-32">
             <div className="flex items-center justify-between mb-6">
-              <h2 className={cn(
-                "text-2xl font-display font-bold",
-                ramadanEvent ? "text-white" : "text-emerald-900"
-              )}>
+              <h2 className="text-2xl font-display font-bold text-emerald-900">
                 {t('daily_hadith')}
               </h2>
               <div className="h-px flex-1 mx-8 bg-emerald-900/10" />

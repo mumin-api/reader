@@ -33,10 +33,6 @@ export const SpiritGate = () => {
             {ramadanEvent.config?.greeting && <SpiritGreeting event={ramadanEvent} />}
             <style jsx global>{`
                 ${ramadanEvent.config?.theme === 'ramadan-gold' ? `
-                    :root {
-                        --emerald-900: #042f24;
-                        --emerald-950: #021a14;
-                    }
                     .gradient-text {
                         background: linear-gradient(135deg, #d4af37 0%, #f97316 100%);
                         -webkit-background-clip: text;
