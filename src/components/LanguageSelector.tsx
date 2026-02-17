@@ -50,7 +50,8 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ isOpen, onCl
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-2xl z-[70] overflow-y-auto"
+                        style={{ backgroundColor: 'var(--page-bg)', color: 'var(--page-text)' }}
+                        className="fixed top-0 right-0 bottom-0 w-full max-w-sm shadow-2xl z-[70] overflow-y-auto border-l border-[var(--border-color)]"
                     >
                         <div className="p-6">
                             <div className="flex items-center justify-between mb-8">

@@ -74,22 +74,28 @@ export const ReadingSettingsPanel: React.FC<ReadingSettingsPanelProps> = ({ isOp
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-2xl z-[70] overflow-y-auto"
+                        style={{ backgroundColor: 'var(--page-bg)', color: 'var(--page-text)' }}
+                        className="fixed top-0 right-0 bottom-0 w-full max-w-sm shadow-2xl z-[70] overflow-y-auto border-l border-[var(--border-color)]"
                     >
                         <div className="p-6">
                             <div className="flex items-center justify-between mb-8">
-                                <h2 className="text-2xl font-display font-bold text-emerald-900">{t('title')}</h2>
+                                <h2 className="text-2xl font-display font-bold" style={{ color: 'var(--page-text)' }}>{t('title')}</h2>
                                 <button
                                     onClick={onClose}
-                                    className="p-2 hover:bg-emerald-900/5 rounded-full transition-colors"
+                                    className="p-2 hover:bg-[var(--hover-bg)] rounded-full transition-colors"
                                 >
-                                    <X className="w-6 h-6 text-emerald-900" />
+                                    <X className="w-6 h-6" style={{ color: 'var(--page-text)' }} />
                                 </button>
                             </div>
 
                             {/* Theme Mode */}
                             <div className="mb-8">
-                                <label className="text-sm font-semibold text-emerald-900/40 uppercase tracking-wider mb-4 block">{t('theme')}</label>
+                                <label
+                                    className="text-sm font-semibold uppercase tracking-wider mb-4 block"
+                                    style={{ color: 'var(--muted-text)' }}
+                                >
+                                    {t('theme')}
+                                </label>
                                 <div className="grid grid-cols-2 gap-3">
                                     {MODES.map((m) => (
                                         <button
@@ -111,11 +117,16 @@ export const ReadingSettingsPanel: React.FC<ReadingSettingsPanelProps> = ({ isOp
                             {/* Text Size */}
                             <div className="mb-8">
                                 <div className="flex items-center justify-between mb-4">
-                                    <label className="text-sm font-semibold text-emerald-900/40 uppercase tracking-wider block">{t('text_size')}</label>
-                                    <span className="text-emerald-900 font-bold">{t('level', { level: textSize })}</span>
+                                    <label
+                                        className="text-sm font-semibold uppercase tracking-wider block"
+                                        style={{ color: 'var(--muted-text)' }}
+                                    >
+                                        {t('text_size')}
+                                    </label>
+                                    <span className="font-bold" style={{ color: 'var(--page-text)' }}>{t('level', { level: textSize })}</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <Type className="w-4 h-4 text-emerald-900/40" />
+                                    <Type className="w-4 h-4" style={{ color: 'var(--muted-text)' }} />
                                     <input
                                         type="range"
                                         min="1"
@@ -125,13 +136,18 @@ export const ReadingSettingsPanel: React.FC<ReadingSettingsPanelProps> = ({ isOp
                                         onChange={(e) => setTextSize(parseInt(e.target.value))}
                                         className="flex-1 accent-emerald-600 h-1.5 bg-emerald-900/10 rounded-lg appearance-none cursor-pointer"
                                     />
-                                    <Type className="w-6 h-6 text-emerald-900/40" />
+                                    <Type className="w-6 h-6" style={{ color: 'var(--muted-text)' }} />
                                 </div>
                             </div>
 
                             {/* Arabic Font */}
                             <div className="mb-8">
-                                <label className="text-sm font-semibold text-emerald-900/40 uppercase tracking-wider mb-4 block">{t('arabic_font')}</label>
+                                <label
+                                    className="text-sm font-semibold uppercase tracking-wider mb-4 block"
+                                    style={{ color: 'var(--muted-text)' }}
+                                >
+                                    {t('arabic_font')}
+                                </label>
                                 <div className="flex flex-col gap-2">
                                     {FONTS.map((f) => (
                                         <button
@@ -153,12 +169,15 @@ export const ReadingSettingsPanel: React.FC<ReadingSettingsPanelProps> = ({ isOp
 
                             {/* Toggles */}
                             <div className="mb-8 space-y-4">
-                                <div className="flex items-center justify-between p-4 rounded-2xl bg-emerald-900/5">
+                                <div
+                                    className="flex items-center justify-between p-4 rounded-2xl"
+                                    style={{ backgroundColor: 'var(--page-bg-soft)' }}
+                                >
                                     <div className="flex items-center gap-3">
-                                        <Globe className="w-5 h-5 text-emerald-900/40" />
+                                        <Globe className="w-5 h-5" style={{ color: 'var(--muted-text)' }} />
                                         <div>
-                                            <p className="font-medium text-emerald-900">{t('toggles.translations')}</p>
-                                            <p className="text-xs text-emerald-900/40">{t('toggles.translations_desc')}</p>
+                                            <p className="font-medium" style={{ color: 'var(--page-text)' }}>{t('toggles.translations')}</p>
+                                            <p className="text-xs" style={{ color: 'var(--muted-text)' }}>{t('toggles.translations_desc')}</p>
                                         </div>
                                     </div>
                                     <button
@@ -175,12 +194,15 @@ export const ReadingSettingsPanel: React.FC<ReadingSettingsPanelProps> = ({ isOp
                                     </button>
                                 </div>
 
-                                <div className="flex items-center justify-between p-4 rounded-2xl bg-emerald-900/5">
+                                <div
+                                    className="flex items-center justify-between p-4 rounded-2xl"
+                                    style={{ backgroundColor: 'var(--page-bg-soft)' }}
+                                >
                                     <div className="flex items-center gap-3">
-                                        <Eye className="w-5 h-5 text-emerald-900/40" />
+                                        <Eye className="w-5 h-5" style={{ color: 'var(--muted-text)' }} />
                                         <div>
-                                            <p className="font-medium text-emerald-900">{t('toggles.narrator_chain')}</p>
-                                            <p className="text-xs text-emerald-900/40">{t('toggles.narrator_chain_desc')}</p>
+                                            <p className="font-medium" style={{ color: 'var(--page-text)' }}>{t('toggles.narrator_chain')}</p>
+                                            <p className="text-xs" style={{ color: 'var(--muted-text)' }}>{t('toggles.narrator_chain_desc')}</p>
                                         </div>
                                     </div>
                                     <button
