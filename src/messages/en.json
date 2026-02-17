@@ -11,7 +11,10 @@
         "explore_collections_subtitle": "Discover the major books of Hadith from authentic sources.",
         "view_all": "View All",
         "view_all_collections": "View All Collections",
-        "unable_load": "Unable to load daily hadith. Please check your connection."
+        "unable_load": "Unable to load daily hadith. Please check your connection.",
+        "ramadan_special": "Ramadan Mubarak",
+        "ramadan_subtitle": "A special selection of hadiths about fasting, Tarawih prayers, and the blessed month.",
+        "view_ramadan_hadiths": "View Hadiths"
     },
     "Navbar": {
         "home": "Home",
@@ -25,8 +28,7 @@
         "recent_searches": "Recent Searches",
         "clear": "Clear",
         "search_for": "Search for",
-        "search_results": "Search Results",
-        "developers": "Developers"
+        "search_results": "Search Results"
     },
     "Collections": {
         "title": "Hadith Collections",

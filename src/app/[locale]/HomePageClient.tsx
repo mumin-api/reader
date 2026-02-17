@@ -8,9 +8,45 @@ import { HadithCard } from '@/components/HadithCard';
 import { CollectionCard } from '@/components/CollectionCard';
 import { Hadith } from '@/lib/api/client';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { Sparkles, ArrowRight, Moon } from 'lucide-react';
 import { Link } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
+
+const RamadanBanner = ({ t }: { t: any }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.3 }}
+    className="max-w-4xl mx-auto mb-20 px-4"
+  >
+    <Link 
+      href="/topics/ramadan"
+      className="group relative block overflow-hidden rounded-[3rem] bg-emerald-900 p-8 md:p-12 shadow-2xl transition-transform hover:scale-[1.02]"
+    >
+      <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 rounded-full -mr-32 -mt-32 blur-3xl group-hover:bg-gold-500/20 transition-colors" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32 blur-3xl" />
+      
+      <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+        <div className="w-20 h-20 rounded-2xl bg-white/10 flex items-center justify-center backdrop-blur-md">
+          <Moon className="w-10 h-10 text-gold-500" />
+        </div>
+        
+        <div className="flex-1 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
+            {t('ramadan_special')}
+          </h2>
+          <p className="text-emerald-100/60 text-lg">
+            {t('ramadan_subtitle')}
+          </p>
+        </div>
+        
+        <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gold-500 text-emerald-900 font-bold text-sm tracking-widest uppercase shadow-lg group-hover:bg-gold-400 transition-colors">
+          {t('view_ramadan_hadiths')} <ArrowRight className="w-4 h-4" />
+        </div>
+      </div>
+    </Link>
+  </motion.div>
+);
 
 interface HomePageClientProps {
   initialDailyHadith: Hadith | null;
@@ -71,6 +107,8 @@ export default function HomePageClient({
               {t('hero_subtitle')}
             </motion.p>
           </div>
+
+          <RamadanBanner t={t} />
 
           {/* Daily Hadith Hero Card */}
           <div className="max-w-4xl mx-auto mb-32">

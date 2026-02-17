@@ -90,6 +90,7 @@ export const hadithApi = {
         bookNumber?: number;
         hadithNumber?: number;
         language?: string;
+        topic?: string;
     }) => {
         const response = await apiClient.get<any>('/hadiths', { params });
         return response.data.data || response.data;
