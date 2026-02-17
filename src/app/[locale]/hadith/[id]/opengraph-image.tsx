@@ -3,7 +3,6 @@ import { OG_PALETTE, fetchFont } from '@/lib/og-helper';
 
 export const runtime = 'edge';
 
-
 export const alt = 'Mumin Reader - Hadith Detail';
 export const size = {
     width: 1200,
@@ -11,10 +10,10 @@ export const size = {
 };
 export const contentType = 'image/png';
 
-async function getHadith(id: string) {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.hadith.mumin.ink/v1';
-    const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.hadith.mumin.ink/v1';
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
+async function getHadith(id: string) {
     try {
         const res = await fetch(`${API_URL}/hadiths/${id}`, {
             headers: {
@@ -30,13 +29,30 @@ async function getHadith(id: string) {
     }
 }
 
+async function getActiveEvents() {
+    try {
+        const res = await fetch(`${API_URL}/events/active`, {
+            headers: {
+                'X-API-Key': API_KEY || '',
+            },
+            next: { revalidate: 3600 }
+        });
+        if (!res.ok) return [];
+        const data = await res.json();
+        return Array.isArray(data.data) ? data.data : (Array.isArray(data) ? data : []);
+    } catch (e) {
+        return [];
+    }
+}
+
 export default async function Image(props: { params: Promise<{ locale: string; id: string }> }) {
     const params = await props.params;
     const { locale, id } = params;
 
     // Parallel data/font loading
-    const [hadith, cinzel, amiri, amiriBold] = await Promise.all([
+    const [hadith, events, cinzel, amiri, amiriBold] = await Promise.all([
         getHadith(id),
+        getActiveEvents(),
         fetchFont('Cinzel', 700),
         fetchFont('Amiri', 400),
         fetchFont('Amiri', 700),
@@ -44,6 +60,7 @@ export default async function Image(props: { params: Promise<{ locale: string; i
 
     if (!hadith) return new Response('Not Found', { status: 404 });
 
+    const isRamadan = events.some((e: any) => e.slug === 'ramadan' || e.isActive);
     const rawText = hadith.translation?.text || '';
     const collection = hadith.collection?.name || hadith.collection || 'Sahih Collection';
     const num = hadith.hadithNumber;
@@ -53,7 +70,15 @@ export default async function Image(props: { params: Promise<{ locale: string; i
         ? rawText.substring(0, 200).trim() + '...'
         : rawText;
 
-    const isRu = locale === 'ru';
+    const themeColors = isRamadan ? {
+        bg: '#011c16', // Darker night green
+        border: 'rgba(212, 175, 55, 0.4)',
+        accent: OG_PALETTE.gold,
+    } : {
+        bg: OG_PALETTE.midnightGreen,
+        border: OG_PALETTE.glass,
+        accent: OG_PALETTE.gold,
+    };
 
     return new ImageResponse(
         (
@@ -65,7 +90,7 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: OG_PALETTE.midnightGreen,
+                    backgroundColor: themeColors.bg,
                     color: OG_PALETTE.cream,
                     position: 'relative',
                     overflow: 'hidden',
@@ -74,11 +99,52 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                 {/* Dynamic Lighting Background */}
                 <div style={{
                     position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    background: `
-                        radial-gradient(circle at 10% 10%, ${OG_PALETTE.forest}30 0%, transparent 40%),
-                        radial-gradient(circle at 90% 90%, ${OG_PALETTE.gold}10 0%, transparent 40%)
+                    background: isRamadan ? `
+                        radial-gradient(circle at 20% 20%, #064e3b 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%)
+                    ` : `
+                        radial-gradient(circle at 10% 10%, rgba(20, 83, 45, 0.3) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.1) 0%, transparent 40%)
                     `,
                 }} />
+
+                {/* Ramadan Specific Decorations */}
+                {isRamadan && (
+                    <div style={{ display: 'flex', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+                        {/* Crescent Moon */}
+                        <svg 
+                            style={{ position: 'absolute', top: '40px', right: '60px' }} 
+                            width="120" height="120" viewBox="0 0 100 100"
+                        >
+                            <path d="M80 20 A40 40 0 1 0 80 80 A32 32 0 1 1 80 20" fill={OG_PALETTE.goldLight} />
+                        </svg>
+
+                        {/* Hanging Lantern Left */}
+                        <svg style={{ position: 'absolute', top: '-10px', left: '120px' }} width="40" height="180" viewBox="0 0 40 180">
+                            <line x1="20" y1="0" x2="20" y2="100" stroke={OG_PALETTE.gold} strokeWidth="1" />
+                            <path d="M10 100 L30 100 L35 120 L20 145 L5 120 Z" fill={OG_PALETTE.gold} opacity="0.8" />
+                        </svg>
+
+                        {/* Hanging Lantern Right */}
+                        <svg style={{ position: 'absolute', top: '-20px', left: '260px' }} width="30" height="140" viewBox="0 0 30 140">
+                            <line x1="15" y1="0" x2="15" y2="80" stroke={OG_PALETTE.gold} strokeWidth="1" />
+                            <rect x="8" y="80" width="14" height="25" fill={OG_PALETTE.gold} opacity="0.6" />
+                            <path d="M8 105 L22 105 L15 125 Z" fill={OG_PALETTE.gold} opacity="0.6" />
+                        </svg>
+
+                        {/* Small Stars */}
+                        {[
+                            { t: '15%', l: '10%' }, { t: '40%', l: '25%' }, { t: '70%', l: '15%' },
+                            { t: '10%', l: '50%' }, { t: '25%', l: '75%' }, { t: '80%', l: '90%' }
+                        ].map((s, i) => (
+                            <div key={i} style={{
+                                position: 'absolute', top: s.t, left: s.l,
+                                width: '2px', height: '2px', backgroundColor: OG_PALETTE.goldLight,
+                                borderRadius: '50%'
+                            }} />
+                        ))}
+                    </div>
+                )}
 
                 {/* Glassmorphic Container for Text */}
                 <div style={{
@@ -88,14 +154,14 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                     justifyContent: 'center',
                     width: '1000px',
                     padding: '80px',
-                    border: `1px solid ${OG_PALETTE.glass}`,
-                    backgroundColor: 'rgba(2, 44, 34, 0.6)',
-                    borderRadius: '4px', // Harder edges for editorial feel
+                    border: `1px solid ${themeColors.border}`,
+                    backgroundColor: isRamadan ? 'rgba(1, 28, 22, 0.7)' : 'rgba(2, 44, 34, 0.6)',
+                    borderRadius: '4px',
                     position: 'relative',
                 }}>
                     {/* Decorative Top/Bottom Borders inside glass */}
-                    <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '200px', height: '2px', background: OG_PALETTE.gold }} />
-                    <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '200px', height: '2px', background: OG_PALETTE.gold }} />
+                    <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '200px', height: '2px', background: themeColors.accent }} />
+                    <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '200px', height: '2px', background: themeColors.accent }} />
 
                     {/* Metadata Header */}
                     <div style={{
@@ -104,7 +170,7 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                         gap: '16px',
                         marginBottom: '40px',
                         fontFamily: '"Cinzel"',
-                        color: OG_PALETTE.goldLight,
+                        color: isRamadan ? OG_PALETTE.gold : OG_PALETTE.goldLight,
                         fontSize: '20px',
                         letterSpacing: '0.1em',
                     }}>
@@ -149,13 +215,16 @@ export default async function Image(props: { params: Promise<{ locale: string; i
                 </div>
 
                 {/* Subtle corner patterns */}
-                <svg style={{ position: 'absolute', top: '40px', left: '40px', opacity: 0.2 }} width="100" height="100" viewBox="0 0 100 100">
-                    <path d="M0 0 H100 V2 H40 C20 2 2 20 2 40 V100 H0 V0Z" fill={OG_PALETTE.gold} />
-                </svg>
-                <svg style={{ position: 'absolute', bottom: '40px', right: '40px', transform: 'rotate(180deg)', opacity: 0.2 }} width="100" height="100" viewBox="0 0 100 100">
-                    <path d="M0 0 H100 V2 H40 C20 2 2 20 2 40 V100 H0 V0Z" fill={OG_PALETTE.gold} />
-                </svg>
-
+                {!isRamadan && (
+                    <>
+                        <svg style={{ position: 'absolute', top: '40px', left: '40px', opacity: 0.2 }} width="100" height="100" viewBox="0 0 100 100">
+                            <path d="M0 0 H100 V2 H40 C20 2 2 20 2 40 V100 H0 V0Z" fill={OG_PALETTE.gold} />
+                        </svg>
+                        <svg style={{ position: 'absolute', bottom: '40px', right: '40px', transform: 'rotate(180deg)', opacity: 0.2 }} width="100" height="100" viewBox="0 0 100 100">
+                            <path d="M0 0 H100 V2 H40 C20 2 2 20 2 40 V100 H0 V0Z" fill={OG_PALETTE.gold} />
+                        </svg>
+                    </>
+                )}
             </div>
         ),
         {
