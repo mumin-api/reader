@@ -11,7 +11,7 @@ import { Filter, Search as SearchIcon, SlidersHorizontal, AlertCircle } from 'lu
 import { cn } from '@/lib/utils';
 import { StructuredData, generateBreadcrumbSchema } from '@/components/StructuredData';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
 // This is a client-side only component. The server-side metadata and page structure 
 // are handled in a separate server component file if needed.

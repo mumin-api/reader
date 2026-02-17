@@ -12,7 +12,7 @@ import { hadithApi, Hadith } from '@/lib/api/client';
 import { StructuredData, generateBreadcrumbSchema } from '@/components/StructuredData';
 import { useTranslations } from 'next-intl';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
 const COLLECTION_NAMES: Record<string, string> = {
     'sahih-bukhari': 'Sahih al-Bukhari',

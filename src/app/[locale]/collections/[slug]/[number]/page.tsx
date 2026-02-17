@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { StructuredData, generateHadithSchema, generateBreadcrumbSchema } from '@/components/StructuredData';
 import { getRelatedHadiths } from '@/lib/seo/related';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string; number: string }> }): Promise<Metadata> {
     const { locale, slug, number } = await params;

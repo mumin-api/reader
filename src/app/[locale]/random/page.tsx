@@ -11,7 +11,7 @@ import { Shuffle, Sparkles, Filter, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { StructuredData, generateBreadcrumbSchema } from '@/components/StructuredData';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
 // This is a client-side only component.
 

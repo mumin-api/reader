@@ -11,7 +11,7 @@ import { hadithApi } from '@/lib/api/client';
 import { useTranslations } from 'next-intl';
 import { Link, useRouter, usePathname } from '@/lib/navigation';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
 import { useParams } from 'next/navigation';
 

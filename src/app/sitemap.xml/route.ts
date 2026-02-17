@@ -1,6 +1,6 @@
 import { hadithApi } from '@/lib/api/client';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mumin.ink';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
 export async function GET() {
     let collections = [];
