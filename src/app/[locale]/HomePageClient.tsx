@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight, Moon } from 'lucide-react';
 import { Link } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
-import { IslamicOrnaments } from '@/components/IslamicOrnaments';
+import { RamadanAtmosphere } from '@/components/RamadanAtmosphere';
 
 const RamadanBanner = ({ t }: { t: any }) => (
   <motion.div
@@ -82,8 +82,8 @@ export default function HomePageClient({
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4 overflow-hidden transition-[background-color] duration-1000 bg-transparent">
-        {/* Decorative Ornaments for Ramadan */}
-        {ramadanEvent && <IslamicOrnaments />}
+        {/* Rich Atmosphere for Ramadan */}
+        {ramadanEvent && <RamadanAtmosphere />}
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
