@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { HadithCard } from '@/components/HadithCard';
@@ -11,6 +12,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight, Moon } from 'lucide-react';
 import { Link } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
+import { IslamicOrnaments } from '@/components/IslamicOrnaments';
 
 const RamadanBanner = ({ t }: { t: any }) => (
   <motion.div
@@ -74,42 +76,55 @@ export default function HomePageClient({
   // We could add refresh logic here if needed, but for now we use initial data
   
   return (
-    <main className="min-h-screen relative">
+    <main className="min-h-screen relative overflow-hidden">
       <GeometricPattern opacity={0.03} />
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-16">
+      <section className={cn(
+        "relative pt-32 pb-20 px-4 overflow-hidden transition-colors duration-1000",
+        ramadanEvent ? "bg-emerald-950" : "bg-white"
+      )}>
+        {/* Decorative Ornaments for Ramadan */}
+        {ramadanEvent && <IslamicOrnaments />}
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="px-6 py-2 rounded-full bg-emerald-900/5 border border-emerald-900/10 backdrop-blur-md mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-600 font-bold text-xs tracking-widest uppercase mb-6"
             >
-              <span className="text-sm font-bold tracking-[0.3em] text-emerald-900 uppercase flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-gold-500" />
-                {t('companion')}
-              </span>
+              <Sparkles className="w-4 h-4" />
+              {ramadanEvent ? t('ramadan_mubarak') : t('daily_inspiration')}
             </motion.div>
-
+            
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl font-display font-bold text-emerald-900 mb-6 leading-tight"
+              className={cn(
+                "text-5xl md:text-7xl font-display font-bold leading-tight mb-6 transition-colors duration-1000",
+                ramadanEvent ? "text-gold-500" : "text-emerald-900"
+              )}
             >
-              {t('hero_title_1')} <br />
-              <span className="gradient-text">{t('hero_title_2')}</span>
+              {ramadanEvent ? (
+                <span className="gradient-text">{t('ramadan_title')}</span>
+              ) : (
+                <span dangerouslySetInnerHTML={{ __html: t.raw('hero_title') }} />
+              )}
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-emerald-900/60 max-w-2xl leading-relaxed"
+              className={cn(
+                "text-lg md:text-xl max-w-2xl mx-auto transition-colors duration-1000",
+                ramadanEvent ? "text-emerald-100/60" : "text-emerald-900/60"
+              )}
             >
-              {t('hero_subtitle')}
+              {ramadanEvent ? t('ramadan_hero_subtitle') : t('hero_subtitle')}
             </motion.p>
           </div>
 
@@ -118,7 +133,12 @@ export default function HomePageClient({
           {/* Daily Hadith Hero Card */}
           <div className="max-w-4xl mx-auto mb-32">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-display font-bold text-emerald-900">{t('daily_hadith')}</h2>
+              <h2 className={cn(
+                "text-2xl font-display font-bold",
+                ramadanEvent ? "text-white" : "text-emerald-900"
+              )}>
+                {t('daily_hadith')}
+              </h2>
               <div className="h-px flex-1 mx-8 bg-emerald-900/10" />
               <button className="text-sm font-bold text-emerald-900/40 hover:text-emerald-900 transition-colors uppercase tracking-widest flex items-center gap-2">
                 {t('refresh')} <ArrowRight className="w-4 h-4" />

@@ -5,16 +5,19 @@
         "hero_title_1": "Connect with the",
         "hero_title_2": "Prophetic Wisdom",
         "hero_subtitle": "Read, study, and reflect upon the authentic traditions of the Prophet Muhammad (ﷺ).",
-        "daily_hadith": "Today's Hadith",
+        "daily_hadith": "Daily Hadith",
         "refresh": "Refresh",
         "explore_collections": "Explore Collections",
         "explore_collections_subtitle": "Discover the major books of Hadith from authentic sources.",
         "view_all": "View All",
         "view_all_collections": "View All Collections",
         "unable_load": "Unable to load daily hadith. Please check your connection.",
-        "ramadan_special": "Ramadan Mubarak",
-        "ramadan_subtitle": "A special selection of hadiths about fasting, Tarawih prayers, and the blessed month.",
-        "view_ramadan_hadiths": "View Hadiths"
+        "ramadan_special": "Ramadan Special",
+        "ramadan_subtitle": "Immerse yourself in the wisdom of prophetic traditions concerning this holy month",
+        "view_ramadan_hadiths": "View Hadiths",
+        "ramadan_mubarak": "Ramadan Mubarak",
+        "ramadan_title": "Month of Quran & Mercy",
+        "ramadan_hero_subtitle": "Discover a treasure trove of authentic hadiths about fasting, prayer, and the blessings of this sacred month."
     },
     "Navbar": {
         "home": "Home",
