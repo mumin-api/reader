@@ -111,7 +111,10 @@ export default function HomePageClient({
               {ramadanEvent ? (
                 <span className="gradient-text">{t('ramadan_title')}</span>
               ) : (
-                <span dangerouslySetInnerHTML={{ __html: t.raw('hero_title') }} />
+                <>
+                  {t('hero_title_1')} <br />
+                  <span className="gradient-text">{t('hero_title_2')}</span>
+                </>
               )}
             </motion.h1>
 

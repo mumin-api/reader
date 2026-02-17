@@ -4,14 +4,22 @@
         "companion": "آپ کا روحانی ساتھی",
         "hero_title_1": "نبوی حکمت",
         "hero_title_2": "سے جڑیں",
+        "hero_title": "نبوی حکمت <br /> <span class='gradient-text'>سے جڑیں</span>",
         "hero_subtitle": "نبی محمد ﷺ کی مستند احادیث کو پڑھیں، مطالعہ کریں اور غور کریں۔",
+        "daily_inspiration": "روزانہ کی ترغیب",
         "daily_hadith": "آج کی حدیث",
         "refresh": "تازہ کریں",
         "explore_collections": "مجموعے دریافت کریں",
         "explore_collections_subtitle": "مستند ذرائع سے حدیث کی بڑی کتب دریافت کریں۔",
         "view_all": "سب دیکھیں",
         "view_all_collections": "تمام مجموعے دیکھیں",
-        "unable_load": "آج کی حدیث لوڈ کرنے میں ناکام۔ براہ کرم اپنا انٹرنیٹ چیک کریں۔"
+        "unable_load": "آج کی حدیث لوڈ کرنے میں ناکام۔ براہ کرم اپنا انٹرنیٹ چیک کریں۔",
+        "ramadan_special": "رمضان اسپیشل",
+        "ramadan_subtitle": "اس مقدس مہینے سے متعلق نبوی حکمتوں میں غوطہ لگائیں",
+        "view_ramadan_hadiths": "احادیث دیکھیں",
+        "ramadan_mubarak": "رمضان مبارک",
+        "ramadan_title": "قرآن اور رحمت کا مہینہ",
+        "ramadan_hero_subtitle": "اس مقدس مہینے کے روزے، دعا اور برکات کے بارے میں مستند احادیث کا خزانہ دریافت کریں۔"
     },
     "Navbar": {
         "home": "ہوم",

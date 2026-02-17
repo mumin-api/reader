@@ -4,14 +4,22 @@
         "companion": "رفيقك الروحي",
         "hero_title_1": "تواصل مع",
         "hero_title_2": "الحكمة النبوية",
+        "hero_title": "تواصل مع <br /> <span class='gradient-text'>الحكمة النبوية</span>",
         "hero_subtitle": "اقرأ وادرس وتأمل في الأحاديث الصحيحة للنبي محمد ﷺ",
+        "daily_inspiration": "إلهام يومي",
         "daily_hadith": "حديث اليوم",
         "refresh": "تحديث",
         "explore_collections": "استكشف المجموعات",
         "explore_collections_subtitle": "اكتشف الكتب الرئيسية للأحاديث النبوية من مصادر موثوقة.",
         "view_all": "عرض الكل",
         "view_all_collections": "عرض جميع المجموعات",
-        "unable_load": "تعذر تحميل حديث اليوم. يرجى التحقق من اتصالك."
+        "unable_load": "تعذر تحميل حديث اليوم. يرجى التحقق من اتصالك.",
+        "ramadan_special": "قسم خاص لرمضان",
+        "ramadan_subtitle": "انغمس في حكمة الأحاديث النبوية المتعلقة بهذا الشهر الكريم",
+        "view_ramadan_hadiths": "عرض الأحاديث",
+        "ramadan_mubarak": "رمضان مبارک",
+        "ramadan_title": "شهر القرآن والرحمة",
+        "ramadan_hero_subtitle": "اكتشف كنزاً من الأحاديث الصحيحة حول الصيام والصلاة وبركات هذا الشهر الفضيل."
     },
     "Navbar": {
         "home": "الرئيسية",

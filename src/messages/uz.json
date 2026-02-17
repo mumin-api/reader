@@ -4,14 +4,22 @@
         "companion": "Sizning Ruhiy Hamrohingiz",
         "hero_title_1": "Bog'laning",
         "hero_title_2": "Payg'ambar Hikmati bilan",
+        "hero_title": "Bog'laning <br /> <span class='gradient-text'>Payg'ambar Hikmati bilan</span>",
         "hero_subtitle": "Payg'ambarimiz Muhammad (s.a.v.)ning sahih hadislarini o'qing, o'rganing va ular ustida fikr yuriting.",
+        "daily_inspiration": "Kundalik Ilhom",
         "daily_hadith": "Kun Hadisi",
         "refresh": "Yangilash",
         "explore_collections": "To'plamlarni O'rganing",
         "explore_collections_subtitle": "Ishonchli manbalardan asosiy hadis kitoblarini kashf eting.",
         "view_all": "Hammasini Ko'rish",
         "view_all_collections": "Barcha To'plamlar",
-        "unable_load": "Kun hadisini yuklab bo'lmadi. Iltimos, aloqangizni tekshiring."
+        "unable_load": "Kun hadisini yuklab bo'lmadi. Iltimos, aloqangizni tekshiring.",
+        "ramadan_special": "Ramazon Maxsus",
+        "ramadan_subtitle": "Ushbu muborak oy haqidagi nabaviy hikmatlar dunyosiga sho'ng'ing",
+        "view_ramadan_hadiths": "Hadislarni ko'rish",
+        "ramadan_mubarak": "Ramazon Muborak",
+        "ramadan_title": "Qur'on va Rahmat oyi",
+        "ramadan_hero_subtitle": "Ushbu muborak oyning ro'zasi, duosi va barakalari haqidagi sahih hadislar xazinasini kashf eting."
     },
     "Navbar": {
         "home": "Bosh Sahifa",

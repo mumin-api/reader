@@ -4,14 +4,22 @@
         "companion": "Pendamping Spiritual Anda",
         "hero_title_1": "Terhubung dengan",
         "hero_title_2": "Kebijaksanaan Nabi",
+        "hero_title": "Terhubung dengan <br /> <span class='gradient-text'>Kebijaksanaan Nabi</span>",
         "hero_subtitle": "Baca, pelajari, dan renungkan hadis-hadis shahih Nabi Muhammad ﷺ",
+        "daily_inspiration": "Inspirasi Harian",
         "daily_hadith": "Hadis Hari Ini",
         "refresh": "Segarkan",
         "explore_collections": "Jelajahi Koleksi",
         "explore_collections_subtitle": "Temukan kitab-kitab utama Hadis dari sumber-sumber shahih.",
         "view_all": "Lihat Semua",
         "view_all_collections": "Lihat Semua Koleksi",
-        "unable_load": "Gagal memuat hadis harian. Silakan periksa koneksi Anda."
+        "unable_load": "Gagal memuat hadis harian. Silakan periksa koneksi Anda.",
+        "ramadan_special": "Spesial Ramadan",
+        "ramadan_subtitle": "Benamkan diri Anda dalam hikmah tradisi kenabian tentang bulan suci ini",
+        "view_ramadan_hadiths": "Lihat Hadis",
+        "ramadan_mubarak": "Ramadan Mubarak",
+        "ramadan_title": "Bulan Al-Quran & Rahmat",
+        "ramadan_hero_subtitle": "Temukan khazanah hadis shahih tentang puasa, doa, dan berkah bulan suci ini."
     },
     "Navbar": {
         "home": "Beranda",

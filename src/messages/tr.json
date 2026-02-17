@@ -4,14 +4,22 @@
         "companion": "Manevi Yoldaşınız",
         "hero_title_1": "Peygamber",
         "hero_title_2": "Hikmetiyle Bağlanın",
+        "hero_title": "Peygamber <br /> <span class='gradient-text'>Hikmetiyle Bağlanın</span>",
         "hero_subtitle": "Hz. Muhammed'in (s.a.v.) sahih hadislerini okuyun, inceleyin ve üzerinde düşünün.",
+        "daily_inspiration": "Günlük İlham",
         "daily_hadith": "Günün Hadisi",
         "refresh": "Yenile",
         "explore_collections": "Koleksiyonları Keşfedin",
         "explore_collections_subtitle": "Güvenilir kaynaklardan temel hadis kitaplarını keşfedin.",
         "view_all": "Hepsini Gör",
         "view_all_collections": "Tüm Koleksiyonları Gör",
-        "unable_load": "Günün hadisi yüklenemedi. Lütfen bağlantınızı kontrol edin."
+        "unable_load": "Günün hadisi yüklenemedi. Lütfen bağlantınızı kontrol edin.",
+        "ramadan_special": "Ramazan Özel",
+        "ramadan_subtitle": "Bu kutsal ay ile ilgili nebevi hikmetlerin derinliklerine dalın",
+        "view_ramadan_hadiths": "Hadisleri Görüntüle",
+        "ramadan_mubarak": "Ramazan Mübarek",
+        "ramadan_title": "Kur'an ve Rahmet Ayı",
+        "ramadan_hero_subtitle": "Bu mübarek ayın orucu, duası ve bereketleri hakkında sahih hadislerden oluşan hazineyi keşfedin."
     },
     "Navbar": {
         "home": "Ana Sayfa",
