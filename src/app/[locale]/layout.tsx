@@ -112,6 +112,7 @@ import { GlobalPanels } from '@/components/GlobalPanels';
 import { ThemeApplier } from '@/components/ThemeApplier';
 import { Analytics } from '@/components/Analytics';
 import { ClientOnly } from '@/components/ClientOnly';
+import { SpiritGate } from '@/components/SpiritGate';
 
 export default async function RootLayout({
   children,
@@ -151,6 +152,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ClientOnly>
             <ThemeApplier />
+            <SpiritGate />
           </ClientOnly>
           <ClientOnly>
             <Analytics />

@@ -51,12 +51,14 @@ const RamadanBanner = ({ t }: { t: any }) => (
 interface HomePageClientProps {
   initialDailyHadith: Hadith | null;
   initialFeaturedCollections: any[];
+  initialEvents: any[];
   locale: string;
 }
 
 export default function HomePageClient({ 
   initialDailyHadith, 
   initialFeaturedCollections,
+  initialEvents,
   locale
 }: HomePageClientProps) {
   const t = useTranslations('Home');
@@ -64,7 +66,10 @@ export default function HomePageClient({
   const tFooter = useTranslations('Footer');
   const [dailyHadith, setDailyHadith] = useState<Hadith | null>(initialDailyHadith);
   const [featuredCollections] = useState<any[]>(initialFeaturedCollections);
+  const [activeEvents] = useState<any[]>(initialEvents);
   const [loading, setLoading] = useState(false);
+
+  const ramadanEvent = activeEvents.find(e => e.slug === 'ramadan');
 
   // We could add refresh logic here if needed, but for now we use initial data
   
@@ -108,7 +113,7 @@ export default function HomePageClient({
             </motion.p>
           </div>
 
-          <RamadanBanner t={t} />
+          {ramadanEvent && <RamadanBanner t={t} />}
 
           {/* Daily Hadith Hero Card */}
           <div className="max-w-4xl mx-auto mb-32">

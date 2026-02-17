@@ -21,16 +21,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   let dailyHadith = null;
   let featuredCollections = [];
+  let initialEvents = [];
 
   try {
-    const [hadith, collections] = await Promise.all([
+    const [hadith, collections, events] = await Promise.all([
       hadithApi.getDailyHadith(locale),
-      hadithApi.getCollections()
+      hadithApi.getCollections(),
+      hadithApi.getActiveEvents()
     ]);
     dailyHadith = hadith;
     if (Array.isArray(collections)) {
       featuredCollections = collections.slice(0, 3);
     }
+    initialEvents = Array.isArray(events) ? events : [];
   } catch (err) {
     console.error('Failed to load home page data on server', err);
   }
@@ -39,6 +42,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <HomePageClient
       initialDailyHadith={dailyHadith}
       initialFeaturedCollections={featuredCollections}
+      initialEvents={initialEvents}
       locale={locale}
     />
   );

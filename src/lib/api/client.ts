@@ -112,7 +112,7 @@ export const hadithApi = {
     },
 
     getDailyHadith: async (language: string = 'en') => {
-        const response = await apiClient.get<any>('/hadiths/daily', { params: { language } });
+        const response = await apiClient.get<any>(`/hadiths/daily`, { params: { language } });
         return response.data.data || response.data;
     },
 
@@ -123,6 +123,11 @@ export const hadithApi = {
 
     getCollectionBySlug: async (slug: string) => {
         const response = await apiClient.get<any>(`/collections/${slug}`);
+        return response.data.data || response.data;
+    },
+
+    getActiveEvents: async () => {
+        const response = await apiClient.get<any>('/events/active');
         return response.data.data || response.data;
     },
 };
