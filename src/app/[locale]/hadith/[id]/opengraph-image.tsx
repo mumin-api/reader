@@ -19,7 +19,7 @@ async function getHadith(id: string) {
             headers: {
                 'X-API-Key': API_KEY || '',
             },
-            next: { revalidate: 86400 }
+            next: { revalidate: 3600 }
         });
         if (!res.ok) return null;
         const data = await res.json();
@@ -35,11 +35,14 @@ async function getActiveEvents() {
             headers: {
                 'X-API-Key': API_KEY || '',
             },
-            next: { revalidate: 3600 }
+            cache: 'no-store' // Don't cache event status for OG images right now to allow rapid testing
         });
         if (!res.ok) return [];
-        const data = await res.json();
-        return Array.isArray(data.data) ? data.data : (Array.isArray(data) ? data : []);
+        const json = await res.json();
+        
+        // Handle various response formats: { success: true, data: [...] } or direct array [...]
+        const data = json.data !== undefined ? json.data : json;
+        return Array.isArray(data) ? data : [];
     } catch (e) {
         return [];
     }
@@ -60,7 +63,11 @@ export default async function Image(props: { params: Promise<{ locale: string; i
 
     if (!hadith) return new Response('Not Found', { status: 404 });
 
-    const isRamadan = events.some((e: any) => e.slug === 'ramadan' || e.isActive);
+    const isRamadan = events.some((e: any) => 
+        e.slug === 'ramadan' || 
+        e.name?.toLowerCase().includes('ramadan') ||
+        e.isActive === true
+    );
     const rawText = hadith.translation?.text || '';
     const collection = hadith.collection?.name || hadith.collection || 'Sahih Collection';
     const num = hadith.hadithNumber;
