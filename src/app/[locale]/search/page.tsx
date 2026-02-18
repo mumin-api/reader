@@ -153,8 +153,10 @@ export default function SearchResultsPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                         {/* Sidebar Filters - Desktop */}
                         <div className="hidden lg:block space-y-8">
-                            <div className="p-8 rounded-[2rem] bg-emerald-900/5 border border-emerald-900/5">
-                                <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-6 border-b border-current opacity-10 pb-4">
+                            <div className="p-8 rounded-[2rem] border"
+                                style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}>
+                                <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-6 pb-4 border-b"
+                                    style={{ borderColor: 'var(--border-color)', color: 'var(--page-text)' }}>
                                     <Filter className="w-4 h-4" />
                                     {t('collections')}
                                 </h3>
@@ -217,12 +219,14 @@ export default function SearchResultsPage() {
                                     <p className="text-emerald-950/60">{error}</p>
                                 </div>
                             ) : results?.data.length === 0 ? (
-                                <div className="p-20 text-center bg-[var(--card-bg)] rounded-[3rem] border border-[var(--card-border)] shadow-islamic">
-                                    <div className="w-20 h-20 bg-emerald-900/5 rounded-full flex items-center justify-center mx-auto mb-8">
-                                        <SearchIcon className="w-10 h-10 text-emerald-900/20" />
+                                <div className="p-20 text-center rounded-[3rem] border"
+                                    style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)' }}>
+                                    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
+                                        style={{ backgroundColor: 'var(--page-bg-soft)' }}>
+                                        <SearchIcon className="w-10 h-10" style={{ color: 'var(--muted-text)', opacity: 0.3 }} />
                                     </div>
-                                    <h3 className="text-2xl font-display font-bold text-emerald-900 mb-4">{t('no_results')}</h3>
-                                    <p className="text-emerald-900/60 max-w-sm mx-auto mb-8">
+                                    <h3 className="text-2xl font-display font-bold mb-4" style={{ color: 'var(--page-text)' }}>{t('no_results')}</h3>
+                                    <p className="max-w-sm mx-auto mb-8" style={{ color: 'var(--muted-text)' }}>
                                         {t('no_results_desc')}
                                     </p>
                                     <button className="px-8 py-3 bg-emerald-600 text-white font-bold rounded-full text-sm tracking-widest uppercase hover:scale-105 transition-all shadow-lg shadow-emerald-600/20">
@@ -240,12 +244,13 @@ export default function SearchResultsPage() {
                                         <div className="flex items-center justify-center gap-2 pt-8">
                                             <button
                                                 onClick={() => handlePageChange(results.pagination.page - 1)}
-                                                className="px-6 py-3 rounded-xl border border-[var(--card-border)] font-bold text-sm tracking-widest uppercase hover:bg-emerald-600/5 transition-all disabled:opacity-30"
+                                                className="px-6 py-3 rounded-xl border font-bold text-sm tracking-widest uppercase transition-all disabled:opacity-30"
+                                                style={{ borderColor: 'var(--border-color)', color: 'var(--page-text)', backgroundColor: 'var(--card-bg)' }}
                                                 disabled={!results.pagination.hasPrev || loading}
                                             >
                                                 {tHadith('previous')}
                                             </button>
-                                            <div className="px-6 py-3 font-bold text-emerald-900">
+                                            <div className="px-6 py-3 font-bold text-sm" style={{ color: 'var(--muted-text)' }}>
                                                 {t('showing_page', { page: results.pagination.page, total: results.pagination.totalPages })}
                                             </div>
                                             <button

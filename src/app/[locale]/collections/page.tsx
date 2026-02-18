@@ -130,23 +130,23 @@ export default function CollectionsPage() {
                 </div>
             </section>
 
-            <section className="py-20 bg-[var(--page-bg-soft)] border-y border-[var(--card-border)] mt-20">
+            <section className="py-20 border-y border-[var(--card-border)] mt-20" style={{ backgroundColor: 'var(--page-bg-soft)' }}>
                 <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
                     <div>
-                        <p className="text-4xl font-display font-bold text-emerald-900 mb-2">{t('stats.hadiths')}</p>
-                        <p className="text-sm font-bold text-emerald-900/40 uppercase tracking-widest">{t('stats.hadiths_label')}</p>
+                        <p className="text-4xl font-display font-bold mb-2" style={{ color: 'var(--page-text)' }}>{t('stats.hadiths')}</p>
+                        <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--muted-text)' }}>{t('stats.hadiths_label')}</p>
                     </div>
                     <div>
-                        <p className="text-4xl font-display font-bold text-emerald-900 mb-2">{t('stats.collections')}</p>
-                        <p className="text-sm font-bold text-emerald-900/40 uppercase tracking-widest">{t('stats.collections_label')}</p>
+                        <p className="text-4xl font-display font-bold mb-2" style={{ color: 'var(--page-text)' }}>{t('stats.collections')}</p>
+                        <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--muted-text)' }}>{t('stats.collections_label')}</p>
                     </div>
                     <div>
-                        <p className="text-4xl font-display font-bold text-emerald-900 mb-2">{t('stats.languages')}</p>
-                        <p className="text-sm font-bold text-emerald-900/40 uppercase tracking-widest">{t('stats.languages_label')}</p>
+                        <p className="text-4xl font-display font-bold mb-2" style={{ color: 'var(--page-text)' }}>{t('stats.languages')}</p>
+                        <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--muted-text)' }}>{t('stats.languages_label')}</p>
                     </div>
                     <div>
-                        <p className="text-4xl font-display font-bold text-emerald-900 mb-2">{t('stats.authentic')}</p>
-                        <p className="text-sm font-bold text-emerald-900/40 uppercase tracking-widest">{t('stats.authentic_label')}</p>
+                        <p className="text-4xl font-display font-bold mb-2" style={{ color: 'var(--page-text)' }}>{t('stats.authentic')}</p>
+                        <p className="text-sm font-bold uppercase tracking-widest" style={{ color: 'var(--muted-text)' }}>{t('stats.authentic_label')}</p>
                     </div>
                 </div>
             </section>
