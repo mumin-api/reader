@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
-const API_WEB_URL = "https://api.mumin.ink";
+const API_WEB_URL = "https://docs.mumin.ink";
 const BOT_URL = "https://t.me/mumin_bot";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
