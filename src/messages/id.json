@@ -154,6 +154,7 @@
         "try_it_now": "Coba Sekarang",
         "no_results": "Tidak ada hasil ditemukan",
         "no_results_desc": "Kami tidak dapat menemukan hadis yang sesuai dengan kueri Anda. Coba kata kunci lain atau jelajahi koleksi.",
+        "did_you_mean": "Apakah maksud Anda:",
         "clear_search": "Hapus Pencarian",
         "error": "Kesalahan Pencarian",
         "error_desc": "Gagal mengambil hasil pencarian. Silakan coba lagi."

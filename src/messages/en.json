@@ -154,6 +154,7 @@
         "try_it_now": "Try it Now",
         "no_results": "No results found",
         "no_results_desc": "We couldn't find any hadiths matching your query. Try different keywords or browse by collection.",
+        "did_you_mean": "Did you mean:",
         "clear_search": "Clear Search",
         "error": "Search Error",
         "error_desc": "Failed to fetch search results. Please try again."

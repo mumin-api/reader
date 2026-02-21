@@ -154,6 +154,7 @@
         "try_it_now": "Şimdi Dene",
         "no_results": "Sonuç bulunamadı",
         "no_results_desc": "Aramanızla eşleşen hiçbir hadis bulamadık. Farklı anahtar kelimeler deneyin veya koleksiyonlara göz atın.",
+        "did_you_mean": "Bunu mu demek istediniz:",
         "clear_search": "Aramayı Temizle",
         "error": "Arama Hatası",
         "error_desc": "Arama sonuçları alınamadı. Lütfen tekrar deneyin."

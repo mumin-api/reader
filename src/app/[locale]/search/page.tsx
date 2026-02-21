@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { HadithCard } from '@/components/HadithCard';
 import { hadithApi, Hadith, PaginatedResponse } from '@/lib/api/client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Filter, Search as SearchIcon, SlidersHorizontal, AlertCircle } from 'lucide-react';
+import { Filter, Search as SearchIcon, SlidersHorizontal, AlertCircle, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StructuredData, generateBreadcrumbSchema } from '@/components/StructuredData';
 
@@ -30,10 +30,12 @@ export default function SearchResultsPage() {
     const searchParams = useSearchParams();
     const query = searchParams.get('q') || '';
 
+    const router = useRouter();
     const [results, setResults] = useState<PaginatedResponse<Hadith> | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(1);
+    const [didYouMean, setDidYouMean] = useState<string | null>(null);
     const [activeFilters, setActiveFilters] = useState({
         collection: '',
         grade: '',
@@ -58,6 +60,7 @@ export default function SearchResultsPage() {
 
             setLoading(true);
             setError(null);
+            setDidYouMean(null);
 
             try {
                 const data = await hadithApi.searchHadiths({
@@ -69,6 +72,18 @@ export default function SearchResultsPage() {
                     grade: activeFilters.grade
                 });
                 setResults(data);
+
+                // If no results — fetch suggestions for "Did you mean?"
+                if (data.data.length === 0) {
+                    try {
+                        const suggestions = await hadithApi.getSuggestions({ q: query, language: locale });
+                        if (suggestions && suggestions.length > 0) {
+                            setDidYouMean(suggestions[0].name);
+                        }
+                    } catch {
+                        // Suggestions are optional, don't block the UI
+                    }
+                }
             } catch (err) {
                 console.error('Search failed', err);
                 setError(t('error_desc'));
@@ -229,7 +244,30 @@ export default function SearchResultsPage() {
                                     <p className="max-w-sm mx-auto mb-8" style={{ color: 'var(--muted-text)' }}>
                                         {t('no_results_desc')}
                                     </p>
-                                    <button className="px-8 py-3 bg-emerald-600 text-white font-bold rounded-full text-sm tracking-widest uppercase hover:scale-105 transition-all shadow-lg shadow-emerald-600/20">
+
+                                    {/* Did You Mean? */}
+                                    {didYouMean && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="mb-8"
+                                        >
+                                            <p className="text-sm mb-3" style={{ color: 'var(--muted-text)' }}>
+                                                {t('did_you_mean') || 'Did you mean:'}
+                                            </p>
+                                            <button
+                                                onClick={() => router.push(`/search?q=${encodeURIComponent(didYouMean)}`)}
+                                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 font-bold text-sm hover:bg-emerald-500/20 transition-all"
+                                            >
+                                                <Sparkles className="w-4 h-4" />
+                                                {didYouMean}
+                                            </button>
+                                        </motion.div>
+                                    )}
+
+                                    <button
+                                        onClick={() => router.push('/search')}
+                                        className="px-8 py-3 bg-emerald-600 text-white font-bold rounded-full text-sm tracking-widest uppercase hover:scale-105 transition-all shadow-lg shadow-emerald-600/20">
                                         {t('clear_search')}
                                     </button>
                                 </div>

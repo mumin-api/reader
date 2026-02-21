@@ -154,6 +154,7 @@
         "try_it_now": "Sinab ko'ring",
         "no_results": "Natija topilmadi",
         "no_results_desc": "So'rovingizga mos hadis topa olmadik. Boshqa kalit so'zlarni sinab ko'ring yoki to'plamlarni ko'rib chiqing.",
+        "did_you_mean": "Buni nazarda tutdingizmi:",
         "clear_search": "Qidiruvni Tozalash",
         "error": "Qidiruv Xatosi",
         "error_desc": "Qidiruv natijalarini olib kelishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring."
