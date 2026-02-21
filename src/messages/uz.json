@@ -33,7 +33,8 @@
         "recent_searches": "Oxirgi Qidiruvlar",
         "clear": "Tozalash",
         "search_for": "Qidirish",
-        "search_results": "Qidiruv Natijalari"
+        "search_results": "Qidiruv Natijalari",
+        "did_you_mean": "Buni nazarda tutdingizmi?"
     },
     "Collections": {
         "title": "Hadis To'plamlari",

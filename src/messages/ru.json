@@ -33,7 +33,8 @@
         "recent_searches": "Недавние поиски",
         "clear": "Очистить",
         "search_for": "Искать",
-        "search_results": "Результаты поиска"
+        "search_results": "Результаты поиска",
+        "did_you_mean": "Вы имели в виду?"
     },
     "Collections": {
         "title": "Коллекции Хадисов",

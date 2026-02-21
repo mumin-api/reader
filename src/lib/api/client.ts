@@ -135,4 +135,9 @@ export const hadithApi = {
         const response = await apiClient.get<any>('/hadiths/suggestions', { params });
         return response.data.data || response.data;
     },
+
+    getSpell: async (params: { q: string; language?: string }) => {
+        const response = await apiClient.get<any>('/hadiths/spell', { params });
+        return response.data.data || response.data;
+    },
 };

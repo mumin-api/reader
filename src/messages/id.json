@@ -33,7 +33,8 @@
         "recent_searches": "Pencarian Terkini",
         "clear": "Hapus",
         "search_for": "Cari",
-        "search_results": "Hasil Pencarian"
+        "search_results": "Hasil Pencarian",
+        "did_you_mean": "Apakah maksud Anda:"
     },
     "Collections": {
         "title": "Koleksi Hadis",

@@ -33,7 +33,8 @@
         "recent_searches": "عمليات البحث الأخيرة",
         "clear": "مسح",
         "search_for": "البحث عن",
-        "search_results": "نتائج البحث"
+        "search_results": "نتائج البحث",
+        "did_you_mean": "هل تقصد؟"
     },
     "Collections": {
         "title": "مجموعات الأحاديث",

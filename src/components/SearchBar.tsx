@@ -12,6 +12,7 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [history, setHistory] = useState<string[]>([]);
     const [suggestions, setSuggestions] = useState<{ name: string; slug: string }[]>([]);
+    const [spellSuggestions, setSpellSuggestions] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const router = useRouter();
@@ -27,18 +28,27 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
         }
     }, []);
 
-    // Debounced suggestion fetching
+    // Debounced suggestion fetching (topics + spell correction)
     useEffect(() => {
         if (!query.trim() || query.length < 2) {
             setSuggestions([]);
+            setSpellSuggestions([]);
             return;
         }
 
         const handler = setTimeout(async () => {
             setIsLoading(true);
             try {
-                const data = await hadithApi.getSuggestions({ q: query, language: locale });
-                setSuggestions(data || []);
+                const [topicData, spellData] = await Promise.allSettled([
+                    hadithApi.getSuggestions({ q: query, language: locale }),
+                    hadithApi.getSpell({ q: query, language: locale }),
+                ]);
+                setSuggestions(topicData.status === 'fulfilled' ? topicData.value || [] : []);
+                setSpellSuggestions(
+                    spellData.status === 'fulfilled' && Array.isArray(spellData.value)
+                        ? spellData.value.map((s: any) => s.word).filter((w: string) => w.toLowerCase() !== query.toLowerCase())
+                        : []
+                );
             } catch (error) {
                 console.error('Suggestions error:', error);
             } finally {
@@ -162,7 +172,30 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
                         }}
                         className="absolute top-full left-0 right-0 mt-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border overflow-hidden z-20 animate-in fade-in slide-in-from-top-2 duration-300 backdrop-blur-3xl"
                     >
-                        {/* Suggestions Layer */}
+                        {/* Spell Correction Layer — "Did you mean: пророк?" */}
+                        {spellSuggestions.length > 0 && query.trim().length > 0 && (
+                            <div className="p-2 border-b border-emerald-500/10">
+                                <div className="flex items-center gap-2 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.1em] text-amber-500/80">
+                                    <Sparkles className="w-3 h-3" />
+                                    <span>{t('did_you_mean') || 'Did you mean?'}</span>
+                                </div>
+                                <div className="flex flex-wrap gap-2 px-3 pb-2">
+                                    {spellSuggestions.map((word) => (
+                                        <button
+                                            key={word}
+                                            onClick={() => {
+                                                handleSearch(word);
+                                            }}
+                                            className="px-3 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-sm hover:bg-amber-500/20 transition-all"
+                                        >
+                                            {word}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Suggestions Layer — Topics */}
                         {suggestions.length > 0 && (
                             <div className="p-2 border-b border-emerald-500/10">
                                 <div className="flex items-center gap-2 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.1em] text-emerald-500/80">
@@ -192,6 +225,7 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
                                 ))}
                             </div>
                         )}
+
 
                         {/* Recent History Layer */}
                         {history.length > 0 && !query && (

@@ -33,7 +33,8 @@
         "recent_searches": "Son Aramalar",
         "clear": "Temizle",
         "search_for": "Ara:",
-        "search_results": "Arama Sonuçları"
+        "search_results": "Arama Sonuçları",
+        "did_you_mean": "Bunu mu demek istediniz?"
     },
     "Collections": {
         "title": "Hadis Koleksiyonları",
