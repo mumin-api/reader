@@ -34,7 +34,8 @@
         "clear": "Tozalash",
         "search_for": "Qidirish",
         "search_results": "Qidiruv Natijalari",
-        "did_you_mean": "Buni nazarda tutdingizmi?"
+        "did_you_mean": "Buni nazarda tutdingizmi?",
+        "suggestions": "Tavsiyalar"
     },
     "Collections": {
         "title": "Hadis To'plamlari",

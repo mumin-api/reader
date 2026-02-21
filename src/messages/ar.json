@@ -34,7 +34,8 @@
         "clear": "مسح",
         "search_for": "البحث عن",
         "search_results": "نتائج البحث",
-        "did_you_mean": "هل تقصد؟"
+        "did_you_mean": "هل تقصد؟",
+        "suggestions": "الاقتراحات"
     },
     "Collections": {
         "title": "مجموعات الأحاديث",

@@ -34,7 +34,8 @@
         "clear": "Clear",
         "search_for": "Search for",
         "search_results": "Search Results",
-        "did_you_mean": "Did you mean?"
+        "did_you_mean": "Did you mean?",
+        "suggestions": "Suggestions"
     },
     "Collections": {
         "title": "Hadith Collections",

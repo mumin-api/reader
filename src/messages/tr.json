@@ -34,7 +34,8 @@
         "clear": "Temizle",
         "search_for": "Ara:",
         "search_results": "Arama Sonuçları",
-        "did_you_mean": "Bunu mu demek istediniz?"
+        "did_you_mean": "Bunu mu demek istediniz?",
+        "suggestions": "Öneriler"
     },
     "Collections": {
         "title": "Hadis Koleksiyonları",

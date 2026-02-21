@@ -34,7 +34,8 @@
         "clear": "Очистить",
         "search_for": "Искать",
         "search_results": "Результаты поиска",
-        "did_you_mean": "Вы имели в виду?"
+        "did_you_mean": "Вы имели в виду?",
+        "suggestions": "Подсказки"
     },
     "Collections": {
         "title": "Коллекции Хадисов",

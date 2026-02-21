@@ -34,7 +34,8 @@
         "clear": "Hapus",
         "search_for": "Cari",
         "search_results": "Hasil Pencarian",
-        "did_you_mean": "Apakah maksud Anda:"
+        "did_you_mean": "Apakah maksud Anda:",
+        "suggestions": "Saran"
     },
     "Collections": {
         "title": "Koleksi Hadis",
