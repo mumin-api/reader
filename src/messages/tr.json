@@ -88,6 +88,24 @@
             "hasan": "Hasan",
             "daif": "Zayıf",
             "mawdu": "Mevzu"
+        },
+        "MuminAI": {
+            "title": "MuminAI",
+            "show_meaning": "Anlamı Göster",
+            "hide_meaning": "Anlamı Gizle",
+            "loading": "MuminAI klasik şerhlerden hikmetleri çıkarıyor...",
+            "consulting_commentaries": "Muteber şerhlere danışılıyor...",
+            "analyzing_context": "Tarihsel bağlam ve dilbilim analiz ediliyor...",
+            "disclaimer": "MuminAI hata yapabilir. Bilgileri her zaman doğrulayın.",
+            "report_error": "Hata bildir",
+            "certainty_level": "Kesinlik Düzeyi: {level}",
+            "sections": {
+                "meaning": "Anlam Açıklaması",
+                "context": "Bağlam ve Terimler",
+                "legal": "Hukuki Yön",
+                "benefit": "Faydalar",
+                "additional": "Ek Notlar"
+            }
         }
     },
     "Language": {
@@ -182,23 +200,5 @@
         "bot_feature_3_desc": "Projeyi desteklemek için güvenli ve hızlı kripto para ödemeleri.",
         "try_bot": "Botu Başlat",
         "read_docs": "API Dokümantasyonu"
-    },
-    "MuminAI": {
-        "title": "MuminAI",
-        "show_meaning": "Anlamı Göster",
-        "hide_meaning": "Anlamı Gizle",
-        "loading": "MuminAI klasik şerhlerden hikmetleri çıkarıyor...",
-        "consulting_commentaries": "Muteber şerhlere danışılıyor...",
-        "analyzing_context": "Tarihsel bağlam ve dilbilim analiz ediliyor...",
-        "disclaimer": "MuminAI hata yapabilir. Bilgileri her zaman doğrulayın.",
-        "report_error": "Hata bildir",
-        "certainty_level": "Kesinlik Düzeyi: {level}",
-        "sections": {
-            "meaning": "Anlam Açıklaması",
-            "context": "Bağlam ve Terimler",
-            "legal": "Hukuki Yön",
-            "benefit": "Faydalar",
-            "additional": "Ek Notlar"
-        }
     }
 }

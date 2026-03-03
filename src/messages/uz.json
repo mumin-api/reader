@@ -88,6 +88,24 @@
             "hasan": "Hasan",
             "daif": "Zaif",
             "mawdu": "Mavzu"
+        },
+        "MuminAI": {
+            "title": "MuminAI",
+            "show_meaning": "Ma'nosini ko'rsatish",
+            "hide_meaning": "Ma'nosini yashirish",
+            "loading": "MuminAI mumtoz sharhlardan hikmatlarni chiqarmoqda...",
+            "consulting_commentaries": "Mötəbər sharhlar bilan maslahatlashilmoqda...",
+            "analyzing_context": "Tarixiy kontekst va tilshunoslik tahlil qilinmoqda...",
+            "disclaimer": "MuminAI xatolarga yo'l qo'yishi mumkin. Ma'lumotni doimo tekshiring.",
+            "report_error": "Xato haqida xabar berish",
+            "certainty_level": "Ishonchlilik darajasi: {level}",
+            "sections": {
+                "meaning": "Ma'no tushuntirishi",
+                "context": "Kontekst va terminlar",
+                "legal": "Huquqiy jihat",
+                "benefit": "Foydalar",
+                "additional": "Qo'shimcha eslatmalar"
+            }
         }
     },
     "Language": {
@@ -182,23 +200,5 @@
         "bot_feature_3_desc": "Loyiha qo'llab-quvvatlash uchun xavfsiz va tezkor kriptovalyuta to'lovlari.",
         "try_bot": "Botni ishga tushirish",
         "read_docs": "API hujjatlari"
-    },
-    "MuminAI": {
-        "title": "MuminAI",
-        "show_meaning": "Ma'nosini ko'rsatish",
-        "hide_meaning": "Ma'nosini yashirish",
-        "loading": "MuminAI mumtoz sharhlardan hikmatlarni chiqarmoqda...",
-        "consulting_commentaries": "Mötəbər sharhlar bilan maslahatlashilmoqda...",
-        "analyzing_context": "Tarixiy kontekst va tilshunoslik tahlil qilinmoqda...",
-        "disclaimer": "MuminAI xatolarga yo'l qo'yishi mumkin. Ma'lumotni doimo tekshiring.",
-        "report_error": "Xato haqida xabar berish",
-        "certainty_level": "Ishonchlilik darajasi: {level}",
-        "sections": {
-            "meaning": "Ma'no tushuntirishi",
-            "context": "Kontekst va terminlar",
-            "legal": "Huquqiy jihat",
-            "benefit": "Foydalar",
-            "additional": "Qo'shimcha eslatmalar"
-        }
     }
 }

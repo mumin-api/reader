@@ -88,6 +88,24 @@
             "hasan": "حسن",
             "daif": "ضعيف",
             "mawdu": "موضوع"
+        },
+        "MuminAI": {
+            "title": "MuminAI",
+            "show_meaning": "إظهار المعنى",
+            "hide_meaning": "إخفاء المعنى",
+            "loading": "MuminAI يستخرج الحكمة من الشروح الكلاسيكية...",
+            "consulting_commentaries": "جاري استشارة الشروح المعتمدة...",
+            "analyzing_context": "تحليل السياق التاريخي واللغوي...",
+            "disclaimer": "MuminAI قد يرتكب أخطاء. تحقق دائماً من المعلومات.",
+            "report_error": "الإبلاغ عن خطأ",
+            "certainty_level": "مستوى اليقين: {level}",
+            "sections": {
+                "meaning": "شرح المعنى",
+                "context": "السياق والمصطلحات",
+                "legal": "الجانب الفقهي",
+                "benefit": "الفوائد",
+                "additional": "ملاحظات إضافية"
+            }
         }
     },
     "Language": {
@@ -182,23 +200,5 @@
         "bot_feature_3_desc": "مدفوعات آمنة وسريعة بالعملات المشفرة لدعم المشروع.",
         "try_bot": "تشغيل البوت",
         "read_docs": "توثيق API"
-    },
-    "MuminAI": {
-        "title": "MuminAI",
-        "show_meaning": "إظهار المعنى",
-        "hide_meaning": "إخفاء المعنى",
-        "loading": "MuminAI يستخرج الحكمة من الشروح الكلاسيكية...",
-        "consulting_commentaries": "جاري استشارة الشروح المعتمدة...",
-        "analyzing_context": "تحليل السياق التاريخي واللغوي...",
-        "disclaimer": "MuminAI قد يرتكب أخطاء. تحقق دائماً من المعلومات.",
-        "report_error": "الإبلاغ عن خطأ",
-        "certainty_level": "مستوى اليقين: {level}",
-        "sections": {
-            "meaning": "شرح المعنى",
-            "context": "السياق والمصطلحات",
-            "legal": "الجانب الفقهي",
-            "benefit": "الفوائد",
-            "additional": "ملاحظات إضافية"
-        }
     }
 }

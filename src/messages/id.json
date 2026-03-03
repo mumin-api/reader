@@ -88,6 +88,24 @@
             "hasan": "Hasan",
             "daif": "Dhaif",
             "mawdu": "Palsu"
+        },
+        "MuminAI": {
+            "title": "MuminAI",
+            "show_meaning": "Tampilkan Makna",
+            "hide_meaning": "Sembunyikan Makna",
+            "loading": "MuminAI sedang mengekstrak hikmah dari syarah klasik...",
+            "consulting_commentaries": "Berkonsultasi dengan syarah otoritatif...",
+            "analyzing_context": "Menganalisis konteks sejarah dan linguistik...",
+            "disclaimer": "MuminAI bisa membuat kesalahan. Selalu verifikasi informasi.",
+            "report_error": "Laporkan kesalahan",
+            "certainty_level": "Tingkat Kepastian: {level}",
+            "sections": {
+                "meaning": "Penjelasan Makna",
+                "context": "Konteks & Terminologi",
+                "legal": "Aspek Hukum",
+                "benefit": "Manfaat",
+                "additional": "Catatan Tambahan"
+            }
         }
     },
     "Language": {
@@ -182,23 +200,5 @@
         "bot_feature_3_desc": "Pembayaran mata uang kripto yang aman dan cepat untuk mendukung proyek.",
         "try_bot": "Luncurkan Bot",
         "read_docs": "Dokumentasi API"
-    },
-    "MuminAI": {
-        "title": "MuminAI",
-        "show_meaning": "Tampilkan Makna",
-        "hide_meaning": "Sembunyikan Makna",
-        "loading": "MuminAI sedang mengekstrak hikmah dari syarah klasik...",
-        "consulting_commentaries": "Berkonsultasi dengan syarah otoritatif...",
-        "analyzing_context": "Menganalisis konteks sejarah dan linguistik...",
-        "disclaimer": "MuminAI bisa membuat kesalahan. Selalu verifikasi informasi.",
-        "report_error": "Laporkan kesalahan",
-        "certainty_level": "Tingkat Kepastian: {level}",
-        "sections": {
-            "meaning": "Penjelasan Makna",
-            "context": "Konteks & Terminologi",
-            "legal": "Aspek Hukum",
-            "benefit": "Manfaat",
-            "additional": "Catatan Tambahan"
-        }
     }
 }
