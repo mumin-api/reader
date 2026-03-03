@@ -42,8 +42,6 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
     const [featuredCollections] = useState<any[]>(initialFeaturedCollections);
     const [activeEvents] = useState<any[]>(initialEvents);
     const { scrollY } = useScroll();
-    const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-    const heroY = useTransform(scrollY, [0, 400], [0, -60]);
 
     const ramadanEvent = activeEvents.find(e => e.slug === 'ramadan');
 
@@ -61,7 +59,7 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                 <FloatingOrb size={400} x="70%" y="10%" color="radial-gradient(circle, #d4af37, transparent)" delay={2} />
                 <FloatingOrb size={300} x="20%" y="60%" color="radial-gradient(circle, #0369a1, transparent)" delay={4} />
 
-                <motion.div style={{ opacity: heroOpacity, y: heroY }} className="max-w-7xl mx-auto relative z-10 w-full">
+                <motion.div className="max-w-7xl mx-auto relative z-10 w-full">
                     <div className="text-center mb-16">
                         {/* Eyebrow badge */}
                         <motion.div
