@@ -264,26 +264,56 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                                 <Sparkles className="w-5 h-5 text-emerald-600" />
                                 <span className="text-sm font-bold uppercase tracking-widest text-emerald-700">MuminAI</span>
                             </div>
-                            <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                                <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-tighter">
-                                    {explanation.provider} • {explanation.model}
-                                </span>
+                            <div className="flex items-center gap-3">
+                                <div className={cn(
+                                    "px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-tighter border",
+                                    explanation.content.certainty_level === 'high' ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" :
+                                    explanation.content.certainty_level === 'low' ? "bg-red-500/10 text-red-600 border-red-500/20" :
+                                    "bg-amber-500/10 text-amber-600 border-amber-500/20"
+                                )}>
+                                    Уверенность: {explanation.content.certainty_level}
+                                </div>
+                                <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                                    <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-tighter">
+                                        {explanation.provider} • {explanation.model}
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
                         <div className="space-y-6">
                             <div>
-                                <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Краткий смысл</h4>
-                                <p className="text-sm leading-relaxed opacity-80">{explanation.content.meaning}</p>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Объяснение смысла</h4>
+                                <p className="text-sm leading-relaxed opacity-80">{explanation.content.long_meaning || explanation.content.meaning}</p>
                             </div>
+
+                            {explanation.content.context && explanation.content.context !== 'нет достоверной информации' && (
+                                <div>
+                                    <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Контекст и термины</h4>
+                                    <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
+                                        <p className="text-sm leading-relaxed opacity-80">{explanation.content.context}</p>
+                                    </div>
+                                </div>
+                            )}
+                            
+                            {explanation.content.legal_note && explanation.content.legal_note !== 'нет достоверной информации' && (
+                                <div>
+                                    <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Правовой аспект</h4>
+                                    <p className="text-sm leading-relaxed opacity-80 italic">{explanation.content.legal_note}</p>
+                                </div>
+                            )}
+
                             <div>
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Польза</h4>
                                 <p className="text-sm leading-relaxed opacity-80">{explanation.content.benefit}</p>
                             </div>
-                            <div>
-                                <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Источник шарха</h4>
-                                <p className="text-xs italic opacity-60">{explanation.content.sources}</p>
-                            </div>
+
+                            {explanation.content.notes && explanation.content.notes !== 'нет достоверной информации' && (
+                                <div>
+                                    <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Дополнительно</h4>
+                                    <p className="text-xs opacity-60 leading-relaxed">{explanation.content.notes}</p>
+                                </div>
+                            )}
                         </div>
 
                         <div className="mt-8 pt-4 border-t border-emerald-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">

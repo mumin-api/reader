@@ -157,9 +157,13 @@ export interface HadithExplanation {
     hadithId: number;
     languageCode: string;
     content: {
-        meaning: string;
+        short_meaning: string;
+        long_meaning: string;
+        context: string;
+        legal_note: string;
         benefit: string;
-        sources: string;
+        certainty_level: string;
+        notes: string;
     };
     provider: string;
     model: string;
