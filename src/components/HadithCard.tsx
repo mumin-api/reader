@@ -159,6 +159,18 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
         }
     };
 
+    const renderExplanationContent = (content: any) => {
+        if (!content) return null;
+        if (typeof content === 'string') return content;
+        if (Array.isArray(content)) return content.join(' ');
+        if (typeof content === 'object') {
+            return Object.entries(content)
+                .map(([key, value]) => `${key}: ${value}`)
+                .join('\n');
+        }
+        return String(content);
+    };
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -280,7 +292,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                             <div>
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Объяснение смысла</h4>
                                 <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
-                                    {explanation.content.long_meaning || explanation.content.meaning}
+                                    {renderExplanationContent(explanation.content.long_meaning || explanation.content.meaning)}
                                 </p>
                             </div>
 
@@ -288,8 +300,8 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                                 <div>
                                     <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Контекст и термины</h4>
                                     <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
-                                        <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
-                                            {explanation.content.context}
+                                        <p className={cn("whitespace-pre-line leading-relaxed opacity-80", currentSize.english)}>
+                                            {renderExplanationContent(explanation.content.context)}
                                         </p>
                                     </div>
                                 </div>
@@ -299,7 +311,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                                 <div>
                                     <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Правовой аспект</h4>
                                     <p className={cn("leading-relaxed opacity-80 italic", currentSize.english)}>
-                                        {explanation.content.legal_note}
+                                        {renderExplanationContent(explanation.content.legal_note)}
                                     </p>
                                 </div>
                             )}
@@ -307,15 +319,15 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                             <div>
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Польза</h4>
                                 <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
-                                    {explanation.content.benefit}
+                                    {renderExplanationContent(explanation.content.benefit)}
                                 </p>
                             </div>
 
                             {explanation.content.notes && explanation.content.notes !== 'нет достоверной информации' && (
                                 <div>
                                     <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Дополнительно</h4>
-                                    <p className={cn("opacity-60 leading-relaxed", currentSize.english)}>
-                                        {explanation.content.notes}
+                                    <p className={cn("leading-relaxed opacity-60", currentSize.english)}>
+                                        {renderExplanationContent(explanation.content.notes)}
                                     </p>
                                 </div>
                             )}
