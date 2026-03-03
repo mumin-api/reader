@@ -159,6 +159,7 @@ export interface HadithExplanation {
     content: {
         short_meaning: string;
         long_meaning: string;
+        meaning?: string; // Legacy support
         context: string;
         legal_note: string;
         benefit: string;
