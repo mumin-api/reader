@@ -274,7 +274,7 @@ export default function SearchResultsPage() {
                             ) : (
                                 <div className="space-y-8">
                                     {results?.data.map((hadith, idx) => (
-                                        <HadithCard key={hadith.id} hadith={hadith} />
+                                        <HadithCard key={hadith.id} hadith={hadith} hideAI />
                                     ))}
 
                                     {/* Pagination */}

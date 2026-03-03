@@ -160,7 +160,7 @@ export default function CollectionDetailPage() {
                                         transition={{ delay: idx * 0.05 }}
                                     >
                                         <Link href={`/collections/${slug}/${hadith.hadithNumber}`}>
-                                            <HadithCard hadith={hadith} />
+                                            <HadithCard hadith={hadith} hideAI />
                                         </Link>
                                     </motion.div>
                                 ))}

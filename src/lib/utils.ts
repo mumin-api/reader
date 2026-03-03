@@ -25,6 +25,7 @@ export function getCollectionSlug(name: string): string {
         'Sahih al-Bukhari': 'sahih-bukhari',
         'Sahih al Bukhari': 'sahih-bukhari',
         'Sahih Bukhari': 'sahih-bukhari',
+        'Sahih al-Muslim': 'sahih-muslim',
         'Sahih Muslim': 'sahih-muslim',
         'Sunan Abi Dawud': 'sunan-abu-dawud',
         'Sunan Abu Dawood': 'sunan-abu-dawud',
@@ -42,6 +43,7 @@ export function getCollectionSlug(name: string): string {
     // Fallback: standard slugify
     return name
         .toLowerCase()
+        .replace(/al-/g, '') // remove al- prefix if not in mapping
         .replace(/[`']/g, '')
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');

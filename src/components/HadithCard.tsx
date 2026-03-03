@@ -31,11 +31,16 @@ import { useTranslations } from 'next-intl';
 interface HadithCardProps {
     hadith: Hadith;
     showDetails?: boolean;
+    hideAI?: boolean;
 }
 
 // Grades are moved inside component to use translations
 
-export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = false }) => {
+export const HadithCard: React.FC<HadithCardProps> = ({ 
+    hadith, 
+    showDetails = false,
+    hideAI = false 
+}) => {
     const { textSize, arabicFont, mode, showTranslation } = useReadingSettings();
     const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
     const [showCopyToast, setShowCopyToast] = useState(false);
@@ -483,7 +488,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         {showIsnad ? t('hide_isnad') : t('isnad')}
                     </button>
                     <Link
-                        href={`/collections/${hadith.collection.toLowerCase().replace(/\s+/g, '-')}/${hadith.hadithNumber}`}
+                        href={`/collections/${getCollectionSlug(hadith.collection)}/${hadith.hadithNumber}`}
                         className="flex items-center gap-2 text-xs font-bold opacity-40 hover:opacity-100 transition-opacity uppercase tracking-widest"
                     >
                         <ExternalLink className="w-4 h-4" />
@@ -491,19 +496,21 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                     </Link>
                 </div>
 
-                <button
-                    onClick={handleFetchExplanation}
-                    disabled={isLoadingExplanation}
-                    className={cn(
-                        "flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 transform active:scale-95",
-                        explanation 
-                            ? "bg-emerald-600 text-white shadow-xl shadow-emerald-600/20 hover:bg-emerald-700" 
-                            : "bg-emerald-500/5 text-emerald-700 hover:bg-emerald-500/10 border border-emerald-500/10"
-                    )}
-                >
-                    <Sparkles className={cn("w-3.5 h-3.5", isLoadingExplanation && "animate-spin")} />
-                    {explanation ? t('MuminAI.hide_meaning') : t('MuminAI.show_meaning')}
-                </button>
+                {!hideAI && (
+                    <button
+                        onClick={handleFetchExplanation}
+                        disabled={isLoadingExplanation}
+                        className={cn(
+                            "flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 transform active:scale-95",
+                            explanation 
+                                ? "bg-emerald-600 text-white shadow-xl shadow-emerald-600/20 hover:bg-emerald-700" 
+                                : "bg-emerald-500/5 text-emerald-700 hover:bg-emerald-500/10 border border-emerald-500/10"
+                        )}
+                    >
+                        <Sparkles className={cn("w-3.5 h-3.5", isLoadingExplanation && "animate-spin")} />
+                        {explanation ? t('MuminAI.hide_meaning') : t('MuminAI.show_meaning')}
+                    </button>
+                )}
             </div>
 
             {/* Isnad Section */}

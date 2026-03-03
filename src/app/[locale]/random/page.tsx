@@ -12,7 +12,7 @@ import { Link } from '@/lib/navigation';
 import { StructuredData, generateBreadcrumbSchema } from '@/components/StructuredData';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import { cn, getCollectionSlug } from '@/lib/utils';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
@@ -157,7 +157,7 @@ export default function RandomHadithPage() {
                                     </div>
                                     <div className="w-px h-8" style={{ backgroundColor: 'var(--border-color)' }} />
                                     <Link
-                                        href={`/hadith/${hadith.id}`}
+                                        href={`/collections/${getCollectionSlug(hadith.collection)}/${hadith.hadithNumber}`}
                                         className="flex items-center gap-2 text-emerald-600 font-bold uppercase tracking-widest text-xs hover:gap-4 transition-all"
                                     >
                                         View Context <ChevronRight className="w-4 h-4" />
