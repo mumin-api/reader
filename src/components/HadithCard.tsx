@@ -271,12 +271,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                                     explanation.content.certainty_level === 'low' ? "bg-red-500/10 text-red-600 border-red-500/20" :
                                     "bg-amber-500/10 text-amber-600 border-amber-500/20"
                                 )}>
-                                    Уверенность: {explanation.content.certainty_level}
-                                </div>
-                                <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                                    <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-tighter">
-                                        {explanation.provider} • {explanation.model}
-                                    </span>
+                                    Уровень достоверности: {explanation.content.certainty_level}
                                 </div>
                             </div>
                         </div>
@@ -353,7 +348,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         className="mt-8 p-8 rounded-2xl bg-emerald-500/5 border border-dashed border-emerald-500/20 flex flex-col items-center justify-center gap-4 animate-pulse"
                     >
                         <Loader2 className="w-8 h-8 text-emerald-600 animate-spin" />
-                        <span className="text-xs font-bold uppercase tracking-widest text-emerald-600/50">MuminAI генерирует смысл...</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-emerald-600/50">MuminAI извлекает мудрость из шархов...</span>
                     </motion.div>
                 )}
             </AnimatePresence>
