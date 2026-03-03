@@ -8,12 +8,17 @@ import {
     ExternalLink,
     Info,
     Check,
-    Globe
+    Globe,
+    Sparkles,
+    AlertCircle,
+    MessageSquare,
+    Loader2
 } from 'lucide-react';
 import { cn, getCollectionSlug } from '@/lib/utils';
-import { Hadith } from '@/lib/api/client';
+import { Hadith, hadithApi, HadithExplanation } from '@/lib/api/client';
 import { useReadingSettings } from '@/store/useReadingSettings';
 import { useBookmarks } from '@/store/useBookmarks';
+import { useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
@@ -30,6 +35,12 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
     const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
     const [showCopyToast, setShowCopyToast] = useState(false);
     const [showIsnad, setShowIsnad] = useState(false);
+    const [explanation, setExplanation] = useState<HadithExplanation | null>(null);
+    const [isLoadingExplanation, setIsLoadingExplanation] = useState(false);
+    const [showReportModal, setShowReportModal] = useState(false);
+    const [reportMessage, setReportMessage] = useState('');
+    const [isReporting, setIsReporting] = useState(false);
+    const locale = useLocale();
     const t = useTranslations('Hadith');
 
     const GRADES = {
@@ -113,6 +124,38 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
             navigator.clipboard.writeText(url);
             setShowCopyToast(true);
             setTimeout(() => setShowCopyToast(false), 2000);
+        }
+    };
+
+    const handleFetchExplanation = async () => {
+        if (explanation) {
+            setExplanation(null);
+            return;
+        }
+
+        setIsLoadingExplanation(true);
+        try {
+            const result = await hadithApi.getExplanation(hadith.id, locale);
+            setExplanation(result);
+        } catch (error) {
+            console.error('Failed to fetch explanation:', error);
+        } finally {
+            setIsLoadingExplanation(false);
+        }
+    };
+
+    const handleReport = async () => {
+        if (!reportMessage.trim()) return;
+        setIsReporting(true);
+        try {
+            await hadithApi.reportExplanation(hadith.id, reportMessage);
+            setShowReportModal(false);
+            setReportMessage('');
+            // Optional: show success toast
+        } catch (error) {
+            console.error('Failed to report error:', error);
+        } finally {
+            setIsReporting(false);
         }
     };
 
@@ -207,6 +250,74 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                 </div>
             )}
 
+            {/* AI Explanation (MuminAI) */}
+            <AnimatePresence>
+                {explanation && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="mt-8 p-6 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 relative z-10"
+                    >
+                        <div className="flex items-center justify-between mb-6">
+                            <div className="flex items-center gap-2">
+                                <Sparkles className="w-5 h-5 text-emerald-600" />
+                                <span className="text-sm font-bold uppercase tracking-widest text-emerald-700">MuminAI</span>
+                            </div>
+                            <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                                <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-tighter">
+                                    {explanation.provider} • {explanation.model}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="space-y-6">
+                            <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Краткий смысл</h4>
+                                <p className="text-sm leading-relaxed opacity-80">{explanation.content.meaning}</p>
+                            </div>
+                            <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Польза</h4>
+                                <p className="text-sm leading-relaxed opacity-80">{explanation.content.benefit}</p>
+                            </div>
+                            <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Источник шарха</h4>
+                                <p className="text-xs italic opacity-60">{explanation.content.sources}</p>
+                            </div>
+                        </div>
+
+                        <div className="mt-8 pt-4 border-t border-emerald-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div className="flex items-center gap-2 opacity-40">
+                                <AlertCircle className="w-4 h-4" />
+                                <span className="text-[10px] font-medium leading-none">MuminAI может совершать ошибки. Проверяйте информацию.</span>
+                            </div>
+                            <button
+                                onClick={() => setShowReportModal(true)}
+                                className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1.5"
+                            >
+                                <MessageSquare className="w-3.5 h-3.5" />
+                                Сообщить об ошибке
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* AI Loading State */}
+            <AnimatePresence>
+                {isLoadingExplanation && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="mt-8 p-8 rounded-2xl bg-emerald-500/5 border border-dashed border-emerald-500/20 flex flex-col items-center justify-center gap-4 animate-pulse"
+                    >
+                        <Loader2 className="w-8 h-8 text-emerald-600 animate-spin" />
+                        <span className="text-xs font-bold uppercase tracking-widest text-emerald-600/50">MuminAI генерирует смысл...</span>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Footer / Actions */}
             <div className="mt-8 flex items-center justify-between relative z-10 pt-4">
                 <div className="flex items-center gap-4">
@@ -225,6 +336,20 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         {t('reference')}
                     </Link>
                 </div>
+
+                <button
+                    onClick={handleFetchExplanation}
+                    disabled={isLoadingExplanation}
+                    className={cn(
+                        "flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300",
+                        explanation 
+                            ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20" 
+                            : "bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20"
+                    )}
+                >
+                    <Sparkles className={cn("w-3.5 h-3.5", isLoadingExplanation && "animate-spin")} />
+                    {explanation ? 'Скрыть смысл' : 'Показать смысл'}
+                </button>
             </div>
 
             {/* Isnad Section */}
@@ -259,6 +384,55 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         <Check className="w-4 h-4" />
                         <span className="text-sm font-medium">{t('copied')}</span>
                     </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Report Modal */}
+            <AnimatePresence>
+                {showReportModal && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setShowReportModal(false)}
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="relative w-full max-w-md bg-[var(--card-bg)] border border-[var(--border-color)] rounded-[2rem] p-8 shadow-2xl overflow-hidden"
+                        >
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-[5rem] -mr-16 -mt-16" />
+                            
+                            <h3 className="text-xl font-bold mb-2 relative z-10">Нашли ошибку?</h3>
+                            <p className="text-sm opacity-60 mb-6 relative z-10">Опишите, что именно не так в ответе MuminAI. Мы проверим и исправим.</p>
+                            
+                            <textarea
+                                value={reportMessage}
+                                onChange={(e) => setReportMessage(e.target.value)}
+                                placeholder="Опишите ошибку..."
+                                className="w-full h-32 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-sm focus:outline-none focus:border-emerald-500/30 transition-colors mb-6 resize-none"
+                            />
+                            
+                            <div className="flex items-center justify-end gap-3 relative z-10">
+                                <button
+                                    onClick={() => setShowReportModal(false)}
+                                    className="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity"
+                                >
+                                    Отмена
+                                </button>
+                                <button
+                                    onClick={handleReport}
+                                    disabled={isReporting || !reportMessage.trim()}
+                                    className="px-8 py-2.5 rounded-full bg-emerald-600 text-white text-xs font-bold uppercase tracking-widest shadow-lg shadow-emerald-600/20 disabled:opacity-50 disabled:shadow-none transition-all"
+                                >
+                                    {isReporting ? 'Отправка...' : 'Отправить'}
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
                 )}
             </AnimatePresence>
         </motion.div>

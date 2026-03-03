@@ -140,4 +140,29 @@ export const hadithApi = {
         const response = await apiClient.get<any>('/hadiths/spell', { params });
         return response.data.data || response.data;
     },
+
+    getExplanation: async (id: number, language: string = 'ru') => {
+        const response = await apiClient.get<any>(`/hadiths/${id}/explain`, { params: { language } });
+        return response.data.data || response.data;
+    },
+
+    reportExplanation: async (id: number, message: string) => {
+        const response = await apiClient.get<any>(`/hadiths/${id}/explain/report`, { params: { message } });
+        return response.data.data || response.data;
+    },
 };
+
+export interface HadithExplanation {
+    id: number;
+    hadithId: number;
+    languageCode: string;
+    content: {
+        meaning: string;
+        benefit: string;
+        sources: string;
+    };
+    provider: string;
+    model: string;
+    isApproved: boolean;
+    createdAt: string;
+}
