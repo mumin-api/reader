@@ -284,14 +284,18 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                         <div className="space-y-6">
                             <div>
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Объяснение смысла</h4>
-                                <p className="text-sm leading-relaxed opacity-80">{explanation.content.long_meaning || explanation.content.meaning}</p>
+                                <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
+                                    {explanation.content.long_meaning || explanation.content.meaning}
+                                </p>
                             </div>
 
                             {explanation.content.context && explanation.content.context !== 'нет достоверной информации' && (
                                 <div>
                                     <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Контекст и термины</h4>
                                     <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
-                                        <p className="text-sm leading-relaxed opacity-80">{explanation.content.context}</p>
+                                        <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
+                                            {explanation.content.context}
+                                        </p>
                                     </div>
                                 </div>
                             )}
@@ -299,19 +303,25 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                             {explanation.content.legal_note && explanation.content.legal_note !== 'нет достоверной информации' && (
                                 <div>
                                     <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Правовой аспект</h4>
-                                    <p className="text-sm leading-relaxed opacity-80 italic">{explanation.content.legal_note}</p>
+                                    <p className={cn("leading-relaxed opacity-80 italic", currentSize.english)}>
+                                        {explanation.content.legal_note}
+                                    </p>
                                 </div>
                             )}
 
                             <div>
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Польза</h4>
-                                <p className="text-sm leading-relaxed opacity-80">{explanation.content.benefit}</p>
+                                <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
+                                    {explanation.content.benefit}
+                                </p>
                             </div>
 
                             {explanation.content.notes && explanation.content.notes !== 'нет достоверной информации' && (
                                 <div>
                                     <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Дополнительно</h4>
-                                    <p className="text-xs opacity-60 leading-relaxed">{explanation.content.notes}</p>
+                                    <p className={cn("opacity-60 leading-relaxed", currentSize.english)}>
+                                        {explanation.content.notes}
+                                    </p>
                                 </div>
                             )}
                         </div>
