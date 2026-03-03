@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Heart,
     Share2,
@@ -12,7 +12,12 @@ import {
     Sparkles,
     AlertCircle,
     MessageSquare,
-    Loader2
+    Loader2,
+    BookOpen,
+    History,
+    Scale,
+    FileText,
+    Fingerprint
 } from 'lucide-react';
 import { cn, getCollectionSlug } from '@/lib/utils';
 import { Hadith, hadithApi, HadithExplanation } from '@/lib/api/client';
@@ -126,6 +131,20 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
             setTimeout(() => setShowCopyToast(false), 2000);
         }
     };
+
+    const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
+        if (isLoadingExplanation) {
+            interval = setInterval(() => {
+                setLoadingMessageIndex((prev) => (prev + 1) % 3);
+            }, 3500);
+        } else {
+            setLoadingMessageIndex(0);
+        }
+        return () => clearInterval(interval);
+    }, [isLoadingExplanation]);
 
     const handleFetchExplanation = async () => {
         if (explanation) {
@@ -266,101 +285,189 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
             <AnimatePresence>
                 {explanation && (
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="mt-8 p-6 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 relative z-10"
+                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                        className="mt-8 p-6 md:p-8 rounded-[2rem] bg-emerald-500/[0.03] dark:bg-emerald-400/[0.02] border border-emerald-500/10 backdrop-blur-md relative z-10 overflow-hidden group/ai shadow-inner"
                     >
-                        <div className="flex items-center justify-between mb-6">
-                            <div className="flex items-center gap-2">
-                                <Sparkles className="w-5 h-5 text-emerald-600" />
-                                <span className="text-sm font-bold uppercase tracking-widest text-emerald-700">MuminAI</span>
+                        {/* Glassmorphism AURA */}
+                        <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none" />
+                        <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-teal-500/10 blur-[80px] rounded-full pointer-events-none" />
+
+                        <div className="flex items-center justify-between mb-8">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+                                    <Sparkles className="w-5 h-5 text-emerald-600 animate-pulse" />
+                                </div>
+                                <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-800 dark:text-emerald-400">
+                                    {t('MuminAI.title')}
+                                </span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className={cn(
-                                    "px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-tighter border",
+                                    "px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider border flex items-center gap-1.5 shadow-sm",
                                     explanation.content.certainty_level === 'high' ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" :
                                     explanation.content.certainty_level === 'low' ? "bg-red-500/10 text-red-600 border-red-500/20" :
                                     "bg-amber-500/10 text-amber-600 border-amber-500/20"
                                 )}>
-                                    Уровень достоверности: {explanation.content.certainty_level}
+                                    <Fingerprint className="w-3 h-3" />
+                                    {t('MuminAI.certainty_level', { level: explanation.content.certainty_level })}
                                 </div>
                             </div>
                         </div>
 
-                        <div className="space-y-6">
-                            <div>
-                                <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Объяснение смысла</h4>
-                                <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
+                        <div className="space-y-8 relative">
+                            {/* Meaning Section */}
+                            <motion.div 
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.1 }}
+                            >
+                                <div className="flex items-center gap-2 mb-3">
+                                    <BookOpen className="w-4 h-4 text-emerald-600/50" />
+                                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-emerald-900/40 dark:text-emerald-100/40">
+                                        {t('MuminAI.sections.meaning')}
+                                    </h4>
+                                </div>
+                                <p className={cn("leading-relaxed opacity-90 font-serif italic text-emerald-950 dark:text-emerald-50", currentSize.english)}>
                                     {renderExplanationContent(explanation.content.long_meaning || explanation.content.meaning)}
                                 </p>
-                            </div>
+                            </motion.div>
 
+                            {/* Context Section */}
                             {explanation.content.context && explanation.content.context !== 'нет достоверной информации' && (
-                                <div>
-                                    <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Контекст и термины</h4>
-                                    <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
+                                <motion.div 
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.2 }}
+                                >
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <History className="w-4 h-4 text-emerald-600/50" />
+                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-emerald-900/40 dark:text-emerald-100/40">
+                                            {t('MuminAI.sections.context')}
+                                        </h4>
+                                    </div>
+                                    <div className="p-5 rounded-2xl bg-emerald-500/[0.02] border border-emerald-500/10 group-hover/ai:bg-emerald-500/[0.04] transition-colors">
                                         <p className={cn("whitespace-pre-line leading-relaxed opacity-80", currentSize.english)}>
                                             {renderExplanationContent(explanation.content.context)}
                                         </p>
                                     </div>
-                                </div>
+                                </motion.div>
                             )}
                             
+                            {/* Legal Aspect */}
                             {explanation.content.legal_note && explanation.content.legal_note !== 'нет достоверной информации' && (
-                                <div>
-                                    <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Правовой аспект</h4>
-                                    <p className={cn("leading-relaxed opacity-80 italic", currentSize.english)}>
+                                <motion.div 
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.3 }}
+                                >
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <Scale className="w-4 h-4 text-emerald-600/50" />
+                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-emerald-900/40 dark:text-emerald-100/40">
+                                            {t('MuminAI.sections.legal')}
+                                        </h4>
+                                    </div>
+                                    <p className={cn("leading-relaxed opacity-80 border-l-2 border-emerald-500/20 pl-4 py-1", currentSize.english)}>
                                         {renderExplanationContent(explanation.content.legal_note)}
                                     </p>
-                                </div>
+                                </motion.div>
                             )}
 
-                            <div>
-                                <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Польза</h4>
+                            {/* Benefits */}
+                            <motion.div 
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.4 }}
+                            >
+                                <div className="flex items-center gap-2 mb-3">
+                                    <Sparkles className="w-4 h-4 text-emerald-600/50" />
+                                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-emerald-900/40 dark:text-emerald-100/40">
+                                        {t('MuminAI.sections.benefit')}
+                                    </h4>
+                                </div>
                                 <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
                                     {renderExplanationContent(explanation.content.benefit)}
                                 </p>
-                            </div>
+                            </motion.div>
 
+                            {/* Additional Notes */}
                             {explanation.content.notes && explanation.content.notes !== 'нет достоверной информации' && (
-                                <div>
-                                    <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-900/40 mb-2">Дополнительно</h4>
-                                    <p className={cn("leading-relaxed opacity-60", currentSize.english)}>
+                                <motion.div 
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.5 }}
+                                >
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <FileText className="w-4 h-4 text-emerald-600/50" />
+                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-emerald-900/40 dark:text-emerald-100/40">
+                                            {t('MuminAI.sections.additional')}
+                                        </h4>
+                                    </div>
+                                    <p className={cn("leading-relaxed opacity-60 text-sm", currentSize.english)}>
                                         {renderExplanationContent(explanation.content.notes)}
                                     </p>
-                                </div>
+                                </motion.div>
                             )}
                         </div>
 
-                        <div className="mt-8 pt-4 border-t border-emerald-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div className="flex items-center gap-2 opacity-40">
-                                <AlertCircle className="w-4 h-4" />
-                                <span className="text-[10px] font-medium leading-none">MuminAI может совершать ошибки. Проверяйте информацию.</span>
+                        <div className="mt-10 pt-6 border-t border-emerald-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div className="flex items-center gap-2 opacity-30 group-hover/ai:opacity-50 transition-opacity">
+                                <AlertCircle className="w-3.5 h-3.5" />
+                                <span className="text-[9px] font-medium leading-none max-w-[200px] sm:max-w-none">
+                                    {t('MuminAI.disclaimer')}
+                                </span>
                             </div>
                             <button
                                 onClick={() => setShowReportModal(true)}
-                                className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1.5"
+                                className="text-[10px] font-bold uppercase tracking-[0.1em] text-emerald-600/60 hover:text-emerald-600 transition-colors flex items-center gap-1.5"
                             >
                                 <MessageSquare className="w-3.5 h-3.5" />
-                                Сообщить об ошибке
+                                {t('MuminAI.report_error')}
                             </button>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* AI Loading State */}
+            {/* AI Loading State (Atmospheric Skeleton) */}
             <AnimatePresence>
                 {isLoadingExplanation && (
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="mt-8 p-8 rounded-2xl bg-emerald-500/5 border border-dashed border-emerald-500/20 flex flex-col items-center justify-center gap-4 animate-pulse"
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.98 }}
+                        className="mt-8 p-8 rounded-[2rem] bg-emerald-500/[0.03] border border-dashed border-emerald-500/20 relative z-10 overflow-hidden"
                     >
-                        <Loader2 className="w-8 h-8 text-emerald-600 animate-spin" />
-                        <span className="text-xs font-bold uppercase tracking-widest text-emerald-600/50">MuminAI извлекает мудрость из шархов...</span>
+                        {/* Shimmering Aura */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/5 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
+                        
+                        <div className="flex flex-col gap-6">
+                            <div className="flex items-center gap-3">
+                                <Loader2 className="w-5 h-5 text-emerald-600 animate-spin" />
+                                <div className="h-4 w-24 bg-emerald-500/10 rounded-full animate-pulse" />
+                            </div>
+
+                            <div className="space-y-3">
+                                <div className="h-4 w-full bg-emerald-500/5 rounded-full animate-pulse" />
+                                <div className="h-4 w-5/6 bg-emerald-500/5 rounded-full animate-pulse delay-75" />
+                                <div className="h-4 w-4/6 bg-emerald-500/5 rounded-full animate-pulse delay-150" />
+                            </div>
+
+                            <div className="pt-4 flex flex-col items-center gap-2">
+                                <motion.span 
+                                    key={loadingMessageIndex}
+                                    initial={{ opacity: 0, y: 5 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -5 }}
+                                    className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600/40 text-center min-h-[1.5em]"
+                                >
+                                    {loadingMessageIndex === 0 ? t('MuminAI.loading') : 
+                                     loadingMessageIndex === 1 ? t('MuminAI.consulting_commentaries') : 
+                                     t('MuminAI.analyzing_context')}
+                                </motion.span>
+                            </div>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -388,14 +495,14 @@ export const HadithCard: React.FC<HadithCardProps> = ({ hadith, showDetails = fa
                     onClick={handleFetchExplanation}
                     disabled={isLoadingExplanation}
                     className={cn(
-                        "flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300",
+                        "flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 transform active:scale-95",
                         explanation 
-                            ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20" 
-                            : "bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20"
+                            ? "bg-emerald-600 text-white shadow-xl shadow-emerald-600/20 hover:bg-emerald-700" 
+                            : "bg-emerald-500/5 text-emerald-700 hover:bg-emerald-500/10 border border-emerald-500/10"
                     )}
                 >
                     <Sparkles className={cn("w-3.5 h-3.5", isLoadingExplanation && "animate-spin")} />
-                    {explanation ? 'Скрыть смысл' : 'Показать смысл'}
+                    {explanation ? t('MuminAI.hide_meaning') : t('MuminAI.show_meaning')}
                 </button>
             </div>
 

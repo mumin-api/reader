@@ -182,5 +182,23 @@
         "bot_feature_3_desc": "Secure and fast cryptocurrency payments to support the project.",
         "try_bot": "Launch Bot",
         "read_docs": "API Documentation"
+    },
+    "MuminAI": {
+        "title": "MuminAI",
+        "show_meaning": "Show Meaning",
+        "hide_meaning": "Hide Meaning",
+        "loading": "MuminAI is extracting wisdom from classical commentaries...",
+        "consulting_commentaries": "Consulting authoritative commentaries...",
+        "analyzing_context": "Analyzing historical context and linguistics...",
+        "disclaimer": "MuminAI can make mistakes. Always verify the information.",
+        "report_error": "Report an error",
+        "certainty_level": "Certainty Level: {level}",
+        "sections": {
+            "meaning": "Explanation of Meaning",
+            "context": "Context & Terminology",
+            "legal": "Legal Aspect",
+            "benefit": "Benefits",
+            "additional": "Additional Notes"
+        }
     }
 }
