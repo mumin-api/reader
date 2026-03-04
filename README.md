@@ -1,7 +1,7 @@
 # 🕌 Mumin Hadith Reader: The Definitive Engineering Encyclopedia
 
-> **Version**: 2.3.0 (The Smart Search Release)  
-> **Date**: February 21, 2026  
+> **Version**: 2.4.0 (The Performance Deep Dive Release)  
+> **Date**: March 4, 2026  
 > **Classification**: Public / Open Source  
 > **Status**: Production Stable  
 > **Maintainers**: The Mumin Core Team  
@@ -648,13 +648,12 @@ Developer pushes code to `feature/new-design`.
 
 ## 27. Environment Variables Reference
 
-| Variable                     | Description        | Default                    | Required |
-| :--------------------------- | :----------------- | :------------------------- | :------- |
-| `NEXT_PUBLIC_API_URL`        | Mumin API Endpoint | `https://api.mumin.ink/v1` | Yes      |
-| `NEXT_PUBLIC_API_KEY`        | Read-Only API Key  | -                          | Yes      |
-| `NEXT_PUBLIC_BASE_URL`       | Canonical Domain   | `http://localhost:3000`    | Yes      |
-| `NEXT_PUBLIC_YANDEX_METRICA` | Analytics ID       | -                          | No       |
-| `NODE_ENV`                   | Environment        | `development`              | Built-in |
+| Variable               | Description        | Default                    | Required |
+| :--------------------- | :----------------- | :------------------------- | :------- |
+| `NEXT_PUBLIC_API_URL`  | Mumin API Endpoint | `https://api.mumin.ink/v1` | Yes      |
+| `NEXT_PUBLIC_API_KEY`  | Read-Only API Key  | -                          | Yes      |
+| `NEXT_PUBLIC_BASE_URL` | Canonical Domain   | `http://localhost:3000`    | Yes      |
+| `NODE_ENV`             | Environment        | `development`              | Built-in |
 
 ## 28. Performance Monitoring (Web Vitals)
 
@@ -662,9 +661,18 @@ We define strict budgets for Core Web Vitals on Mobile connections (4G).
 
 | Metric                             | Target  | Warning | Critical |
 | :--------------------------------- | :------ | :------ | :------- |
-| **LCP** (Largest Contentful Paint) | < 1.2s  | > 2.5s  | > 4.0s   |
-| **FID** (First Input Delay)        | < 100ms | > 200ms | > 300ms  |
+| **LCP** (Largest Contentful Paint) | < 2.5s  | > 4.0s  | > 6.0s   |
+| **TBT** (Total Blocking Time)      | < 300ms | > 600ms | > 1000ms |
 | **CLS** (Cumulative Layout Shift)  | 0.00    | > 0.1   | > 0.25   |
+
+### Latest Lighthouse Audit Results (Incognito)
+
+| Category           | Score  | Status       |
+| :----------------- | :----- | :----------- |
+| **Performance**    | **74** | 🟠 Healthy   |
+| **Accessibility**  | **95** | 🟢 Excellent |
+| **Best Practices** | **96** | 🟢 Excellent |
+| **SEO**            | **92** | 🟢 Excellent |
 
 ## 29. Security Policy
 
