@@ -152,14 +152,10 @@ export default async function RootLayout({
           <ClientOnly>
             <ThemeApplier />
             <SpiritGate initialEvents={activeEvents} />
-          </ClientOnly>
-          <ClientOnly>
             <Analytics />
-          </ClientOnly>
-          {children}
-          <ClientOnly>
             <GlobalPanels />
           </ClientOnly>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

@@ -31,7 +31,7 @@ export const GeometricPattern: React.FC<GeometricPatternProps> = ({
             ctx.globalAlpha = opacity;
             ctx.lineWidth = 1;
 
-            const size = 100;
+            const size = 150;
             const rows = Math.ceil(height / size) + 1;
             const cols = Math.ceil(width / size) + 1;
 
@@ -40,25 +40,13 @@ export const GeometricPattern: React.FC<GeometricPatternProps> = ({
                     const x = j * size;
                     const y = i * size;
 
-                    // Draw a simple octagonal pattern
+                    // Simplified geometric shape (Diamond) to reduce draw calls
                     ctx.beginPath();
-                    ctx.moveTo(x + size / 2, y);
-                    ctx.lineTo(x + (size * 3) / 4, y + size / 4);
-                    ctx.lineTo(x + size, y + size / 2);
-                    ctx.lineTo(x + (size * 3) / 4, y + (size * 3) / 4);
-                    ctx.lineTo(x + size / 2, y + size);
-                    ctx.lineTo(x + size / 4, y + (size * 3) / 4);
-                    ctx.lineTo(x, y + size / 2);
-                    ctx.lineTo(x + size / 4, y + size / 4);
+                    ctx.moveTo(x + size / 2, y + size / 4);
+                    ctx.lineTo(x + (size * 3) / 4, y + size / 2);
+                    ctx.lineTo(x + size / 2, y + (size * 3) / 4);
+                    ctx.lineTo(x + size / 4, y + size / 2);
                     ctx.closePath();
-                    ctx.stroke();
-
-                    // Inner cross
-                    ctx.beginPath();
-                    ctx.moveTo(x + size / 2, y);
-                    ctx.lineTo(x + size / 2, y + size);
-                    ctx.moveTo(x, y + size / 2);
-                    ctx.lineTo(x + size, y + size / 2);
                     ctx.stroke();
                 }
             }

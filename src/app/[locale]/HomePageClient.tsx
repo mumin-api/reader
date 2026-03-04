@@ -22,7 +22,7 @@ const GeometricPattern = dynamic(() => import('@/components/GeometricPattern').t
 const FloatingOrb = ({ size, x, y, color, delay = 0, isMobile = false }: { size: number; x: string; y: string; color: string; delay?: number; isMobile?: boolean }) => (
     <motion.div
         className={cn("absolute rounded-full pointer-events-none", isMobile ? "hidden md:block" : "block")}
-        style={{ width: size, height: size, left: x, top: y, background: color, filter: 'blur(80px)', opacity: 0.1, willChange: 'transform' }}
+        style={{ width: size, height: size, left: x, top: y, background: color, filter: 'blur(30px)', opacity: 0.08, willChange: 'transform' }}
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 10 + delay, repeat: Infinity, ease: 'linear', delay }}
     />
@@ -80,10 +80,10 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                             {ramadanEvent ? t('ramadan_mubarak') : t('daily_inspiration')}
                         </motion.div>
 
-                        {/* Main headline - Simplified animation for LCP */}
+                        {/* Main headline - Instant visibility for LCP, only animate position */}
                         <motion.h1
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            initial={{ y: 15 }}
+                            animate={{ y: 0 }}
                             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                             className="text-6xl md:text-8xl font-display font-bold leading-[1.05] mb-8 tracking-tight"
                         >

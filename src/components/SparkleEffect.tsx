@@ -8,13 +8,13 @@ export const SparkleEffect = () => {
 
   useEffect(() => {
     // Reduced particle count for better performance
-    const newParticles = Array.from({ length: 15 }).map((_, i) => ({
+    const newParticles = Array.from({ length: 8 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 3 + 1, // Slightly smaller
-      duration: Math.random() * 4 + 3, // Slower for less "jitter"
-      delay: Math.random() * 10,
+      size: Math.random() * 2 + 1,
+      duration: Math.random() * 3 + 4,
+      delay: Math.random() * 5,
     }));
     setParticles(newParticles);
   }, []);
