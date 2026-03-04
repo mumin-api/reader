@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Navbar } from '@/components/Navbar';
-import { GeometricPattern } from '@/components/GeometricPattern';
 import { HadithCard } from '@/components/HadithCard';
 import { CollectionCard } from '@/components/CollectionCard';
 import { Hadith } from '@/lib/api/client';
@@ -14,15 +13,18 @@ import {
 import { Link } from '@/lib/navigation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { RamadanAtmosphere } from '@/components/RamadanAtmosphere';
+import dynamic from 'next/dynamic';
+import { cn } from '@/lib/utils';
 
-// ─── Floating Orb ─────────────────────────────────────────────────────────────
-const FloatingOrb = ({ size, x, y, color, delay = 0 }: { size: number; x: string; y: string; color: string; delay?: number }) => (
+const RamadanAtmosphere = dynamic(() => import('@/components/RamadanAtmosphere').then(mod => mod.RamadanAtmosphere), { ssr: false });
+const GeometricPattern = dynamic(() => import('@/components/GeometricPattern').then(mod => mod.GeometricPattern), { ssr: false });
+
+const FloatingOrb = ({ size, x, y, color, delay = 0, isMobile = false }: { size: number; x: string; y: string; color: string; delay?: number; isMobile?: boolean }) => (
     <motion.div
-        className="absolute rounded-full pointer-events-none"
-        style={{ width: size, height: size, left: x, top: y, background: color, filter: 'blur(80px)', opacity: 0.15, willChange: 'transform' }}
-        animate={{ y: [0, -30, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 8 + delay, repeat: Infinity, ease: 'easeInOut', delay }}
+        className={cn("absolute rounded-full pointer-events-none", isMobile ? "hidden md:block" : "block")}
+        style={{ width: size, height: size, left: x, top: y, background: color, filter: 'blur(80px)', opacity: 0.1, willChange: 'transform' }}
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 10 + delay, repeat: Infinity, ease: 'linear', delay }}
     />
 );
 
@@ -59,10 +61,10 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
             <section className="relative min-h-screen flex flex-col justify-center pt-20 pb-16 px-4 overflow-hidden">
                 {ramadanEvent && <RamadanAtmosphere />}
 
-                {/* Floating background orbs */}
+                {/* Floating background orbs - reduced for performance */}
                 <FloatingOrb size={600} x="-10%" y="-5%" color="radial-gradient(circle, #059669, transparent)" delay={0} />
-                <FloatingOrb size={400} x="70%" y="10%" color="radial-gradient(circle, #d4af37, transparent)" delay={2} />
-                <FloatingOrb size={300} x="20%" y="60%" color="radial-gradient(circle, #0369a1, transparent)" delay={4} />
+                <FloatingOrb size={400} x="70%" y="10%" color="radial-gradient(circle, #d4af37, transparent)" delay={2} isMobile />
+                <FloatingOrb size={300} x="20%" y="60%" color="radial-gradient(circle, #0369a1, transparent)" delay={4} isMobile />
 
                 <motion.div className="max-w-7xl mx-auto relative z-10 w-full">
                     <div className="text-center mb-16">
@@ -78,11 +80,11 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                             {ramadanEvent ? t('ramadan_mubarak') : t('daily_inspiration')}
                         </motion.div>
 
-                        {/* Main headline */}
+                        {/* Main headline - Simplified animation for LCP */}
                         <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1, type: 'spring', stiffness: 100 }}
+                            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                             className="text-6xl md:text-8xl font-display font-bold leading-[1.05] mb-8 tracking-tight"
                         >
                             {ramadanEvent ? (
@@ -107,22 +109,22 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                             الحديث النبوي الشريف
                         </motion.p>
 
-                        {/* Subtitle */}
+                        {/* Subtitle - faster delay */}
                         <motion.p
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
+                            transition={{ delay: 0.15, duration: 0.5 }}
                             className="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
                             style={{ color: 'var(--muted-text)' }}
                         >
                             {ramadanEvent ? t('ramadan_hero_subtitle') : t('hero_subtitle')}
                         </motion.p>
 
-                        {/* CTA Buttons & Search */}
+                        {/* CTA Buttons & Search - faster delay */}
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
+                            transition={{ delay: 0.2, duration: 0.5 }}
                             className="max-w-2xl mx-auto mb-16"
                         >
                             <form action={`/${locale}/search`} className="relative group mb-8">
