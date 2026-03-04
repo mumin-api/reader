@@ -50,7 +50,9 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
                         : []
                 );
             } catch (error) {
-                console.error('Suggestions error:', error);
+                if (process.env.NODE_ENV === 'development') {
+                    console.error('Suggestions error:', error);
+                }
             } finally {
                 setIsLoading(false);
             }

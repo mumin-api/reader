@@ -110,7 +110,9 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                 setShowCopyToast(true);
                 setTimeout(() => setShowCopyToast(false), 2000);
             } catch (e) {
-                console.error('Failed to copy', e);
+                if (process.env.NODE_ENV === 'development') {
+                    console.error('Failed to copy', e);
+                }
             }
             document.body.removeChild(textArea);
         }
@@ -126,8 +128,9 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                     url: url
                 });
             } catch (err) {
-                // User cancelled or error occurred
-                console.log('Share cancelled');
+                if (process.env.NODE_ENV === 'development') {
+                    console.log('Share cancelled');
+                }
             }
         } else {
             // Fallback: copy link to clipboard
@@ -162,7 +165,9 @@ export const HadithCard: React.FC<HadithCardProps> = ({
             const result = await hadithApi.getExplanation(hadith.id, locale);
             setExplanation(result);
         } catch (error) {
-            console.error('Failed to fetch explanation:', error);
+            if (process.env.NODE_ENV === 'development') {
+                console.error('Failed to fetch explanation:', error);
+            }
         } finally {
             setIsLoadingExplanation(false);
         }
@@ -177,7 +182,9 @@ export const HadithCard: React.FC<HadithCardProps> = ({
             setReportMessage('');
             // Optional: show success toast
         } catch (error) {
-            console.error('Failed to report error:', error);
+            if (process.env.NODE_ENV === 'development') {
+                console.error('Failed to report error:', error);
+            }
         } finally {
             setIsReporting(false);
         }

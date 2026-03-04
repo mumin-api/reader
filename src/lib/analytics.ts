@@ -1,8 +1,5 @@
-export const trackEvent = (goal: string, params?: any) => {
-    if (typeof window !== 'undefined' && (window as any).ym) {
-        const METRICA_ID = process.env.NEXT_PUBLIC_YANDEX_METRICA || '99602444';
-        (window as any).ym(METRICA_ID, 'reachGoal', goal, params);
-    }
+export const trackEvent = (goal: string, _params?: any) => {
+    // Relying on Vercel Analytics automatically tracking events if needed
 };
 
 export const SEO_GOALS = {

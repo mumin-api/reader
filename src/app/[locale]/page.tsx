@@ -35,7 +35,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     }
     initialEvents = Array.isArray(events) ? events : [];
   } catch (err) {
-    console.error('Failed to load home page data on server', err);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Failed to load home page data on server', err);
+    }
   }
 
   return (
