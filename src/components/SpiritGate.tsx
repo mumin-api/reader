@@ -5,23 +5,8 @@ import { hadithApi } from '@/lib/api/client';
 import { SparkleEffect } from './SparkleEffect';
 import { SpiritGreeting } from './SpiritGreeting';
 
-export const SpiritGate = () => {
-    const [activeEvents, setActiveEvents] = useState<any[]>([]);
-
-    useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const events = await hadithApi.getActiveEvents();
-                if (Array.isArray(events)) {
-                    setActiveEvents(events);
-                }
-            } catch (err) {
-                // Silently fail to not break the app if API is down
-                console.warn('Events system unavailable');
-            }
-        };
-        fetchEvents();
-    }, []);
+export const SpiritGate = ({ initialEvents = [] }: { initialEvents?: any[] }) => {
+    const [activeEvents] = useState<any[]>(initialEvents);
 
     const ramadanEvent = activeEvents.find(e => e.slug === 'ramadan');
 

@@ -42,6 +42,11 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
     const [featuredCollections] = useState<any[]>(initialFeaturedCollections);
     const [activeEvents] = useState<any[]>(initialEvents);
     const { scrollY } = useScroll();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const ramadanEvent = activeEvents.find(e => e.slug === 'ramadan');
 
@@ -193,10 +198,10 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                         </div>
                         <div className="text-right">
                             <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--muted-text)' }}>
-                                {new Date().toLocaleDateString(locale, { weekday: 'long' })}
+                                {mounted ? new Date().toLocaleDateString(locale, { weekday: 'long' }) : '...'}
                             </p>
                             <p className="text-sm font-medium" style={{ color: 'var(--muted-text)' }}>
-                                {new Date().toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' })}
+                                {mounted ? new Date().toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' }) : '...'}
                             </p>
                         </div>
                     </motion.div>
@@ -238,7 +243,13 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                     <div className="col-span-1 md:col-span-2">
                         <Link href="/" className="flex items-center gap-3 mb-6 transition-transform hover:scale-105 w-fit">
                             <div className="relative w-10 h-10">
-                                <Image src="/icons/logo.svg" alt="Mumin Logo" fill className="object-contain" />
+                                <Image 
+                                    src="/icons/logo.svg" 
+                                    alt="Mumin Logo" 
+                                    fill 
+                                    sizes="40px"
+                                    className="object-contain" 
+                                />
                             </div>
                             <span className="text-xl font-display font-bold" style={{ color: 'var(--page-text)' }}>Mumin Hadith</span>
                         </Link>

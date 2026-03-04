@@ -111,6 +111,7 @@ import { ThemeApplier } from '@/components/ThemeApplier';
 import { Analytics } from '@/components/Analytics';
 import { ClientOnly } from '@/components/ClientOnly';
 import { SpiritGate } from '@/components/SpiritGate';
+import { hadithApi } from '@/lib/api/client';
 
 export default async function RootLayout({
   children,
@@ -128,6 +129,7 @@ export default async function RootLayout({
   setRequestLocale(locale);
 
   const messages = await getMessages({ locale });
+  const activeEvents = await hadithApi.getActiveEvents().catch(() => []);
 
   return (
     <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
@@ -149,7 +151,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ClientOnly>
             <ThemeApplier />
-            <SpiritGate />
+            <SpiritGate initialEvents={activeEvents} />
           </ClientOnly>
           <ClientOnly>
             <Analytics />
