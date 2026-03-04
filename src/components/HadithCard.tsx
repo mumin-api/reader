@@ -232,6 +232,8 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                             "p-2.5 rounded-full transition-all duration-300",
                             bookmarked ? "text-gold-500 bg-gold-500/10" : "opacity-30 hover:opacity-100 hover:bg-emerald-600/5"
                         )}
+                        aria-label={bookmarked ? t('remove_bookmark') : t('bookmark')}
+                        title={bookmarked ? t('remove_bookmark') : t('bookmark')}
                     >
                         <Heart className={cn("w-5 h-5", bookmarked && "fill-current scale-110")} />
                     </button>
@@ -239,6 +241,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                         onClick={copyToClipboard}
                         className="p-2.5 rounded-full opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
                         title={t('copy')}
+                        aria-label={t('copy')}
                     >
                         <Copy className="w-5 h-5" />
                     </button>
@@ -246,6 +249,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                         onClick={handleShare}
                         className="p-2.5 rounded-full opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
                         title={t('share')}
+                        aria-label={t('share')}
                     >
                         <Share2 className="w-5 h-5" />
                     </button>
@@ -483,6 +487,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                     <button
                         onClick={() => setShowIsnad(!showIsnad)}
                         className="flex items-center gap-2 text-xs font-bold opacity-40 hover:opacity-100 transition-opacity uppercase tracking-widest"
+                        aria-label={showIsnad ? t('hide_isnad') : t('isnad')}
                     >
                         <Info className="w-4 h-4" />
                         {showIsnad ? t('hide_isnad') : t('isnad')}

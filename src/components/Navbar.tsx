@@ -113,6 +113,7 @@ export const Navbar: React.FC = () => {
                         className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-600/5 rounded-full transition-colors relative"
                         style={{ color: 'var(--page-text)' }}
                         title={t('bookmarks')}
+                        aria-label={t('bookmarks')}
                     >
                         <Bookmark className="w-5 h-5" />
                     </Link>
@@ -122,6 +123,7 @@ export const Navbar: React.FC = () => {
                         className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-900/5 rounded-full transition-colors"
                         style={{ color: 'var(--page-text)' }}
                         title={t('language')}
+                        aria-label={t('language')}
                     >
                         <Globe className="w-5 h-5" />
                     </button>
@@ -131,6 +133,7 @@ export const Navbar: React.FC = () => {
                         className="p-2 opacity-60 hover:opacity-100 hover:bg-emerald-600/5 rounded-full transition-colors"
                         style={{ color: 'var(--page-text)' }}
                         title={t('settings')}
+                        aria-label={t('settings')}
                     >
                         <Settings className="w-5 h-5" />
                     </button>
@@ -140,6 +143,7 @@ export const Navbar: React.FC = () => {
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         className="p-2 lg:hidden rounded-full transition-colors"
                         style={{ color: 'var(--page-text)' }}
+                        aria-label={isMobileMenuOpen ? 'Close Menu' : 'Open Menu'}
                     >
                         {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>

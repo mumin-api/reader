@@ -1,7 +1,4 @@
-'use client';
-
-import React from 'react';
-import { Inter, Playfair_Display, Amiri, Cairo, Poppins } from 'next/font/google';
+import { Inter, Playfair_Display, Amiri, Cairo } from 'next/font/google';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { motion } from 'framer-motion';
 import { Search, Home, ArrowLeft } from 'lucide-react';
@@ -12,28 +9,26 @@ import './[locale]/globals.css';
 const inter = Inter({
     subsets: ['latin'],
     variable: '--font-inter',
+    display: 'swap',
 });
 
 const playfair = Playfair_Display({
     subsets: ['latin'],
     variable: '--font-playfair',
+    display: 'swap',
 });
 
 const amiri = Amiri({
     subsets: ['arabic'],
     weight: ['400', '700'],
     variable: '--font-amiri',
+    display: 'swap',
 });
 
 const cairo = Cairo({
     subsets: ['arabic'],
     variable: '--font-cairo',
-});
-
-const poppins = Poppins({
-    subsets: ['latin'],
-    weight: ['300', '400', '500', '600', '700'],
-    variable: '--font-poppins',
+    display: 'swap',
 });
 
 export default function RootNotFound() {
@@ -44,8 +39,7 @@ export default function RootNotFound() {
                 inter.variable,
                 playfair.variable,
                 amiri.variable,
-                cairo.variable,
-                poppins.variable
+                cairo.variable
             )}>
                 <main className="min-h-screen relative flex items-center justify-center p-4 bg-gradient-to-br from-emerald-50 to-gold-50">
                     <GeometricPattern opacity={0.03} />

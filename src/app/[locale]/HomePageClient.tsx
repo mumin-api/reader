@@ -20,7 +20,7 @@ import { RamadanAtmosphere } from '@/components/RamadanAtmosphere';
 const FloatingOrb = ({ size, x, y, color, delay = 0 }: { size: number; x: string; y: string; color: string; delay?: number }) => (
     <motion.div
         className="absolute rounded-full pointer-events-none"
-        style={{ width: size, height: size, left: x, top: y, background: color, filter: 'blur(80px)', opacity: 0.15 }}
+        style={{ width: size, height: size, left: x, top: y, background: color, filter: 'blur(80px)', opacity: 0.15, willChange: 'transform' }}
         animate={{ y: [0, -30, 0], scale: [1, 1.1, 1] }}
         transition={{ duration: 8 + delay, repeat: Infinity, ease: 'easeInOut', delay }}
     />
@@ -126,6 +126,7 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                                     name="q"
                                     type="text"
                                     placeholder={tNav('search_results')}
+                                    aria-label={tNav('search_results')}
                                     className="w-full pl-14 pr-6 py-5 rounded-2xl border text-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
                                     style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border-color)', color: 'var(--page-text)' }}
                                 />
@@ -167,6 +168,8 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                     transition={{ delay: 1 }}
                     className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
                     style={{ color: 'var(--muted-text)' }}
+                    role="img"
+                    aria-label="Scroll indicator"
                 >
                     <span className="text-xs font-bold uppercase tracking-widest">Scroll</span>
                     <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>

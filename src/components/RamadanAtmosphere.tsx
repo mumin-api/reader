@@ -17,6 +17,7 @@ const Lantern = ({ className, delay = 0 }: { className?: string; delay?: number 
             delay 
         }}
         className={className}
+        style={{ willChange: 'transform' }}
     >
         <div className="relative">
             {/* The string */}
@@ -51,7 +52,7 @@ const TwinklingStar = ({ top, left, delay, size = 1 }: { top: string; left: stri
             ease: "easeInOut",
             delay 
         }}
-        style={{ top, left }}
+        style={{ top, left, willChange: 'transform, opacity' }}
         className="absolute pointer-events-none"
     >
         <Star className="text-gold-200 fill-current" size={size === 1 ? 4 : 8} />
@@ -61,12 +62,16 @@ const TwinklingStar = ({ top, left, delay, size = 1 }: { top: string; left: stri
 export const RamadanAtmosphere = () => {
     return (
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
-            {/* Twinkling Star Field */}
+            {/* Twinkling Star Field - Reduced on mobile */}
             <TwinklingStar top="10%" left="15%" delay={0.2} size={1} />
-            <TwinklingStar top="25%" left="45%" delay={1.2} size={2} />
-            <TwinklingStar top="15%" left="75%" delay={0.5} size={1} />
+            <div className="hidden sm:block">
+                <TwinklingStar top="25%" left="45%" delay={1.2} size={2} />
+                <TwinklingStar top="15%" left="75%" delay={0.5} size={1} />
+            </div>
             <TwinklingStar top="40%" left="85%" delay={2.1} size={1} />
-            <TwinklingStar top="60%" left="10%" delay={1.5} size={2} />
+            <div className="hidden md:block">
+                <TwinklingStar top="60%" left="10%" delay={1.5} size={2} />
+            </div>
             <TwinklingStar top="80%" left="50%" delay={0.8} size={1} />
             <TwinklingStar top="15%" left="30%" delay={3.2} size={1} />
 

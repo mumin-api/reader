@@ -1,33 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, Amiri, Cairo, Poppins } from "next/font/google";
+import { Inter, Playfair_Display, Amiri, Cairo } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: 'swap',
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: 'swap',
 });
 
 const amiri = Amiri({
   subsets: ["arabic"],
   weight: ["400", "700"],
   variable: "--font-amiri",
+  display: 'swap',
 });
 
 const cairo = Cairo({
   subsets: ["arabic"],
   variable: "--font-cairo",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
+  display: 'swap',
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
@@ -99,8 +97,8 @@ export const viewport: Viewport = {
   themeColor: "#064e3b",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 import { StructuredData, generateSearchSchema } from "@/components/StructuredData";
@@ -145,8 +143,7 @@ export default async function RootLayout({
           inter.variable,
           playfair.variable,
           amiri.variable,
-          cairo.variable,
-          poppins.variable
+          cairo.variable
         )}
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
