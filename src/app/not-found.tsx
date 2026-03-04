@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Inter, Playfair_Display, Amiri, Cairo } from 'next/font/google';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { motion } from 'framer-motion';
 import { Search, Home, ArrowLeft } from 'lucide-react';
