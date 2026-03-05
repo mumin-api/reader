@@ -51,14 +51,14 @@
         "explore": "Explore",
         "page_info": "Page {page} of {total}",
         "stats": {
-            "hadiths": "50k+",
+            "hadiths": "40k+",
             "hadiths_label": "Hadiths",
-            "collections": "8",
+            "collections": "10",
             "collections_label": "Collections",
-            "languages": "12+",
-            "languages_label": "Languages",
+            "languages": "2",
+            "languages_label": "Global Languages",
             "authentic": "100%",
-            "authentic_label": "Authentic"
+            "authentic_label": "AI Guided"
         }
     },
     "Hadith": {

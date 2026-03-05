@@ -51,14 +51,14 @@
         "explore": "Исследовать",
         "page_info": "Страница {page} из {total}",
         "stats": {
-            "hadiths": "50к+",
+            "hadiths": "40к+",
             "hadiths_label": "Хадисов",
-            "collections": "8",
+            "collections": "10",
             "collections_label": "Коллекций",
-            "languages": "12+",
-            "languages_label": "Языков",
+            "languages": "2",
+            "languages_label": "Языва (и ИИ)",
             "authentic": "100%",
-            "authentic_label": "Достоверность"
+            "authentic_label": "ИИ Сопровождение"
         }
     },
     "Hadith": {

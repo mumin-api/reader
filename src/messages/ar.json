@@ -51,14 +51,14 @@
         "explore": "استكشف",
         "page_info": "صفحة {page} من {total}",
         "stats": {
-            "hadiths": "50 ألف+",
+            "hadiths": "40 ألف+",
             "hadiths_label": "حديث",
-            "collections": "8",
+            "collections": "10",
             "collections_label": "مجموعة",
-            "languages": "12+",
-            "languages_label": "لغة",
+            "languages": "2",
+            "languages_label": "لغات عالمية",
             "authentic": "100%",
-            "authentic_label": "موثوقة"
+            "authentic_label": "بإرشاد ذكي"
         }
     },
     "Hadith": {

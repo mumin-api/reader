@@ -51,14 +51,14 @@
         "explore": "دریافت کریں",
         "page_info": "صفحہ {page} کا {total}",
         "stats": {
-            "hadiths": "50 ہزار+",
+            "hadiths": "40 ہزار+",
             "hadiths_label": "احادیث",
-            "collections": "8",
+            "collections": "10",
             "collections_label": "مجموعے",
-            "languages": "12+",
-            "languages_label": "زبانیں",
+            "languages": "2",
+            "languages_label": "عالمی زبانیں",
             "authentic": "100%",
-            "authentic_label": "مستند"
+            "authentic_label": "AI کی رہنمائی"
         }
     },
     "Hadith": {

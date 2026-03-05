@@ -51,14 +51,14 @@
         "explore": "O'rganish",
         "page_info": "{page}-sahifa, jami {total}",
         "stats": {
-            "hadiths": "50ming+",
+            "hadiths": "40ming+",
             "hadiths_label": "Hadislar",
-            "collections": "8",
+            "collections": "10",
             "collections_label": "To'plamlar",
-            "languages": "12+",
-            "languages_label": "Tillar",
+            "languages": "2",
+            "languages_label": "Global Tillar",
             "authentic": "100%",
-            "authentic_label": "Ishonchli"
+            "authentic_label": "AI Ko'rsatmasi"
         }
     },
     "Hadith": {

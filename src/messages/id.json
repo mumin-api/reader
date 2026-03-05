@@ -51,14 +51,14 @@
         "explore": "Jelajahi",
         "page_info": "Halaman {page} dari {total}",
         "stats": {
-            "hadiths": "50rb+",
+            "hadiths": "40rb+",
             "hadiths_label": "Hadis",
-            "collections": "8",
+            "collections": "10",
             "collections_label": "Koleksi",
-            "languages": "12+",
-            "languages_label": "Bahasa",
+            "languages": "2",
+            "languages_label": "Bahasa Global",
             "authentic": "100%",
-            "authentic_label": "Shahih"
+            "authentic_label": "Panduan AI"
         }
     },
     "Hadith": {

@@ -51,14 +51,14 @@
         "explore": "Keşfet",
         "page_info": "Sayfa {page} / {total}",
         "stats": {
-            "hadiths": "50bin+",
+            "hadiths": "40bin+",
             "hadiths_label": "Hadis",
-            "collections": "8",
+            "collections": "10",
             "collections_label": "Koleksiyon",
-            "languages": "12+",
-            "languages_label": "Dil",
-            "authentic": "%100",
-            "authentic_label": "Sahih"
+            "languages": "2",
+            "languages_label": "Küresel Dil",
+            "authentic": "100%",
+            "authentic_label": "AI Destekli"
         }
     },
     "Hadith": {
