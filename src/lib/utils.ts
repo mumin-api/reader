@@ -21,29 +21,49 @@ export function truncate(text: string, length: number): string {
 export function getCollectionSlug(name: string): string {
     if (!name) return '';
 
+    // Short slugs that are already correct — pass through
+    const shortSlugs = new Set(['bukhari', 'muslim', 'tirmidhi', 'abudawud', 'nasai', 'ibnmajah', 'malik', 'shamail', 'riyadh', 'adab']);
+    if (shortSlugs.has(name.toLowerCase())) return name.toLowerCase();
+
     const mapping: Record<string, string> = {
-        'Sahih al-Bukhari': 'sahih-bukhari',
-        'Sahih al Bukhari': 'sahih-bukhari',
-        'Sahih Bukhari': 'sahih-bukhari',
-        'Sahih al-Muslim': 'sahih-muslim',
-        'Sahih Muslim': 'sahih-muslim',
-        'Sunan Abi Dawud': 'sunan-abu-dawud',
-        'Sunan Abu Dawood': 'sunan-abu-dawud',
-        'Jami` at-Tirmidhi': 'jami-at-tirmidhi',
-        'Jami at-Tirmidhi': 'jami-at-tirmidhi',
-        'Sunan an-Nasa\'i': 'sunan-an-nasai',
-        'Sunan an-Nasai': 'sunan-an-nasai',
-        'Sunan Ibn Majah': 'sunan-ibn-majah',
-        'Muwatta Malik': 'muwatta-malik',
-        'Musnad Ahmad bin Hanbal': 'musnad-ahmad',
+        // Bukhari
+        'Sahih al-Bukhari': 'bukhari',
+        'Sahih al Bukhari': 'bukhari',
+        'Sahih Bukhari': 'bukhari',
+        'sahih-bukhari': 'bukhari',
+        // Muslim
+        'Sahih al-Muslim': 'muslim',
+        'Sahih Muslim': 'muslim',
+        'sahih-muslim': 'muslim',
+        // Abu Dawud
+        'Sunan Abi Dawud': 'abudawud',
+        'Sunan Abu Dawood': 'abudawud',
+        'sunan-abu-dawud': 'abudawud',
+        // Tirmidhi
+        'Jami` at-Tirmidhi': 'tirmidhi',
+        'Jami at-Tirmidhi': 'tirmidhi',
+        'jami-at-tirmidhi': 'tirmidhi',
+        // Nasai
+        "Sunan an-Nasa'i": 'nasai',
+        'Sunan an-Nasai': 'nasai',
+        'sunan-an-nasai': 'nasai',
+        // Ibn Majah
+        'Sunan Ibn Majah': 'ibnmajah',
+        'sunan-ibn-majah': 'ibnmajah',
+        // Malik
+        'Muwatta Malik': 'malik',
+        'muwatta-malik': 'malik',
+        // Riyadh as-Saliheen
+        'Riyadh as-Saliheen': 'riyadh',
+        'Riyad as-Saliheen': 'riyadh',
+        'saliheen': 'riyadh',
     };
 
     if (mapping[name]) return mapping[name];
 
-    // Fallback: standard slugify
+    // Fallback: slugify
     return name
         .toLowerCase()
-        .replace(/al-/g, '') // remove al- prefix if not in mapping
         .replace(/[`']/g, '')
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
