@@ -103,20 +103,30 @@ export default function SearchResultsPage() {
                 let accumulated: Hadith[] = [];
                 
                 eventSource.onmessage = (event) => {
-                    const hadith = JSON.parse(event.data);
-                    accumulated = [...accumulated, hadith];
-                    setResults({
-                        data: accumulated,
-                        pagination: {
-                            page: 1,
-                            limit: 50,
-                            total: accumulated.length, // Update dynamically
-                            totalPages: 1,
-                            hasNext: false,
-                            hasPrev: false
-                        }
-                    });
-                    setLoading(false); // Show first results as soon as they arrive
+                    if (event.data === '[DONE]') {
+                        eventSource.close();
+                        setLoading(false);
+                        return;
+                    }
+
+                    try {
+                        const hadith = JSON.parse(event.data);
+                        accumulated = [...accumulated, hadith];
+                        setResults({
+                            data: accumulated,
+                            pagination: {
+                                page: 1,
+                                limit: 50,
+                                total: accumulated.length,
+                                totalPages: 1,
+                                hasNext: false,
+                                hasPrev: false
+                            }
+                        });
+                        setLoading(false);
+                    } catch (e) {
+                        console.error('Failed to parse search message', e);
+                    }
                 };
 
                 eventSource.onerror = (err) => {
