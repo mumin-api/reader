@@ -152,6 +152,32 @@ export const hadithApi = {
         return response.data.data || response.data;
     },
 
+    streamExplanation: (id: number, language: string = 'ru') => {
+        const config = {
+            headers: {
+                'X-API-Key': process.env.NEXT_PUBLIC_API_KEY || '',
+            }
+        };
+        const url = `${API_URL}/hadiths/${id}/explain-stream?language=${language}`;
+        return new EventSource(url);
+    },
+
+    semanticSearch: async (params: { q: string; language?: string; limit?: number }) => {
+        const response = await apiClient.get<any>('/hadiths/semantic-search', { params });
+        return response.data.data || response.data;
+    },
+
+    streamSearch: (params: { q: string; language?: string; collection?: string; grade?: string }) => {
+        const queryParams = new URLSearchParams({
+            q: params.q,
+            language: params.language || 'ru',
+            ...(params.collection && { collection: params.collection }),
+            ...(params.grade && { grade: params.grade }),
+        });
+        const url = `${API_URL}/hadiths/search-stream?${queryParams.toString()}`;
+        return new EventSource(url);
+    },
+
     reportExplanation: async (id: number, message: string) => {
         const response = await apiClient.get<any>(`/hadiths/${id}/explain/report`, { params: { message } });
         return response.data.data || response.data;

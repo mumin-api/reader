@@ -58,42 +58,86 @@ export default function SearchResultsPage() {
         async function performSearch() {
             if (!query) return;
 
+            const isSemantic = searchParams.get('semantic') === 'true';
             setLoading(true);
             setError(null);
             setDidYouMean(null);
+            setResults(null);
 
+            if (isSemantic) {
+                try {
+                    const data = await hadithApi.semanticSearch({
+                        q: query,
+                        language: locale,
+                        limit: 30
+                    });
+                    setResults({
+                        data: data,
+                        pagination: {
+                            page: 1,
+                            limit: 30,
+                            total: data.length,
+                            totalPages: 1,
+                            hasNext: false,
+                            hasPrev: false
+                        }
+                    });
+                } catch (err) {
+                    console.error('Semantic search failed', err);
+                    setError(t('error_desc'));
+                } finally {
+                    setLoading(false);
+                }
+                return;
+            }
+
+            // Progressive Streaming Search
             try {
-                const data = await hadithApi.searchHadiths({
+                const eventSource = hadithApi.streamSearch({
                     q: query,
-                    page,
-                    limit: 20,
                     language: locale,
                     collection: activeFilters.collection,
                     grade: activeFilters.grade
                 });
-                setResults(data);
 
-                // If no results — fetch suggestions for "Did you mean?"
-                if (data.data.length === 0) {
-                    try {
-                        const suggestions = await hadithApi.getSuggestions({ q: query, language: locale });
-                        if (suggestions && suggestions.length > 0) {
-                            setDidYouMean(suggestions[0].name);
+                let accumulated: Hadith[] = [];
+                
+                eventSource.onmessage = (event) => {
+                    const hadith = JSON.parse(event.data);
+                    accumulated = [...accumulated, hadith];
+                    setResults({
+                        data: accumulated,
+                        pagination: {
+                            page: 1,
+                            limit: 50,
+                            total: accumulated.length, // Update dynamically
+                            totalPages: 1,
+                            hasNext: false,
+                            hasPrev: false
                         }
-                    } catch {
-                        // Suggestions are optional, don't block the UI
+                    });
+                    setLoading(false); // Show first results as soon as they arrive
+                };
+
+                eventSource.onerror = (err) => {
+                    console.error('SSE Error:', err);
+                    eventSource.close();
+                    if (accumulated.length === 0) {
+                        setError(t('error_desc'));
                     }
-                }
+                    setLoading(false);
+                };
+
+                return () => eventSource.close();
             } catch (err) {
-                console.error('Search failed', err);
+                console.error('Streaming search failed', err);
                 setError(t('error_desc'));
-            } finally {
                 setLoading(false);
             }
         }
 
         performSearch();
-    }, [query, locale, page, activeFilters]);
+    }, [query, locale, page, activeFilters, searchParams]);
 
     const tHadith = useTranslations('Hadith');
 

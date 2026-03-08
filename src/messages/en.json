@@ -35,7 +35,8 @@
         "search_for": "Search for",
         "search_results": "Search Results",
         "did_you_mean": "Did you mean?",
-        "suggestions": "Suggestions"
+        "suggestions": "Suggestions",
+        "semantic_search": "Semantic Search"
     },
     "Collections": {
         "title": "Hadith Collections",
@@ -177,7 +178,8 @@
         "did_you_mean": "Did you mean:",
         "clear_search": "Clear Search",
         "error": "Search Error",
-        "error_desc": "Failed to fetch search results. Please try again."
+        "error_desc": "Failed to fetch search results. Please try again.",
+        "semantic_search_desc": "Use AI to find hadiths by meaning, even if the exact words don't match."
     },
     "Developers": {
         "title": "Developers & Ecosystem",

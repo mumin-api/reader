@@ -61,7 +61,7 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
         return () => clearTimeout(handler);
     }, [query, locale]);
 
-    const handleSearch = (searchQuery: string) => {
+    const handleSearch = (searchQuery: string, isSemantic: boolean = false) => {
         const q = searchQuery.trim();
         if (!q) return;
 
@@ -70,7 +70,7 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
         setHistory(newHistory.slice(0, 5));
         localStorage.setItem('mumin_search_history', JSON.stringify(newHistory));
 
-        router.push(`/search?q=${encodeURIComponent(q)}`);
+        router.push(`/search?q=${encodeURIComponent(q)}${isSemantic ? '&semantic=true' : ''}`);
         setIsFocused(false);
         setSuggestions([]);
     };
@@ -261,12 +261,34 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
                             </div>
                         )}
 
+                        {/* Semantic Search Toggle */}
+                        {query && (
+                            <div className="p-2 border-b border-emerald-500/10">
+                                <button
+                                    onClick={() => handleSearch(query, true)}
+                                    className="flex items-center gap-3 w-full px-3 py-3 hover:bg-emerald-500/10 rounded-xl transition-all duration-200 text-left group border border-dashed border-emerald-500/20"
+                                >
+                                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
+                                        <Sparkles className="w-4 h-4 text-emerald-500 animate-pulse" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                                            {t('semantic_search') || 'Semantic Search'}
+                                        </span>
+                                        <span className="text-[10px] opacity-50 leading-tight">
+                                            {t('semantic_search_desc') || 'Search by meaning using AI'}
+                                        </span>
+                                    </div>
+                                </button>
+                            </div>
+                        )}
+
                         {/* Default Search Action */}
                         {query && suggestions.length === 0 && !isLoading && (
                             <div className="p-2">
                                 <button
                                     onClick={() => handleSearch(query)}
-                                    className="flex items-center gap-3 w-full px-3 py-4 hover:bg-emerald-500/10 rounded-xl transition-all duration-200 text-left group"
+                                    className="flex items-center gap-3 w-full px-3 py-3 hover:bg-emerald-500/10 rounded-xl transition-all duration-200 text-left group"
                                 >
                                     <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center group-hover:rotate-12 transition-transform">
                                         <Search className="w-4 h-4 text-emerald-500" />

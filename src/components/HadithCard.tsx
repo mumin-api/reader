@@ -161,14 +161,51 @@ export const HadithCard: React.FC<HadithCardProps> = ({
         }
 
         setIsLoadingExplanation(true);
+        setExplanation(null);
+
         try {
-            const result = await hadithApi.getExplanation(hadith.id, locale);
-            setExplanation(result);
+            const eventSource = hadithApi.streamExplanation(hadith.id, locale);
+            
+            let accumulatedContent = '';
+            
+            eventSource.onmessage = (event) => {
+                if (event.data === '[DONE]') {
+                    eventSource.close();
+                    setIsLoadingExplanation(false);
+                    return;
+                }
+
+                try {
+                    const data = JSON.parse(event.data);
+                    
+                    // The API might send chunks of the explanation object or just text
+                    // Our current API sends the full updated object in each SSE message for simplicity, 
+                    // but let's handle the specific 'content' update pattern.
+                    setExplanation(prev => {
+                        if (!prev) return data;
+                        return {
+                            ...data,
+                            content: data.content
+                        };
+                    });
+                    
+                    setIsLoadingExplanation(false); // Stop loading skeleton as soon as first data arrives
+                } catch (e) {
+                    console.error('Failed to parse SSE message', e);
+                }
+            };
+
+            eventSource.onerror = (err) => {
+                console.error('SSE Error:', err);
+                eventSource.close();
+                setIsLoadingExplanation(false);
+            };
+
+            return () => eventSource.close();
         } catch (error) {
             if (process.env.NODE_ENV === 'development') {
-                console.error('Failed to fetch explanation:', error);
+                console.error('Failed to start explanation stream:', error);
             }
-        } finally {
             setIsLoadingExplanation(false);
         }
     };
