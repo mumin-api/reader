@@ -35,7 +35,8 @@
         "search_for": "Ara:",
         "search_results": "Arama Sonuçları",
         "did_you_mean": "Bunu mu demek istediniz?",
-        "suggestions": "Öneriler"
+        "suggestions": "Öneriler",
+        "semantic_search_desc": "Yapay zeka ile anlama göre ara"
     },
     "Collections": {
         "title": "Hadis Koleksiyonları",
@@ -62,6 +63,8 @@
         }
     },
     "Hadith": {
+        "bookmark": "Yer işaretlerine ekle",
+        "remove_bookmark": "Yer işaretlerinden kaldır",
         "translation": "Türkçe Çeviri",
         "narrator": "Ravi: {narrator}",
         "isnad": "İsnadı Göster",

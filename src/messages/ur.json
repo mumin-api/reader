@@ -35,7 +35,8 @@
         "search_for": "تلاش کریں",
         "search_results": "تلاش کے نتائج",
         "did_you_mean": "کیا آپ کا مطلب یہ تھا؟",
-        "suggestions": "تجاویز"
+        "suggestions": "تجاویز",
+        "semantic_search_desc": "مصنوعی ذہانت کا استعمال کرتے ہوئے معنی کے لحاظ سے تلاش کریں"
     },
     "Collections": {
         "title": "احادیث کے مجموعے",
@@ -62,6 +63,8 @@
         }
     },
     "Hadith": {
+        "bookmark": "بک مارک میں شامل کریں",
+        "remove_bookmark": "بک مارک سے ہٹائیں",
         "translation": "اردو ترجمہ",
         "narrator": "راوی: {narrator}",
         "isnad": "اسناد دکھائیں",

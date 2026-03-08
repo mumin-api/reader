@@ -35,7 +35,8 @@
         "search_for": "Cari",
         "search_results": "Hasil Pencarian",
         "did_you_mean": "Apakah maksud Anda:",
-        "suggestions": "Saran"
+        "suggestions": "Saran",
+        "semantic_search_desc": "Cari berdasarkan makna menggunakan AI"
     },
     "Collections": {
         "title": "Koleksi Hadis",
@@ -62,6 +63,8 @@
         }
     },
     "Hadith": {
+        "bookmark": "Tambah ke penanda buku",
+        "remove_bookmark": "Hapus dari penanda buku",
         "translation": "Terjemahan Bahasa Indonesia",
         "narrator": "Diriwayatkan oleh {narrator}",
         "isnad": "Tampilkan Isnad",

@@ -35,7 +35,8 @@
         "search_for": "البحث عن",
         "search_results": "نتائج البحث",
         "did_you_mean": "هل تقصد؟",
-        "suggestions": "الاقتراحات"
+        "suggestions": "الاقتراحات",
+        "semantic_search_desc": "البحث بالمعنى باستخدام الذكاء الاصطناعي"
     },
     "Collections": {
         "title": "مجموعات الأحاديث",
@@ -62,6 +63,8 @@
         }
     },
     "Hadith": {
+        "bookmark": "إضافة إلى الإشارات المرجعية",
+        "remove_bookmark": "إزالة من الإشارات المرجعية",
         "translation": "الترجمة العربية",
         "narrator": "رواه {narrator}",
         "isnad": "إظهار الإسناد",

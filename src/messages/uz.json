@@ -35,7 +35,8 @@
         "search_for": "Qidirish",
         "search_results": "Qidiruv Natijalari",
         "did_you_mean": "Buni nazarda tutdingizmi?",
-        "suggestions": "Tavsiyalar"
+        "suggestions": "Tavsiyalar",
+        "semantic_search_desc": "Sun'iy intellekt yordamida ma'no bo'yicha qidirish"
     },
     "Collections": {
         "title": "Hadis To'plamlari",
@@ -62,6 +63,8 @@
         }
     },
     "Hadith": {
+        "bookmark": "Xatcho'plarga qo'shish",
+        "remove_bookmark": "Xatcho'plardan olib tashlash",
         "translation": "O'zbekcha Tarjima",
         "narrator": "Rivoyat qiladi {narrator}",
         "isnad": "Isnadni Ko'rsatish",

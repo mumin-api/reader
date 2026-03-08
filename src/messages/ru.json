@@ -36,7 +36,8 @@
         "search_results": "Результаты поиска",
         "did_you_mean": "Вы имели в виду?",
         "suggestions": "Подсказки",
-        "semantic_search": "Поиск по смыслу"
+        "semantic_search": "Поиск по смыслу",
+        "semantic_search_desc": "Поиск по смыслу с помощью ИИ"
     },
     "Collections": {
         "title": "Коллекции Хадисов",
@@ -63,6 +64,8 @@
         }
     },
     "Hadith": {
+        "bookmark": "Добавить в закладки",
+        "remove_bookmark": "Удалить из закладок",
         "translation": "Русский перевод",
         "narrator": "Передано {narrator}",
         "isnad": "Показать иснад",

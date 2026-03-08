@@ -36,7 +36,8 @@
         "search_results": "Search Results",
         "did_you_mean": "Did you mean?",
         "suggestions": "Suggestions",
-        "semantic_search": "Semantic Search"
+        "semantic_search": "Semantic Search",
+        "semantic_search_desc": "Search by meaning using AI"
     },
     "Collections": {
         "title": "Hadith Collections",
@@ -63,6 +64,8 @@
         }
     },
     "Hadith": {
+        "bookmark": "Add to bookmarks",
+        "remove_bookmark": "Remove from bookmarks",
         "translation": "English Translation",
         "narrator": "Narrated by {narrator}",
         "isnad": "Show Isnad",
