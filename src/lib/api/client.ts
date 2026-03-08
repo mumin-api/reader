@@ -153,12 +153,8 @@ export const hadithApi = {
     },
 
     streamExplanation: (id: number, language: string = 'ru') => {
-        const config = {
-            headers: {
-                'X-API-Key': process.env.NEXT_PUBLIC_API_KEY || '',
-            }
-        };
-        const url = `${API_URL}/hadiths/${id}/explain-stream?language=${language}`;
+        const apiKey = process.env.NEXT_PUBLIC_API_KEY || '';
+        const url = `${API_URL}/hadiths/${id}/explain-stream?language=${language}&apiKey=${apiKey}`;
         return new EventSource(url);
     },
 
@@ -168,9 +164,11 @@ export const hadithApi = {
     },
 
     streamSearch: (params: { q: string; language?: string; collection?: string; grade?: string }) => {
+        const apiKey = process.env.NEXT_PUBLIC_API_KEY || '';
         const queryParams = new URLSearchParams({
             q: params.q,
             language: params.language || 'ru',
+            apiKey,
             ...(params.collection && { collection: params.collection }),
             ...(params.grade && { grade: params.grade }),
         });
