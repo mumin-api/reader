@@ -359,12 +359,12 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                             <div className="flex items-center gap-3">
                                 <div className={cn(
                                     "px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider border flex items-center gap-1.5 shadow-sm",
-                                    explanation.content.certainty_level === 'high' ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" :
-                                    explanation.content.certainty_level === 'low' ? "bg-red-500/10 text-red-600 border-red-500/20" :
+                                    explanation?.content?.certainty_level === 'high' ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" :
+                                    explanation?.content?.certainty_level === 'low' ? "bg-red-500/10 text-red-600 border-red-500/20" :
                                     "bg-amber-500/10 text-amber-600 border-amber-500/20"
                                 )}>
                                     <Fingerprint className="w-3 h-3" />
-                                    {t('MuminAI.certainty_level', { level: explanation.content.certainty_level })}
+                                    {t('MuminAI.certainty_level', { level: explanation?.content?.certainty_level || 'medium' })}
                                 </div>
                             </div>
                         </div>
