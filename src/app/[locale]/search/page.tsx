@@ -66,17 +66,21 @@ export default function SearchResultsPage() {
 
             if (isSemantic) {
                 try {
-                    const data = await hadithApi.semanticSearch({
+                    const responseData = await hadithApi.semanticSearch({
                         q: query,
                         language: locale,
                         limit: 30
                     });
+                    
+                    const actualData = Array.isArray(responseData) ? responseData : (responseData.data || []);
+                    const totalCount = responseData.total ?? actualData.length ?? 0;
+
                     setResults({
-                        data: data,
+                        data: actualData,
                         pagination: {
                             page: 1,
                             limit: 30,
-                            total: data.length,
+                            total: totalCount,
                             totalPages: 1,
                             hasNext: false,
                             hasPrev: false

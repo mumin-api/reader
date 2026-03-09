@@ -90,7 +90,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
                             }}
                         >
                             <Hash className="w-3 h-3" />
-                            {t('hadith_count', { count: count.toLocaleString() })}
+                            {t('hadith_count', { count: (count || 0).toLocaleString() })}
                         </div>
                     </div>
 
