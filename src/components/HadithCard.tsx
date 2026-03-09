@@ -383,12 +383,12 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                                     </h4>
                                 </div>
                                 <p className={cn("leading-relaxed opacity-90 font-serif italic text-emerald-950 dark:text-emerald-50", currentSize.english)}>
-                                    {renderExplanationContent(explanation.content.long_meaning || explanation.content.meaning)}
+                                    {renderExplanationContent(explanation?.content?.long_meaning || explanation?.content?.meaning)}
                                 </p>
                             </motion.div>
 
                             {/* Context Section */}
-                            {explanation.content.context && explanation.content.context !== 'нет достоверной информации' && (
+                            {explanation?.content?.context && explanation?.content?.context !== 'нет достоверной информации' && (
                                 <motion.div 
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -402,14 +402,14 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                                     </div>
                                     <div className="p-5 rounded-2xl bg-emerald-500/[0.02] border border-emerald-500/10 group-hover/ai:bg-emerald-500/[0.04] transition-colors">
                                         <p className={cn("whitespace-pre-line leading-relaxed opacity-80", currentSize.english)}>
-                                            {renderExplanationContent(explanation.content.context)}
+                                            {renderExplanationContent(explanation?.content?.context)}
                                         </p>
                                     </div>
                                 </motion.div>
                             )}
                             
                             {/* Legal Aspect */}
-                            {explanation.content.legal_note && explanation.content.legal_note !== 'нет достоверной информации' && (
+                            {explanation?.content?.legal_note && explanation?.content?.legal_note !== 'нет достоверной информации' && (
                                 <motion.div 
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -422,7 +422,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                                         </h4>
                                     </div>
                                     <p className={cn("leading-relaxed opacity-80 border-l-2 border-emerald-500/20 pl-4 py-1", currentSize.english)}>
-                                        {renderExplanationContent(explanation.content.legal_note)}
+                                        {renderExplanationContent(explanation?.content?.legal_note)}
                                     </p>
                                 </motion.div>
                             )}
@@ -440,12 +440,12 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                                     </h4>
                                 </div>
                                 <p className={cn("leading-relaxed opacity-80", currentSize.english)}>
-                                    {renderExplanationContent(explanation.content.benefit)}
+                                    {renderExplanationContent(explanation?.content?.benefit)}
                                 </p>
                             </motion.div>
 
                             {/* Additional Notes */}
-                            {explanation.content.notes && explanation.content.notes !== 'нет достоверной информации' && (
+                            {explanation?.content?.notes && explanation?.content?.notes !== 'нет достоверной информации' && (
                                 <motion.div 
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -458,7 +458,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                                         </h4>
                                     </div>
                                     <p className={cn("leading-relaxed opacity-60 text-sm", currentSize.english)}>
-                                        {renderExplanationContent(explanation.content.notes)}
+                                        {renderExplanationContent(explanation?.content?.notes)}
                                     </p>
                                 </motion.div>
                             )}
