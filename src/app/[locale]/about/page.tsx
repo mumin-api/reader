@@ -71,7 +71,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         Our Mission
                     </div>
 
-                    <h1 className="text-5xl md:text-6xl font-display font-bold mb-8 leading-tight" style={{ color: 'var(--page-text)' }}>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-8 leading-tight" style={{ color: 'var(--page-text)' }}>
                         {t('mission')}
                     </h1>
 

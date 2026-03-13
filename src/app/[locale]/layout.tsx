@@ -111,6 +111,7 @@ import { ThemeApplier } from '@/components/ThemeApplier';
 import { Analytics } from '@/components/Analytics';
 import { ClientOnly } from '@/components/ClientOnly';
 import { SpiritGate } from '@/components/SpiritGate';
+import { MobileTabBar } from '@/components/MobileTabBar';
 import { hadithApi } from '@/lib/api/client';
 
 export default async function RootLayout({
@@ -154,6 +155,7 @@ export default async function RootLayout({
             <SpiritGate initialEvents={activeEvents} />
             <Analytics />
             <GlobalPanels />
+            <MobileTabBar />
           </ClientOnly>
           {children}
         </NextIntlClientProvider>

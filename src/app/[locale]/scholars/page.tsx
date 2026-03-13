@@ -112,7 +112,7 @@ export default async function ScholarsPage({ params }: { params: Promise<{ local
                             <Star className="w-3.5 h-3.5" />
                             The Great Imams
                         </div>
-                        <h1 className="text-5xl md:text-6xl font-display font-bold mb-6" style={{ color: 'var(--page-text)' }}>
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6" style={{ color: 'var(--page-text)' }}>
                             The Scholars
                         </h1>
                         <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--muted-text)' }}>

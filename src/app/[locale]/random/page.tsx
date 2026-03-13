@@ -72,7 +72,7 @@ export default function RandomHadithPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-5xl md:text-6xl font-display font-bold mb-6"
+                            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6"
                             style={{ color: 'var(--page-text)' }}
                         >
                             Random <span className="gradient-text">Wisdom</span>

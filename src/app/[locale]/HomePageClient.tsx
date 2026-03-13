@@ -85,7 +85,7 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                             initial={{ y: 15 }}
                             animate={{ y: 0 }}
                             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                            className="text-6xl md:text-8xl font-display font-bold leading-[1.05] mb-8 tracking-tight"
+                            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.05] mb-8 tracking-tight"
                         >
                             {ramadanEvent ? (
                                 <span className="gradient-text">{t('ramadan_title')}</span>

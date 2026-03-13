@@ -45,7 +45,7 @@ export default function BookmarksPage() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="text-5xl font-display font-bold mb-4"
+                                className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4"
                                 style={{ color: 'var(--page-text)' }}
                             >
                                 Your Bookmarks

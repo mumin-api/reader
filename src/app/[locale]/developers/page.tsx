@@ -57,7 +57,7 @@ export default async function DevelopersPage({ params }: { params: Promise<{ loc
                         <Terminal className="w-4 h-4 text-emerald-600" />
                         <span className="text-xs font-bold tracking-[0.2em] uppercase text-emerald-600">Mumin Ecosystem</span>
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-display font-bold mb-8 leading-tight">
+                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-8 leading-tight">
                         {t('title')}
                     </h1>
                     <p className="text-xl opacity-60 max-w-2xl mx-auto leading-relaxed">

@@ -61,7 +61,7 @@ export default async function MethodologyPage({ params }: { params: Promise<{ lo
                             <Shield className="w-4 h-4" />
                             {t('title')}
                         </div>
-                        <h1 className="text-5xl md:text-6xl font-display font-bold text-emerald-900 mb-6">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-emerald-900 mb-6">
                             {t('title')}
                         </h1>
                         <p className="text-xl text-emerald-900/60 leading-relaxed max-w-2xl mx-auto">

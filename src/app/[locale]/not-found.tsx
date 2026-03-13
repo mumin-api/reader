@@ -27,7 +27,7 @@ export default function NotFound() {
                             className="absolute inset-0 border-2 border-dashed border-gold-500/20 rounded-[2.5rem]"
                         />
                     </div>
-                    <h1 className="text-8xl font-display font-bold text-emerald-900 mb-4">404</h1>
+                    <h1 className="text-6xl md:text-8xl font-display font-bold text-emerald-900 mb-4">404</h1>
                     <h2 className="text-2xl font-display font-bold text-emerald-950 mb-6">Page Not Found</h2>
                     <p className="text-emerald-900/60 leading-relaxed mb-12">
                         The path you are looking for has been moved or doesn't exist.
