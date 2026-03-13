@@ -121,7 +121,7 @@ export default function NotAvailableClient({ title, description, supportLinkText
                 className="pt-8"
               >
                 <a 
-                  href="https://t.me/mumin_ink" 
+                  href="https://t.me/mumin_api" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-3 px-8 py-4 bg-emerald-900 dark:bg-emerald-800 text-white font-bold rounded-full text-sm sm:text-base tracking-widest uppercase hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(6,78,59,0.3)] hover:shadow-[0_0_60px_rgba(6,78,59,0.5)]"
