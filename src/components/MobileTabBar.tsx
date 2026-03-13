@@ -51,6 +51,10 @@ export const MobileTabBar: React.FC = () => {
     { name: t('bookmarks'), href: '/bookmarks', icon: Bookmark },
   ];
 
+  if (pathname.includes('/not-available')) {
+    return null;
+  }
+
   return (
     <>
       {/* Full Screen Mobile Search Modal */}
