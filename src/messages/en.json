@@ -205,5 +205,10 @@
         "bot_feature_3_desc": "Secure and fast cryptocurrency payments to support the project.",
         "try_bot": "Launch Bot",
         "read_docs": "API Documentation"
+    },
+    "Errors": {
+        "serviceUnavailableTitle": "Service Unavailable",
+        "serviceUnavailableDescription": "We apologize, but Mumin Hadith Reader is currently not available in your region due to local regulations.",
+        "contactSupport": "If you believe this is an error, please contact support."
     }
 }
