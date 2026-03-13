@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, usePathname } from '@/lib/navigation';
 import { Home, BookOpen, Shuffle, Bookmark, Settings, Search } from 'lucide-react';
@@ -14,29 +14,35 @@ export const MobileTabBar: React.FC = () => {
   const pathname = usePathname();
   const { toggleSettings } = useUIStore();
   
-  // Scroll direction state
+  // Scroll direction state tracking
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // If we scroll down more than 50px, hide the bar.
-      // If we scroll up, show the bar.
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setIsVisible(false);
-      } else if (currentScrollY < lastScrollY) {
-        setIsVisible(true);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          
+          if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+            setIsVisible(false);
+          } else if (currentScrollY < lastScrollY.current) {
+            setIsVisible(true);
+          }
+          
+          lastScrollY.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
       }
-      
-      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const navLinks = [
     { name: t('home'), href: '/', icon: Home },
@@ -47,36 +53,36 @@ export const MobileTabBar: React.FC = () => {
 
   return (
     <>
-      {/* Mobile Search Overlay Modal */}
+      {/* Full Screen Mobile Search Modal */}
       <AnimatePresence>
         {isSearchOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed inset-x-0 bottom-[90px] z-50 p-4 md:hidden"
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed inset-0 z-[100] md:hidden pt-20 px-4"
+            style={{ backgroundColor: 'var(--page-bg)' }}
           >
-            <div className="bg-white/90 dark:bg-emerald-950/90 backdrop-blur-2xl p-4 rounded-3xl shadow-2xl border border-emerald-900/10 dark:border-emerald-500/20">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-sm font-bold opacity-70">Search Library</span>
-                <button 
-                  onClick={() => setIsSearchOpen(false)}
-                  className="text-xs font-bold uppercase tracking-widest text-red-500 bg-red-500/10 px-3 py-1 rounded-full"
-                >
-                  Close
-                </button>
-              </div>
-              <SearchBar />
+            <div className="flex justify-between items-center mb-6">
+              <span className="text-xl font-display font-bold" style={{ color: 'var(--page-text)' }}>Search Library</span>
+              <button 
+                onClick={() => setIsSearchOpen(false)}
+                className="text-xs font-bold uppercase tracking-widest text-[var(--page-text)] opacity-60 hover:opacity-100 bg-emerald-500/10 px-4 py-2 rounded-full cursor-pointer"
+              >
+                Close
+              </button>
             </div>
+            <SearchBar />
           </motion.div>
         )}
       </AnimatePresence>
 
+      {/* Ensure we hide the whole wrapper when search is open so pill disappears */}
       <motion.div
         initial={{ y: 0 }}
-        animate={{ y: isVisible ? 0 : 120 }}
+        animate={{ y: isVisible && !isSearchOpen ? 0 : 200 }}
         transition={{ duration: 0.3, ease: 'circOut' }}
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden pointer-events-none pb-6"
+        className="fixed bottom-0 left-0 right-0 z-[90] md:hidden pointer-events-none pb-6"
       >
         <div className="px-4 pointer-events-auto w-full relative">
           
@@ -84,7 +90,7 @@ export const MobileTabBar: React.FC = () => {
           <div className="absolute left-4 right-4 -top-14 flex justify-center">
              <button
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center gap-3 w-full max-w-sm h-12 px-4 rounded-full shadow-lg border backdrop-blur-xl transition-all active:scale-95 bg-white/90 dark:bg-emerald-950/90 border-emerald-900/10 dark:border-emerald-500/20 text-emerald-900/60 dark:text-emerald-50/60"
+                className="flex items-center gap-3 w-full max-w-sm h-12 px-4 rounded-full shadow-lg border backdrop-blur-xl transition-all active:scale-95 bg-white/90 dark:bg-[#0a1a16]/90 border-emerald-900/10 dark:border-emerald-500/20 text-[var(--page-text)] opacity-80"
              >
                 <Search className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 <span className="text-sm font-medium">{t('search_placeholder') || 'Search...'}</span>
@@ -103,7 +109,7 @@ export const MobileTabBar: React.FC = () => {
                   key={link.href}
                   onClick={() => setIsSearchOpen(false)}
                   href={link.href}
-                  className="relative flex flex-col items-center justify-center flex-1 h-full gap-1 active:scale-95 transition-transform"
+                  className="relative flex items-center justify-center flex-1 h-full active:scale-95 transition-transform"
                 >
                   {isActive && (
                     <motion.div 
@@ -117,14 +123,6 @@ export const MobileTabBar: React.FC = () => {
                       isActive ? "text-emerald-700 dark:text-emerald-400" : "text-emerald-900/40 dark:text-white/40"
                     )} 
                   />
-                  <span 
-                    className={cn(
-                      "text-[10px] uppercase font-bold tracking-widest z-10 transition-colors",
-                      isActive ? "text-emerald-700 dark:text-emerald-400" : "text-emerald-900/40 dark:text-white/40"
-                    )}
-                  >
-                    {link.name}
-                  </span>
                 </Link>
               );
             })}
@@ -135,12 +133,9 @@ export const MobileTabBar: React.FC = () => {
                 setIsSearchOpen(false);
                 toggleSettings();
               }}
-              className="relative flex flex-col items-center justify-center flex-1 h-full gap-1 active:scale-95 transition-transform"
+              className="relative flex items-center justify-center flex-1 h-full active:scale-95 transition-transform"
             >
               <Settings className="w-6 h-6 z-10 text-emerald-900/40 dark:text-white/40" />
-              <span className="text-[10px] uppercase font-bold tracking-widest z-10 text-emerald-900/40 dark:text-white/40">
-                {t('settings')}
-              </span>
             </button>
             
           </div>

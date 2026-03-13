@@ -156,7 +156,7 @@ export default function SearchResultsPage() {
     const tHadith = useTranslations('Hadith');
 
     return (
-        <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500">
+        <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500 overflow-x-hidden">
             <StructuredData data={generateBreadcrumbSchema([
                 { name: tNav('home'), item: BASE_URL },
                 { name: t('title'), item: `${BASE_URL}/search` }
