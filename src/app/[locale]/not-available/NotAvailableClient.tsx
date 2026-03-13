@@ -17,7 +17,7 @@ export default function NotAvailableClient({ title, description, supportLinkText
       <GeometricPattern opacity={0.05} />
       
       {/* Minimal Logo Header */}
-      <header className="absolute top-0 w-full p-6 sm:p-8 flex items-center justify-center sm:justify-start z-50">
+      <header className="absolute top-0 w-full p-6 sm:p-8 flex items-center justify-center z-50">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-emerald-900 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-900/20">
             <BookOpen className="w-5 h-5 text-emerald-50" />
