@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShieldAlert, Globe2, AlertTriangle, ArrowRight } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
+import { ShieldAlert, Globe2, AlertTriangle, ArrowRight, BookOpen } from 'lucide-react';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import Link from 'next/link';
 
@@ -16,7 +15,18 @@ export default function NotAvailableClient({ title, description, supportLinkText
   return (
     <main className="min-h-screen relative flex flex-col">
       <GeometricPattern opacity={0.05} />
-      <Navbar />
+      
+      {/* Minimal Logo Header */}
+      <header className="absolute top-0 w-full p-6 sm:p-8 flex items-center justify-center sm:justify-start z-50">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-emerald-900 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-900/20">
+            <BookOpen className="w-5 h-5 text-emerald-50" />
+          </div>
+          <span className="text-xl font-display font-bold px-1 bg-gradient-to-r from-emerald-950 to-emerald-800 dark:from-emerald-50 dark:to-emerald-200 bg-clip-text text-transparent">
+            Mumin
+          </span>
+        </div>
+      </header>
 
       <div className="flex-1 flex items-center justify-center p-4 sm:p-8 relative z-10 overflow-hidden">
         
