@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navbar } from '@/components/Navbar';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -52,9 +51,8 @@ export default async function MethodologyPage({ params }: { params: Promise<{ lo
     return (
         <main className="min-h-screen relative">
             <GeometricPattern opacity={0.03} />
-            <Navbar />
 
-            <section className="pt-32 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-16">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-900/5 text-emerald-900 font-bold text-xs uppercase tracking-widest mb-6 border border-emerald-900/10">

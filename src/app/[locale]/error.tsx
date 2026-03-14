@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { Navbar } from '@/components/Navbar';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { motion } from 'framer-motion';
 import { AlertTriangle, RefreshCcw, Home } from 'lucide-react';
@@ -21,7 +20,6 @@ export default function Error({
     return (
         <main className="min-h-screen relative flex items-center justify-center p-4">
             <GeometricPattern opacity={0.03} />
-            <Navbar />
 
             <div className="max-w-2xl w-full text-center">
                 <motion.div

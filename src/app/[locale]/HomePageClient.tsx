@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Navbar } from '@/components/Navbar';
 import { HadithCard } from '@/components/HadithCard';
 import { CollectionCard } from '@/components/CollectionCard';
 import { Hadith } from '@/lib/api/client';
@@ -55,10 +54,9 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
     return (
         <main className="min-h-screen relative overflow-hidden" style={{ backgroundColor: 'var(--page-bg)', color: 'var(--page-text)' }}>
             <GeometricPattern opacity={0.02} />
-            <Navbar />
 
             {/* ── HERO ──────────────────────────────────────────────────────── */}
-            <section className="relative min-h-screen flex flex-col justify-center pt-20 pb-16 px-4 overflow-hidden">
+            <section className="relative min-h-screen flex flex-col justify-center pb-16 px-4 overflow-hidden">
                 {ramadanEvent && <RamadanAtmosphere />}
 
                 {/* Floating background orbs - reduced for performance */}

@@ -162,9 +162,9 @@ export default function SearchResultsPage() {
                 { name: t('title'), item: `${BASE_URL}/search` }
             ])} />
             <GeometricPattern opacity={0.02} />
-            <Navbar />
+            <GeometricPattern opacity={0.02} />
 
-            <section className="pt-32 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-7xl mx-auto">
                     {/* Search Header */}
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">

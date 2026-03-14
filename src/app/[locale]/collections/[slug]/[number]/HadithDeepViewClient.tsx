@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Navbar } from '@/components/Navbar';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { HadithCard } from '@/components/HadithCard';
 import { ReadingSettingsPanel } from '@/components/ReadingSettingsPanel';
@@ -96,9 +95,8 @@ export default function HadithDeepViewClient({
     return (
         <main className="min-h-screen relative">
             <GeometricPattern opacity={0.02} />
-            <Navbar />
 
-            <section className="pt-24 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-7xl mx-auto">
                     {/* Breadcrumbs & Navigation */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">

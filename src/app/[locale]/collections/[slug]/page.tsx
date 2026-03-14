@@ -99,9 +99,8 @@ export default function CollectionDetailPage() {
                 { name: collectionName, item: `${BASE_URL}/collections/${slug}` }
             ])} />
             <GeometricPattern opacity={0.02} />
-            <Navbar />
 
-            <section className="pt-24 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="mb-12">

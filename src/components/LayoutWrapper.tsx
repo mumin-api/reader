@@ -16,13 +16,22 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
 }) => {
   const { uiVariant } = useReadingSettings();
   const [mounted, setMounted] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
+    
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
-  // For SSR, always show classic layout to ensure content is visible to search engines immediately
-  if (!mounted || uiVariant === 'classic') {
+  // For SSR or Mobile, always show classic layout to ensure content is visible and fits the screen
+  if (!mounted || isMobile || uiVariant === 'classic') {
     return (
       <>
         {classicNavbar}

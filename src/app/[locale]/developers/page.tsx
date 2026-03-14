@@ -48,10 +48,10 @@ export default async function DevelopersPage({ params }: { params: Promise<{ loc
         <main className="min-h-screen relative overflow-hidden bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500">
             <StructuredData data={ecosystemSchema} />
             <GeometricPattern opacity={0.03} />
-            <Navbar />
+            <GeometricPattern opacity={0.03} />
 
             {/* Hero Section */}
-            <section className="relative pt-40 pb-20 px-4">
+            <section className="relative pb-20 px-4">
                 <div className="max-w-7xl mx-auto text-center relative z-10">
                     <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-sm mb-8 animate-fade-in shadow-sm">
                         <Terminal className="w-4 h-4 text-emerald-600" />

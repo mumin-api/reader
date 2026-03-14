@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navbar } from '@/components/Navbar';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
@@ -60,10 +59,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <main className="min-h-screen relative" style={{ backgroundColor: 'var(--page-bg)', color: 'var(--page-text)' }}>
             <StructuredData data={aboutSchema} />
             <GeometricPattern opacity={0.025} />
-            <Navbar />
 
             {/* Hero */}
-            <section className="pt-36 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-4xl mx-auto">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-xs tracking-widest uppercase mb-8 border"
                         style={{ backgroundColor: 'rgba(5,150,105,0.08)', borderColor: 'rgba(5,150,105,0.2)', color: '#059669' }}>

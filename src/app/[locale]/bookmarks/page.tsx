@@ -25,9 +25,9 @@ export default function BookmarksPage() {
     return (
         <main className="min-h-screen relative" style={{ backgroundColor: 'var(--page-bg)', color: 'var(--page-text)' }}>
             <GeometricPattern opacity={0.02} />
-            <Navbar />
+            <GeometricPattern opacity={0.02} />
 
-            <section className="pt-32 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">

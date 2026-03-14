@@ -52,9 +52,9 @@ export default function RandomHadithPage() {
                 { name: 'Random Hadith', item: `${BASE_URL}/random` }
             ])} />
             <GeometricPattern opacity={0.02} />
-            <Navbar />
+            <GeometricPattern opacity={0.02} />
 
-            <section className="pt-32 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">

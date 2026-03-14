@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { Navbar } from '@/components/Navbar';
 import { GeometricPattern } from '@/components/GeometricPattern';
 import { HadithCard } from '@/components/HadithCard';
 import { motion } from 'framer-motion';
@@ -90,9 +89,8 @@ export default function TopicDetailPage() {
     return (
         <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500">
             <GeometricPattern opacity={0.02} />
-            <Navbar />
 
-            <section className="pt-32 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="mb-12 text-center flex flex-col items-center">

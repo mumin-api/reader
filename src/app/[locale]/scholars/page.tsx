@@ -101,9 +101,9 @@ export default async function ScholarsPage({ params }: { params: Promise<{ local
         <main className="min-h-screen relative" style={{ backgroundColor: 'var(--page-bg)', color: 'var(--page-text)' }}>
             <StructuredData data={scholarsSchema} />
             <GeometricPattern opacity={0.025} />
-            <Navbar />
+            <GeometricPattern opacity={0.025} />
 
-            <section className="pt-36 pb-20 px-4">
+            <section className="pb-20 px-4">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-20">
