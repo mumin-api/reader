@@ -17,7 +17,8 @@ import {
     History,
     Scale,
     FileText,
-    Fingerprint
+    Fingerprint,
+    Image as ImageIcon
 } from 'lucide-react';
 import { cn, getCollectionSlug } from '@/lib/utils';
 import { Hadith, hadithApi, HadithExplanation } from '@/lib/api/client';
@@ -27,6 +28,7 @@ import { useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from '@/lib/navigation';
 import { useTranslations } from 'next-intl';
+import { ShareImageModal } from './ShareImageModal';
 
 interface HadithCardProps {
     hadith: Hadith;
@@ -48,6 +50,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
     const [explanation, setExplanation] = useState<HadithExplanation | null>(null);
     const [isLoadingExplanation, setIsLoadingExplanation] = useState(false);
     const [showReportModal, setShowReportModal] = useState(false);
+    const [showImageModal, setShowImageModal] = useState(false);
     const [reportMessage, setReportMessage] = useState('');
     const [isReporting, setIsReporting] = useState(false);
     const locale = useLocale();
@@ -296,6 +299,14 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                         aria-label={t('share')}
                     >
                         <Share2 className="w-5 h-5" />
+                    </button>
+                    <button
+                        onClick={() => setShowImageModal(true)}
+                        className="p-2.5 rounded-full opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
+                        title={t('share_as_image')}
+                        aria-label={t('share_as_image')}
+                    >
+                        <ImageIcon className="w-5 h-5" />
                     </button>
                 </div>
             </div>
@@ -643,6 +654,17 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                             </div>
                         </motion.div>
                     </div>
+                )}
+            </AnimatePresence>
+
+            {/* Share Image Modal */}
+            <AnimatePresence>
+                {showImageModal && (
+                    <ShareImageModal
+                        hadith={hadith}
+                        isOpen={showImageModal}
+                        onClose={() => setShowImageModal(false)}
+                    />
                 )}
             </AnimatePresence>
         </motion.div>

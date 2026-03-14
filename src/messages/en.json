@@ -74,6 +74,8 @@
         "share": "Share",
         "copy": "Copy Citation",
         "copied": "Copied to clipboard!",
+        "share_as_image": "Share as Image",
+        "download_png": "Download PNG",
         "chain_of_narration": "Chain of Narration (Isnad)",
         "not_found": "Hadith not found",
         "not_found_message": "We couldn't find hadith №{number} in {collection}.",

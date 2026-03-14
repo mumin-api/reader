@@ -74,6 +74,8 @@
         "share": "Поделиться",
         "copy": "Копировать цитату",
         "copied": "Скопировано в буфер обмена!",
+        "share_as_image": "Поделиться картинкой",
+        "download_png": "Скачать PNG",
         "chain_of_narration": "Цепочка передатчиков (Иснад)",
         "not_found": "Хадис не найден",
         "not_found_message": "Мы не смогли найти хадис №{number} в {collection}.",
