@@ -15,7 +15,24 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
   classicNavbar 
 }) => {
   const { uiVariant } = useReadingSettings();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
   
+  // For SSR, always show classic layout to ensure content is visible to search engines immediately
+  if (!mounted || uiVariant === 'classic') {
+    return (
+      <>
+        {classicNavbar}
+        <main className="pt-20">
+          {children}
+        </main>
+      </>
+    );
+  }
+
   if (uiVariant === 'cinematic') {
     return (
       <div className="flex min-h-screen">

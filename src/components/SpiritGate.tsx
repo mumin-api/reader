@@ -5,8 +5,18 @@ import { hadithApi } from '@/lib/api/client';
 import { SparkleEffect } from './SparkleEffect';
 import { SpiritGreeting } from './SpiritGreeting';
 
-export const SpiritGate = ({ initialEvents = [] }: { initialEvents?: any[] }) => {
-    const [activeEvents] = useState<any[]>(initialEvents);
+export const SpiritGate = () => {
+    const [activeEvents, setActiveEvents] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        hadithApi.getActiveEvents()
+            .then(events => setActiveEvents(events || []))
+            .catch(() => setActiveEvents([]))
+            .finally(() => setIsLoading(false));
+    }, []);
+
+    if (isLoading) return null;
 
     const ramadanEvent = activeEvents.find(e => e.slug === 'ramadan');
 

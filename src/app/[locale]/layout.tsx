@@ -134,7 +134,6 @@ export default async function RootLayout({
   setRequestLocale(locale);
 
   const messages = await getMessages({ locale });
-  const activeEvents = await hadithApi.getActiveEvents().catch(() => []);
 
   return (
     <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
@@ -157,15 +156,16 @@ export default async function RootLayout({
           <ClientOnly>
             <ThemeApplier />
             <CinematicBackground />
-            <SpiritGate initialEvents={activeEvents} />
             <Analytics />
             <GlobalPanels />
-            <MobileTabBar />
-            
-            <LayoutWrapper cinematicNavbar={<CinematicNavbar />} classicNavbar={<Navbar />}>
-              {children}
-            </LayoutWrapper>
           </ClientOnly>
+
+          <SpiritGate />
+          <MobileTabBar />
+          
+          <LayoutWrapper cinematicNavbar={<CinematicNavbar />} classicNavbar={<Navbar />}>
+            {children}
+          </LayoutWrapper>
         </NextIntlClientProvider>
       </body>
     </html>
