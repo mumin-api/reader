@@ -8,7 +8,13 @@ import { cn } from '@/lib/utils';
 import { useTranslations, useLocale } from 'next-intl';
 import { hadithApi } from '@/lib/api/client';
 
-export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
+export interface SearchBarProps {
+    className?: string;
+    autoFocus?: boolean;
+    onClose?: () => void;
+}
+
+export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onClose }) => {
     const [query, setQuery] = useState('');
     const [isFocused, setIsFocused] = useState(false);
     const [history, setHistory] = useState<string[]>([]);
@@ -30,7 +36,12 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
         if (savedHistory) {
             setHistory(JSON.parse(savedHistory).slice(0, 5));
         }
-    }, []);
+        
+        // Auto focus if requested (for mobile modal)
+        if (autoFocus && searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
+    }, [autoFocus]);
 
     // Debounced suggestion fetching (topics + spell correction)
     useEffect(() => {
@@ -74,15 +85,17 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
         setHistory(newHistory.slice(0, 5));
         localStorage.setItem('mumin_search_history', JSON.stringify(newHistory));
 
-        router.push(`/search?q=${encodeURIComponent(q)}${isSemantic ? '&semantic=true' : ''}`);
         setIsFocused(false);
         setSuggestions([]);
+        if (onClose) onClose();
+        router.push(`/search?q=${encodeURIComponent(q)}${isSemantic ? '&semantic=true' : ''}`);
     };
 
     const handleTopicSelect = (slug: string) => {
-        router.push(`/topics/${slug}`);
         setIsFocused(false);
         setSuggestions([]);
+        if (onClose) onClose();
+        router.push(`/topics/${slug}`);
     };
 
     const onKeyDown = (e: React.KeyboardEvent) => {

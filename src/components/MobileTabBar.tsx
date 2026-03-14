@@ -76,7 +76,10 @@ export const MobileTabBar: React.FC = () => {
                 Close
               </button>
             </div>
-            <SearchBar />
+            <SearchBar 
+              autoFocus={true} 
+              onClose={() => setIsSearchOpen(false)} 
+            />
           </motion.div>
         )}
       </AnimatePresence>
