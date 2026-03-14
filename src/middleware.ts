@@ -15,16 +15,25 @@ export default function middleware(request: NextRequest) {
     // Explicitly blocked countries (UZ mainly based on previous config)
     const blockedCountries = (process.env.BLOCKED_COUNTRIES || 'UZ').split(',').map(c => c.trim().toUpperCase());
 
-    if (country && blockedCountries.includes(country.toUpperCase())) {
-        // If they are already on the not-available page, let them through
-        if (request.nextUrl.pathname.includes('/not-available')) {
-            return intlMiddleware(request);
+    const isBlocked = country && blockedCountries.includes(country.toUpperCase());
+    const isAtNotAvailable = request.nextUrl.pathname.includes('/not-available');
+
+    if (isBlocked) {
+        // If blocked and not on the not-available page, redirect to it
+        if (!isAtNotAvailable) {
+            const url = request.nextUrl.clone();
+            url.pathname = `/${defaultLocale}/not-available`;
+            return NextResponse.redirect(url);
         }
-        
-        // Otherwise, redirect to the not-available page
-        const url = request.nextUrl.clone();
-        url.pathname = `/${defaultLocale}/not-available`;
-        return NextResponse.redirect(url);
+        // If blocked and already on the page, proceed
+        return intlMiddleware(request);
+    } else {
+        // If NOT blocked but trying to access the restricted page, redirect to home
+        if (isAtNotAvailable) {
+            const url = request.nextUrl.clone();
+            url.pathname = `/${defaultLocale}`;
+            return NextResponse.redirect(url);
+        }
     }
 
     // 2. Proceed to standard translation middleware
