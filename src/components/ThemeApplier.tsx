@@ -4,22 +4,31 @@ import { useEffect } from 'react';
 import { useReadingSettings } from '@/store/useReadingSettings';
 
 export const ThemeApplier = () => {
-    const { mode } = useReadingSettings();
+    const { mode, uiVariant } = useReadingSettings();
 
     useEffect(() => {
-        // Remove any existing reading-* classes
         const body = document.body;
-        const classes = Array.from(body.classList).filter(c => c.startsWith('reading-'));
-        classes.forEach(c => body.classList.remove(c));
+        
+        // Remove existing theme classes
+        const themeClasses = Array.from(body.classList).filter(c => 
+            c.startsWith('reading-')
+        );
+        themeClasses.forEach(c => body.classList.remove(c));
 
-        // Add the current mode class
+        // Add both mode and variant classes
+        // mode: light | dark | sepia | contrast
+        // uiVariant: classic | cinematic
         body.classList.add(`reading-${mode}`);
+        
+        if (uiVariant === 'cinematic') {
+            body.classList.add('reading-cinematic');
+        }
 
-        // Return cleanup to avoid side effects if component unmounts
         return () => {
             body.classList.remove(`reading-${mode}`);
+            body.classList.remove('reading-cinematic');
         };
-    }, [mode]);
+    }, [mode, uiVariant]);
 
-    return null; // This component doesn't render anything
+    return null;
 };

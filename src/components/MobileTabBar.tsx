@@ -8,11 +8,13 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/store/useUIStore';
 import { SearchBar } from './SearchBar';
+import { useReadingSettings } from '@/store/useReadingSettings';
 
 export const MobileTabBar: React.FC = () => {
   const t = useTranslations('Navbar');
   const pathname = usePathname();
   const { toggleSettings } = useUIStore();
+  const { uiVariant } = useReadingSettings();
   
   // Scroll direction state tracking
   const [isVisible, setIsVisible] = useState(true);
@@ -64,16 +66,26 @@ export const MobileTabBar: React.FC = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            className="fixed inset-0 z-[100] md:hidden pt-20 px-4"
-            style={{ backgroundColor: 'var(--page-bg)' }}
+            className={cn(
+               "fixed inset-0 z-[100] md:hidden pt-20 px-4",
+               uiVariant === 'cinematic' && "glass-cinematic"
+            )}
+            style={{ backgroundColor: uiVariant === 'cinematic' ? 'transparent' : 'var(--page-bg)' }}
           >
             <div className="flex justify-between items-center mb-6">
-              <span className="text-xl font-display font-bold" style={{ color: 'var(--page-text)' }}>Search Library</span>
+              <span className="text-xl font-display font-bold" style={{ color: 'var(--page-text)' }}>
+                {t('search_title') || 'Search Library'}
+              </span>
               <button 
                 onClick={() => setIsSearchOpen(false)}
-                className="text-xs font-bold uppercase tracking-widest text-[var(--page-text)] opacity-60 hover:opacity-100 bg-emerald-500/10 px-4 py-2 rounded-full cursor-pointer"
+                className={cn(
+                   "text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full cursor-pointer transition-all",
+                   uiVariant === 'cinematic'
+                    ? "text-white/80 bg-white/10 hover:bg-white/20"
+                    : "text-[var(--page-text)] opacity-60 hover:opacity-100 bg-emerald-500/10"
+                )}
               >
-                Close
+                {t('close') || 'Close'}
               </button>
             </div>
             <SearchBar 
@@ -97,15 +109,25 @@ export const MobileTabBar: React.FC = () => {
           <div className="absolute left-4 right-4 -top-14 flex justify-center">
              <button
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center gap-3 w-full max-w-sm h-12 px-4 rounded-full shadow-lg border backdrop-blur-xl transition-all active:scale-95 bg-white/90 dark:bg-[#0a1a16]/90 border-emerald-900/10 dark:border-emerald-500/20 text-[var(--page-text)] opacity-80"
+                className={cn(
+                   "flex items-center gap-3 w-full max-w-sm h-12 px-4 rounded-full shadow-lg border backdrop-blur-xl transition-all active:scale-95",
+                   uiVariant === 'cinematic'
+                       ? "glass-cinematic border-white/10 text-white/80"
+                       : "bg-white/90 dark:bg-[#0a1a16]/90 border-emerald-900/10 dark:border-emerald-500/20 text-[var(--page-text)] opacity-80"
+                )}
              >
-                <Search className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <Search className={cn("w-5 h-5", uiVariant === 'cinematic' ? "text-amber-500" : "text-emerald-600 dark:text-emerald-400")} />
                 <span className="text-sm font-medium">{t('search_placeholder') || 'Search...'}</span>
              </button>
           </div>
 
           {/* Bottom Tab Bar Container */}
-          <div className="flex items-center justify-between w-full h-16 px-2 bg-white/95 dark:bg-[#0a1a16]/95 backdrop-blur-2xl border border-emerald-900/10 dark:border-emerald-500/10 rounded-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
+          <div className={cn(
+            "flex items-center justify-between w-full h-16 px-2 backdrop-blur-2xl border rounded-3xl transition-all shadow-xl",
+            uiVariant === 'cinematic'
+                ? "glass-cinematic border-white/10"
+                : "bg-white/95 dark:bg-[#0a1a16]/95 border-emerald-900/10 dark:border-emerald-500/10 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.2)]"
+          )}>
             
             {navLinks.map((link) => {
               const Icon = link.icon;
@@ -126,8 +148,10 @@ export const MobileTabBar: React.FC = () => {
                   )}
                   <Icon 
                     className={cn(
-                      "w-6 h-6 z-10 transition-colors", 
-                      isActive ? "text-emerald-700 dark:text-emerald-400" : "text-emerald-900/40 dark:text-white/40"
+                      "w-6 h-6 z-10 transition-all", 
+                      isActive 
+                        ? (uiVariant === 'cinematic' ? "text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" : "text-emerald-700 dark:text-emerald-400") 
+                        : (uiVariant === 'cinematic' ? "text-white/30" : "text-emerald-900/40 dark:text-white/40")
                     )} 
                   />
                 </Link>

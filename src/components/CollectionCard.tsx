@@ -5,6 +5,8 @@ import { Link } from '@/lib/navigation';
 import { BookOpen, Hash, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { useReadingSettings } from '@/store/useReadingSettings';
+import { cn } from '@/lib/utils';
 
 // Unique accent colors per collection slug for visual differentiation
 const COLLECTION_ACCENTS: Record<string, { from: string; to: string; icon: string }> = {
@@ -40,6 +42,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
     description,
 }) => {
     const t = useTranslations('Collections');
+    const { uiVariant } = useReadingSettings();
     const accent = getAccent(slug);
 
     return (
@@ -50,11 +53,16 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
             <Link
                 href={`/collections/${slug}`}
                 style={{
-                    backgroundColor: 'var(--card-bg)',
-                    borderColor: 'var(--card-border)',
+                    backgroundColor: uiVariant === 'cinematic' ? 'transparent' : 'var(--card-bg)',
+                    borderColor: uiVariant === 'cinematic' ? 'transparent' : 'var(--card-border)',
                     color: 'var(--page-text)',
                 }}
-                className="group relative block rounded-[2rem] border shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden"
+                className={cn(
+                    "group relative block rounded-[2rem] border transition-all duration-500 overflow-hidden",
+                    uiVariant === 'cinematic' 
+                        ? "glass-cinematic golden-glow-hover shadow-xl" 
+                        : "shadow-sm hover:shadow-xl hover:border-emerald-600/20"
+                )}
             >
                 {/* Gradient accent strip at top */}
                 <div
@@ -76,8 +84,11 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
                             style={{ background: `${accent.from}18` }}
                         >
                             <BookOpen
-                                className="w-5 h-5 transition-colors duration-500"
-                                style={{ color: accent.from }}
+                                className="w-5 h-5 transition-all duration-500"
+                                style={{ 
+                                    color: uiVariant === 'cinematic' ? '#f59e0b' : accent.from,
+                                    filter: uiVariant === 'cinematic' ? 'drop-shadow(0 0 8px rgba(245,158,11,0.5))' : 'none'
+                                }}
                             />
                         </div>
 

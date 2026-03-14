@@ -142,6 +142,11 @@
             "narrator_chain": "Narrator Chain",
             "narrator_chain_desc": "Show detailed isnad"
         },
+        "ui_variant": "Interface Style",
+        "variants": {
+            "classic": "Classic",
+            "cinematic": "Cinematic (Beta)"
+        },
         "reset": "Reset to Defaults"
     },
     "Footer": {

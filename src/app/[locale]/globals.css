@@ -103,6 +103,21 @@
   --muted-text: rgba(255, 255, 255, 0.6);
 }
 
+.reading-cinematic {
+  --page-bg: transparent;
+  --page-bg-soft: rgba(0, 0, 0, 0.3);
+  --page-text: #ffffff;
+  --nav-bg: rgba(0, 0, 0, 0.4);
+  --card-bg: rgba(0, 0, 0, 0.3);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-focus-bg: rgba(255, 255, 255, 0.15);
+  --dropdown-bg: rgba(10, 26, 22, 0.95);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --muted-text: rgba(255, 255, 255, 0.5);
+  --accent-glow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
 /* Ensure headings adapt in dark/contrast modes */
 .reading-dark h1,
 .reading-dark h2,
@@ -115,7 +130,13 @@
 .reading-contrast h3,
 .reading-contrast h4,
 .reading-contrast h5,
-.reading-contrast h6 {
+.reading-contrast h6,
+.reading-cinematic h1,
+.reading-cinematic h2,
+.reading-cinematic h3,
+.reading-cinematic h4,
+.reading-cinematic h5,
+.reading-cinematic h6 {
   @apply text-white;
 }
 
@@ -175,6 +196,20 @@
 
   .glass-premium {
     @apply bg-white/70 dark:bg-emerald-950/20 backdrop-blur-xl border border-white/20 dark:border-emerald-500/10 shadow-xl;
+  }
+
+  .glass-cinematic {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .golden-glow {
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    box-shadow:
+      0 0 15px rgba(245, 158, 11, 0.1),
+      inset 0 0 20px rgba(245, 158, 11, 0.05);
   }
 }
 

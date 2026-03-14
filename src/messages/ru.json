@@ -142,6 +142,11 @@
             "narrator_chain": "Цепочка передатчиков",
             "narrator_chain_desc": "Показать детальный иснад"
         },
+        "ui_variant": "Интерфейс",
+        "variants": {
+            "classic": "Классика",
+            "cinematic": "Cinema (Beta)"
+        },
         "reset": "Сбросить настройки"
     },
     "Footer": {

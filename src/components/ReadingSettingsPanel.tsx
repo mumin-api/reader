@@ -10,7 +10,8 @@ import {
     Eye,
     Smartphone,
     Check,
-    Globe
+    Globe,
+    Sparkles
 } from 'lucide-react';
 import { useReadingSettings, ReadingMode, ArabicFont } from '@/store/useReadingSettings';
 import { cn } from '@/lib/utils';
@@ -42,6 +43,7 @@ export const ReadingSettingsPanel: React.FC<ReadingSettingsPanelProps> = ({ isOp
         arabicFont, setArabicFont,
         showTranslation, toggleTranslation,
         showIsnad, toggleIsnad,
+        uiVariant, setUIVariant,
         resetSettings
     } = useReadingSettings();
     const t = useTranslations('Settings');
@@ -223,10 +225,46 @@ export const ReadingSettingsPanel: React.FC<ReadingSettingsPanelProps> = ({ isOp
 
                             <button
                                 onClick={resetSettings}
-                                className="w-full p-4 rounded-2xl text-emerald-600 font-semibold hover:bg-emerald-600/5 transition-colors border border-emerald-600/20"
+                                className="w-full p-4 rounded-2xl text-emerald-600 font-semibold hover:bg-emerald-600/5 transition-colors border border-emerald-600/20 mb-8"
                             >
                                 {t('reset')}
                             </button>
+
+                            {/* UI Variant (A/B Test) */}
+                            <div className="pt-6 border-t border-emerald-900/10">
+                                <label
+                                    className="text-sm font-semibold uppercase tracking-wider mb-4 block"
+                                    style={{ color: 'var(--muted-text)' }}
+                                >
+                                    {t('ui_variant')}
+                                </label>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <button
+                                        onClick={() => setUIVariant('classic')}
+                                        className={cn(
+                                            "flex items-center justify-center gap-2 p-3 rounded-2xl border transition-all text-sm font-medium",
+                                            uiVariant === 'classic' 
+                                                ? "border-emerald-600 bg-emerald-50 text-emerald-900 ring-2 ring-emerald-600" 
+                                                : "border-emerald-900/10 opacity-60 hover:opacity-100"
+                                        )}
+                                    >
+                                        <Smartphone className="w-4 h-4" />
+                                        {t('variants.classic')}
+                                    </button>
+                                    <button
+                                        onClick={() => setUIVariant('cinematic')}
+                                        className={cn(
+                                            "flex items-center justify-center gap-2 p-3 rounded-2xl border transition-all text-sm font-medium",
+                                            uiVariant === 'cinematic' 
+                                                ? "border-amber-500 bg-amber-500/10 text-amber-600 ring-2 ring-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.2)]" 
+                                                : "border-emerald-900/10 opacity-60 hover:opacity-100"
+                                        )}
+                                    >
+                                        <Sparkles className="w-4 h-4" />
+                                        {t('variants.cinematic')}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </>

@@ -43,7 +43,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
     showDetails = false,
     hideAI = false 
 }) => {
-    const { textSize, arabicFont, mode, showTranslation } = useReadingSettings();
+    const { textSize, arabicFont, mode, showTranslation, uiVariant } = useReadingSettings();
     const { addBookmark, removeBookmark, isBookmarked } = useBookmarks();
     const [showCopyToast, setShowCopyToast] = useState(false);
     const [showIsnad, setShowIsnad] = useState(false);
@@ -248,22 +248,46 @@ export const HadithCard: React.FC<HadithCardProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             style={{
-                backgroundColor: 'var(--card-bg)',
-                borderColor: 'var(--border-color)',
+                backgroundColor: uiVariant === 'cinematic' ? 'transparent' : 'var(--card-bg)',
+                borderColor: uiVariant === 'cinematic' ? 'transparent' : 'var(--border-color)',
                 color: 'var(--page-text)'
             }}
             className={cn(
-                "group relative p-6 md:p-8 rounded-[2rem] border transition-all duration-500 overflow-hidden shadow-sm hover:shadow-2xl hover:border-emerald-600/20"
+                "group relative rounded-[2.5rem] border transition-all duration-700 overflow-hidden",
+                uiVariant === 'cinematic' 
+                    ? "glass-cinematic golden-glow p-10 md:p-14 mb-10" 
+                    : "bg-[var(--card-bg)] border-[var(--card-border)] p-6 md:p-8 mb-8 shadow-sm hover:shadow-2xl hover:border-emerald-600/20",
+                showDetails && "ring-2 ring-emerald-600/20"
             )}
         >
-            {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-[5rem] -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
+            {uiVariant === 'cinematic' && (
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] -mr-32 -mt-32" />
+                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-[60px] -ml-24 -mb-24" />
+                </div>
+            )}
+            
+            <div className={cn(
+                "flex flex-col gap-8",
+                uiVariant === 'cinematic' && "items-center text-center"
+            )}>
 
             {/* Header */}
             <div className="flex items-center justify-between mb-8 relative z-10">
-                <div className="flex items-center gap-3">
-                    <div className="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 backdrop-blur-md">
-                        <span className="text-xs font-bold tracking-widest text-emerald-600 uppercase">
+                <div className={cn(
+                    "flex flex-wrap items-center gap-3",
+                    uiVariant === 'cinematic' && "justify-center"
+                )}>
+                    <div className={cn(
+                        "px-4 py-1.5 rounded-full border backdrop-blur-md",
+                        uiVariant === 'cinematic' 
+                            ? "bg-amber-500/10 border-amber-500/20" 
+                            : "bg-emerald-500/10 border-emerald-500/20"
+                    )}>
+                        <span className={cn(
+                            "text-xs font-bold tracking-widest uppercase",
+                            uiVariant === 'cinematic' ? "text-amber-500" : "text-emerald-600"
+                        )}>
                             {hadith.collection} • {hadith.hadithNumber}
                         </span>
                     </div>
@@ -272,12 +296,17 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                     </div>
                 </div>
 
-                <div className="flex items-center gap-1">
+                <div className={cn(
+                    "flex items-center gap-2",
+                    uiVariant === 'cinematic' && "justify-center"
+                )}>
                     <button
                         onClick={handleBookmark}
                         className={cn(
                             "p-2.5 rounded-full transition-all duration-300",
-                            bookmarked ? "text-gold-500 bg-gold-500/10" : "opacity-30 hover:opacity-100 hover:bg-emerald-600/5"
+                            uiVariant === 'cinematic'
+                                ? (bookmarked ? "text-amber-500 bg-amber-500/10 shadow-[0_0_15px_rgba(245,158,11,0.3)]" : "text-white/30 hover:text-white/80 hover:bg-white/5")
+                                : (bookmarked ? "text-gold-500 bg-gold-500/10" : "opacity-30 hover:opacity-100 hover:bg-emerald-600/5")
                         )}
                         aria-label={bookmarked ? t('remove_bookmark') : t('bookmark')}
                         title={bookmarked ? t('remove_bookmark') : t('bookmark')}
@@ -286,7 +315,12 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                     </button>
                     <button
                         onClick={copyToClipboard}
-                        className="p-2.5 rounded-full opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
+                        className={cn(
+                            "p-2.5 rounded-full transition-all",
+                            uiVariant === 'cinematic'
+                                ? "text-white/30 hover:text-white/80 hover:bg-white/5"
+                                : "opacity-30 hover:opacity-100 hover:bg-emerald-600/5"
+                        )}
                         title={t('copy')}
                         aria-label={t('copy')}
                     >
@@ -294,7 +328,12 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                     </button>
                     <button
                         onClick={handleShare}
-                        className="p-2.5 rounded-full opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
+                        className={cn(
+                            "p-2.5 rounded-full transition-all",
+                            uiVariant === 'cinematic'
+                                ? "text-white/30 hover:text-white/80 hover:bg-white/5"
+                                : "opacity-30 hover:opacity-100 hover:bg-emerald-600/5"
+                        )}
                         title={t('share')}
                         aria-label={t('share')}
                     >
@@ -302,7 +341,12 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                     </button>
                     <button
                         onClick={() => setShowImageModal(true)}
-                        className="p-2.5 rounded-full opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
+                        className={cn(
+                            "p-2.5 rounded-full transition-all",
+                            uiVariant === 'cinematic'
+                                ? "text-white/30 hover:text-white/80 hover:bg-white/5"
+                                : "opacity-30 hover:opacity-100 hover:bg-emerald-600/5 transition-all"
+                        )}
                         title={t('share_as_image')}
                         aria-label={t('share_as_image')}
                     >
@@ -312,9 +356,13 @@ export const HadithCard: React.FC<HadithCardProps> = ({
             </div>
 
             {/* Arabic Text */}
-            <div className="mb-8 relative z-10" dir="rtl">
+            <div className={cn(
+                "mb-8 relative z-10",
+                uiVariant === 'cinematic' ? "text-center" : "text-right"
+            )} dir="rtl">
                 <p className={cn(
-                    "leading-[2.2] text-right font-medium",
+                    "leading-[2.2] font-medium",
+                    uiVariant === 'cinematic' ? "text-center" : "text-right",
                     currentSize.arabic,
                     arabicFont === 'Amiri' && "font-amiri",
                     arabicFont === 'Cairo' && "font-cairo",
@@ -326,13 +374,20 @@ export const HadithCard: React.FC<HadithCardProps> = ({
 
             {/* Translation */}
             {showTranslation && hadith.translation && (
-                <div className="mt-8 pt-8 border-t border-[var(--card-border)] relative z-10">
-                    <div className="flex items-center gap-2 mb-4 opacity-30">
+                <div className={cn(
+                    "mt-8 pt-8 border-t relative z-10",
+                    uiVariant === 'cinematic' ? "border-white/10" : "border-[var(--card-border)]"
+                )}>
+                    <div className={cn(
+                        "flex items-center gap-2 mb-4 opacity-30",
+                        uiVariant === 'cinematic' && "justify-center"
+                    )}>
                         <Globe className="w-4 h-4" />
                         <span className="text-xs font-bold uppercase tracking-widest">{t('translation')}</span>
                     </div>
                     <p className={cn(
-                        "leading-relaxed font-sans opacity-80",
+                        "leading-relaxed font-sans",
+                        uiVariant === 'cinematic' ? "opacity-90" : "opacity-80",
                         currentSize.english
                     )}>
                         {hadith.translation.text}
@@ -593,6 +648,8 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                 )}
             </AnimatePresence>
 
+            </div>
+
             {/* Copy Toast */}
             <AnimatePresence>
                 {showCopyToast && (
@@ -623,7 +680,10 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                             initial={{ opacity: 0, scale: 0.9, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="relative w-full max-w-md bg-[var(--card-bg)] border border-[var(--border-color)] rounded-[2rem] p-8 shadow-2xl overflow-hidden"
+                            className={cn(
+                                "relative w-full max-w-md border rounded-[2rem] p-8 shadow-2xl overflow-hidden",
+                                uiVariant === 'cinematic' ? "glass-cinematic border-white/10" : "bg-[var(--card-bg)] border-[var(--border-color)]"
+                            )}
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-[5rem] -mr-16 -mt-16" />
                             

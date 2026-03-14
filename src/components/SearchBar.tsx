@@ -7,6 +7,7 @@ import { useRouter } from '@/lib/navigation';
 import { cn } from '@/lib/utils';
 import { useTranslations, useLocale } from 'next-intl';
 import { hadithApi } from '@/lib/api/client';
+import { useReadingSettings } from '@/store/useReadingSettings';
 
 export interface SearchBarProps {
     className?: string;
@@ -23,6 +24,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onCl
     const [isLoading, setIsLoading] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const [itemToDelete, setItemToDelete] = useState<string | null>(null);
+    const { uiVariant } = useReadingSettings();
     const longPressTimer = useRef<NodeJS.Timeout | null>(null);
     const searchInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
@@ -180,9 +182,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onCl
                         placeholder={t('search_placeholder')}
                         autoComplete="off"
                         style={{
-                            backgroundColor: isFocused ? 'var(--input-focus-bg)' : 'var(--input-bg)',
+                            backgroundColor: uiVariant === 'cinematic' 
+                                ? (isFocused ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.05)')
+                                : (isFocused ? 'var(--input-focus-bg)' : 'var(--input-bg)'),
                             color: 'var(--page-text)',
-                            borderColor: 'var(--border-color)',
+                            borderColor: uiVariant === 'cinematic' 
+                                ? (isFocused ? 'rgba(245, 158, 11, 0.3)' : 'rgba(255, 255, 255, 0.05)')
+                                : 'var(--border-color)',
                             transition: 'all 0.4s cubic-bezier(0.19, 1, 0.22, 1)'
                         }}
                         className={cn(
@@ -195,8 +201,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onCl
                             <Loader2 className="w-4 h-4 text-emerald-500 animate-spin" />
                         ) : (
                             <Search
-                                className={cn("w-4 h-4 transition-colors", isFocused ? "text-emerald-500" : "text-gray-400")}
-                                style={{ color: !isFocused ? 'var(--muted-text)' : undefined }}
+                                className={cn("w-4 h-4 transition-colors", isFocused ? (uiVariant === 'cinematic' ? "text-amber-500" : "text-emerald-500") : "text-gray-400")}
+                                style={{ color: !isFocused ? (uiVariant === 'cinematic' ? "rgba(255,255,255,0.4)" : 'var(--muted-text)') : undefined }}
                             />
                         )}
                     </div>
@@ -222,11 +228,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onCl
                     <div
                         ref={dropdownRef}
                         style={{
-                            backgroundColor: 'var(--dropdown-bg)',
-                            borderColor: 'var(--border-color)',
+                            backgroundColor: uiVariant === 'cinematic' ? 'transparent' : 'var(--dropdown-bg)',
+                            borderColor: uiVariant === 'cinematic' ? 'rgba(255, 255, 255, 0.1)' : 'var(--border-color)',
                             color: 'var(--page-text)'
                         }}
-                        className="absolute top-full left-0 right-0 mt-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border overflow-hidden z-20 animate-in fade-in slide-in-from-top-2 duration-300 backdrop-blur-3xl"
+                        className={cn(
+                            "absolute top-full left-0 right-0 mt-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border overflow-hidden z-20 animate-in fade-in slide-in-from-top-2 duration-300 backdrop-blur-3xl",
+                            uiVariant === 'cinematic' && "glass-cinematic"
+                        )}
                     >
                         {/* Spell Correction Layer — "Did you mean: пророк?" */}
                         {spellSuggestions.length > 0 && query.trim().length > 0 && (
@@ -403,7 +412,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onCl
                             initial={{ opacity: 0, scale: 0.9, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="relative w-full max-w-sm bg-white dark:bg-emerald-950 p-6 rounded-[2rem] shadow-2xl border border-emerald-900/10 dark:border-emerald-500/20 overflow-hidden"
+                            className={cn(
+                                "relative w-full max-w-sm p-6 rounded-[2rem] shadow-2xl border overflow-hidden",
+                                uiVariant === 'cinematic'
+                                    ? "glass-cinematic border-white/10"
+                                    : "bg-white dark:bg-emerald-950 border-emerald-900/10 dark:border-emerald-500/20"
+                            )}
                         >
                             <div className="absolute top-0 right-0 p-8 opacity-5">
                                 <Trash2 className="w-24 h-24 text-emerald-600" />
