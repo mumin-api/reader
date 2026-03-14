@@ -89,6 +89,7 @@
         "report_error": "Сообщить об ошибке",
         "previous": "Предыдущий",
         "next": "Следующий",
+        "based_on_topics": "По темам",
         "grades": {
             "sahih": "Сахих",
             "hasan": "Хасан",

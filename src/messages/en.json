@@ -89,6 +89,7 @@
         "report_error": "Report Error",
         "previous": "Previous",
         "next": "Next",
+        "based_on_topics": "Based on Topics",
         "grades": {
             "sahih": "Sahih",
             "hasan": "Hasan",

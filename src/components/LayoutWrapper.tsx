@@ -1,0 +1,40 @@
+'use client';
+
+import React from 'react';
+import { useReadingSettings } from '@/store/useReadingSettings';
+
+interface LayoutWrapperProps {
+  children: React.ReactNode;
+  cinematicNavbar: React.ReactNode;
+  classicNavbar: React.ReactNode;
+}
+
+export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ 
+  children, 
+  cinematicNavbar, 
+  classicNavbar 
+}) => {
+  const { uiVariant } = useReadingSettings();
+  
+  if (uiVariant === 'cinematic') {
+    return (
+      <div className="flex min-h-screen">
+        {cinematicNavbar}
+        <main className="flex-1 lg:pl-24 transition-all duration-500">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            {children}
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {classicNavbar}
+      <main className="pt-20">
+        {children}
+      </main>
+    </>
+  );
+};

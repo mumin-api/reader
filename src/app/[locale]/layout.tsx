@@ -116,7 +116,7 @@ import { hadithApi } from '@/lib/api/client';
 import { CinematicBackground } from '@/components/CinematicBackground';
 import { CinematicNavbar } from '@/components/CinematicNavbar';
 import { Navbar } from '@/components/Navbar';
-import { useReadingSettings } from '@/store/useReadingSettings';
+import { LayoutWrapper } from '@/components/LayoutWrapper';
 
 export default async function RootLayout({
   children,
@@ -162,7 +162,6 @@ export default async function RootLayout({
             <GlobalPanels />
             <MobileTabBar />
             
-            {/* Conditional Navbar rendering is handled inside components or by wrapping */}
             <LayoutWrapper cinematicNavbar={<CinematicNavbar />} classicNavbar={<Navbar />}>
               {children}
             </LayoutWrapper>
@@ -172,38 +171,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
-// Client wrapper to handle the conditional layout structure based on uiVariant
-const LayoutWrapper = ({ 
-  children, 
-  cinematicNavbar, 
-  classicNavbar 
-}: { 
-  children: React.ReactNode,
-  cinematicNavbar: React.ReactNode,
-  classicNavbar: React.ReactNode
-}) => {
-  const { uiVariant } = useReadingSettings();
-  
-  if (uiVariant === 'cinematic') {
-    return (
-      <div className="flex min-h-screen">
-        {cinematicNavbar}
-        <main className="flex-1 lg:pl-24 transition-all duration-500">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            {children}
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  return (
-    <>
-      {classicNavbar}
-      <main className="pt-20">
-        {children}
-      </main>
-    </>
-  );
-};
