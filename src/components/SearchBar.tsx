@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, X, History, Sparkles, Loader2, BookOpen } from 'lucide-react';
+import { Search, X, History, Sparkles, Loader2, BookOpen, ArrowUpRight, Trash2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from '@/lib/navigation';
 import { cn } from '@/lib/utils';
 import { useTranslations, useLocale } from 'next-intl';
@@ -15,6 +16,9 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
     const [spellSuggestions, setSpellSuggestions] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(-1);
+    const [itemToDelete, setItemToDelete] = useState<string | null>(null);
+    const longPressTimer = useRef<NodeJS.Timeout | null>(null);
+    const searchInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const t = useTranslations('Navbar');
     const locale = useLocale();
@@ -108,10 +112,46 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
         }
     };
 
+    const removeFromHistory = (itemToRemove: string) => {
+        const newHistory = history.filter(h => h !== itemToRemove);
+        setHistory(newHistory);
+        
+        // Update persistent storage
+        const savedHistory = localStorage.getItem('mumin_search_history');
+        if (savedHistory) {
+            const fullHistory: string[] = JSON.parse(savedHistory);
+            const updatedHistory = fullHistory.filter(h => h !== itemToRemove);
+            localStorage.setItem('mumin_search_history', JSON.stringify(updatedHistory));
+        }
+        setItemToDelete(null);
+    };
+
     const clearHistory = (e: React.MouseEvent) => {
         e.stopPropagation();
         setHistory([]);
         localStorage.removeItem('mumin_search_history');
+    };
+
+    // Long press logic
+    const handleLongPressStart = (item: string) => {
+        longPressTimer.current = setTimeout(() => {
+            setItemToDelete(item);
+        }, 600); // 600ms for long press
+    };
+
+    const handleLongPressEnd = () => {
+        if (longPressTimer.current) {
+            clearTimeout(longPressTimer.current);
+            longPressTimer.current = null;
+        }
+    };
+
+    const handleInsertQuery = (e: React.MouseEvent, item: string) => {
+        e.stopPropagation();
+        setQuery(item);
+        if (searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
     };
 
     return (
@@ -119,6 +159,7 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
             <form onSubmit={(e) => { e.preventDefault(); handleSearch(query); }} className="relative z-20">
                 <div className="relative group">
                     <input
+                        ref={searchInputRef}
                         type="text"
                         value={query}
                         onChange={(e) => { setQuery(e.target.value); setSelectedIndex(-1); }}
@@ -245,18 +286,39 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
                                     </button>
                                 </div>
                                 {history.map((item, idx) => (
-                                    <button
+                                    <div
                                         key={item}
-                                        onClick={() => handleSearch(item)}
-                                        onMouseEnter={() => setSelectedIndex(idx)}
+                                        onContextMenu={(e) => {
+                                            e.preventDefault();
+                                            setItemToDelete(item);
+                                        }}
+                                        onTouchStart={() => handleLongPressStart(item)}
+                                        onTouchEnd={handleLongPressEnd}
+                                        onMouseDown={() => handleLongPressStart(item)}
+                                        onMouseUp={handleLongPressEnd}
+                                        onMouseLeave={handleLongPressEnd}
                                         className={cn(
-                                            "flex items-center gap-3 w-full px-3 py-2.5 rounded-xl transition-all duration-200 text-left group",
+                                            "flex items-center justify-between w-full px-3 py-2.5 rounded-xl transition-all duration-200 text-left group relative",
                                             selectedIndex === idx ? "bg-emerald-600/15" : "hover:bg-emerald-600/5"
                                         )}
                                     >
-                                        <Search className="w-4 h-4 text-gray-400 group-hover:text-emerald-500 transition-colors" />
-                                        <span className="text-sm opacity-90">{item}</span>
-                                    </button>
+                                        <button
+                                            onClick={() => handleSearch(item)}
+                                            onMouseEnter={() => setSelectedIndex(idx)}
+                                            className="flex items-center gap-3 flex-1 text-left"
+                                        >
+                                            <Search className="w-4 h-4 text-gray-400 group-hover:text-emerald-500 transition-colors" />
+                                            <span className="text-sm opacity-90 truncate">{item}</span>
+                                        </button>
+                                        
+                                        <button
+                                            onClick={(e) => handleInsertQuery(e, item)}
+                                            className="p-2 opacity-0 group-hover:opacity-100 hover:bg-emerald-500/10 rounded-lg transition-all"
+                                            title="Insert into search"
+                                        >
+                                            <ArrowUpRight className="w-4 h-4 text-emerald-500" />
+                                        </button>
+                                    </div>
                                 ))}
                             </div>
                         )}
@@ -312,6 +374,54 @@ export const SearchBar: React.FC<{ className?: string }> = ({ className }) => {
                     </div>
                 </>
             )}
+
+            {/* Delete Confirmation Modal */}
+            <AnimatePresence>
+                {itemToDelete && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setItemToDelete(null)}
+                            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="relative w-full max-w-sm bg-white dark:bg-emerald-950 p-6 rounded-[2rem] shadow-2xl border border-emerald-900/10 dark:border-emerald-500/20 overflow-hidden"
+                        >
+                            <div className="absolute top-0 right-0 p-8 opacity-5">
+                                <Trash2 className="w-24 h-24 text-emerald-600" />
+                            </div>
+                            
+                            <h3 className="text-xl font-display font-bold mb-2" style={{ color: 'var(--page-text)' }}>
+                                {t('delete_history_title') || 'Remove from history?'}
+                            </h3>
+                            <p className="text-sm mb-6 opacity-60" style={{ color: 'var(--page-text)' }}>
+                                "{itemToDelete}"
+                            </p>
+                            
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => setItemToDelete(null)}
+                                    className="flex-1 py-3 px-4 rounded-2xl bg-gray-100 dark:bg-white/5 font-bold text-sm transition-colors hover:bg-gray-200 dark:hover:bg-white/10"
+                                    style={{ color: 'var(--page-text)' }}
+                                >
+                                    {t('cancel') || 'Cancel'}
+                                </button>
+                                <button
+                                    onClick={() => removeFromHistory(itemToDelete)}
+                                    className="flex-1 py-3 px-4 rounded-2xl bg-red-500 text-white font-bold text-sm shadow-lg shadow-red-500/20 hover:bg-red-600 transition-colors"
+                                >
+                                    {t('delete') || 'Delete'}
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
