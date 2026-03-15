@@ -2,17 +2,20 @@
 
 import React from 'react';
 import { useReadingSettings } from '@/store/useReadingSettings';
+import { cn } from '@/lib/utils';
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
   cinematicNavbar: React.ReactNode;
   classicNavbar: React.ReactNode;
+  mobileHeader: React.ReactNode;
 }
 
 export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ 
   children, 
   cinematicNavbar, 
-  classicNavbar 
+  classicNavbar,
+  mobileHeader
 }) => {
   const { uiVariant } = useReadingSettings();
   const [mounted, setMounted] = React.useState(false);
@@ -34,8 +37,8 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
   if (!mounted || isMobile || uiVariant === 'classic') {
     return (
       <>
-        {classicNavbar}
-        <main className="pt-20">
+        {isMobile ? mobileHeader : classicNavbar}
+        <main className={cn(isMobile ? "pt-16 pb-24" : "pt-20")}>
           {children}
         </main>
       </>

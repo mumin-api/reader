@@ -235,3 +235,38 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-emerald-900/20 rounded-full hover:bg-emerald-900/40 transition-colors;
 }
+
+/* Mobile-First Refinement */
+@media (max-width: 1024px) {
+  :root {
+    --transition-speed: 0.3s;
+  }
+
+  body {
+    @apply text-[15px] leading-relaxed;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none; /* Prevent pull-to-refresh if not needed */
+  }
+
+  h1 { @apply text-2xl; }
+  h2 { @apply text-xl; }
+  
+  .mobile-safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  
+  .mobile-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+  }
+
+  /* Make focus states more visible on mobile but hide if not using keyboard */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* Native-like bounce effect for cards */
+.active-bounce:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}

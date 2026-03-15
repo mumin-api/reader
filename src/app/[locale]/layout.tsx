@@ -116,6 +116,7 @@ import { hadithApi } from '@/lib/api/client';
 import { CinematicBackground } from '@/components/CinematicBackground';
 import { CinematicNavbar } from '@/components/CinematicNavbar';
 import { Navbar } from '@/components/Navbar';
+import { MobileHeader } from '@/components/MobileHeader';
 import { LayoutWrapper } from '@/components/LayoutWrapper';
 
 export default async function RootLayout({
@@ -163,7 +164,11 @@ export default async function RootLayout({
           <SpiritGate />
           <MobileTabBar />
           
-          <LayoutWrapper cinematicNavbar={<CinematicNavbar />} classicNavbar={<Navbar />}>
+          <LayoutWrapper 
+            cinematicNavbar={<CinematicNavbar />} 
+            classicNavbar={<Navbar />}
+            mobileHeader={<MobileHeader />}
+          >
             {children}
           </LayoutWrapper>
         </NextIntlClientProvider>
