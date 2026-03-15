@@ -180,6 +180,11 @@ export const hadithApi = {
         const response = await apiClient.get<any>(`/hadiths/${id}/explain/report`, { params: { message } });
         return response.data.data || response.data;
     },
+
+    getSystemStatus: async () => {
+        const response = await apiClient.get<any>('/system/status');
+        return response.data;
+    },
 };
 
 export interface HadithExplanation {

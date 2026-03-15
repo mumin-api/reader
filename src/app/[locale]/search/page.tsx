@@ -10,6 +10,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, Search as SearchIcon, SlidersHorizontal, AlertCircle, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StructuredData, generateBreadcrumbSchema } from '@/components/StructuredData';
+import { useSystemStore } from '@/store/useSystemStore';
+import { MaintenanceBanner } from '@/components/MaintenanceBanner';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://hadith.mumin.ink';
 
@@ -29,6 +31,8 @@ export default function SearchResultsPage() {
     const tNav = useTranslations('Navbar');
     const searchParams = useSearchParams();
     const query = searchParams.get('q') || '';
+    const isSemantic = searchParams.get('semantic') === 'true';
+    const { status: systemStatus } = useSystemStore();
 
     const router = useRouter();
     const [results, setResults] = useState<PaginatedResponse<Hadith> | null>(null);
@@ -279,6 +283,11 @@ export default function SearchResultsPage() {
 
                         {/* Results Area */}
                         <div className="lg:col-span-3 space-y-8">
+                            <MaintenanceBanner 
+                                isVisible={isSemantic && !systemStatus.search}
+                                featureName="Семантический поиск"
+                            />
+
                             {loading ? (
                                 <div className="space-y-8">
                                     {[1, 2, 3].map((i) => (

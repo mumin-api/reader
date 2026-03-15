@@ -24,6 +24,7 @@ import { cn, getCollectionSlug } from '@/lib/utils';
 import { Hadith, hadithApi, HadithExplanation } from '@/lib/api/client';
 import { useReadingSettings } from '@/store/useReadingSettings';
 import { useBookmarks } from '@/store/useBookmarks';
+import { useSystemStore } from '@/store/useSystemStore';
 import { useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from '@/lib/navigation';
@@ -54,6 +55,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
     const [reportMessage, setReportMessage] = useState('');
     const [isReporting, setIsReporting] = useState(false);
     const locale = useLocale();
+    const { status: systemStatus } = useSystemStore();
     const t = useTranslations('Hadith');
 
     const GRADES = {
@@ -614,16 +616,19 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                 {!hideAI && (
                     <button
                         onClick={handleFetchExplanation}
-                        disabled={isLoadingExplanation}
+                        disabled={isLoadingExplanation || !systemStatus.ai}
                         className={cn(
                             "flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 transform active:scale-95",
                             explanation 
                                 ? "bg-emerald-600 text-white shadow-xl shadow-emerald-600/20 hover:bg-emerald-700" 
-                                : "bg-emerald-500/5 text-emerald-700 hover:bg-emerald-500/10 border border-emerald-500/10"
+                                : !systemStatus.ai
+                                    ? "bg-gray-500/5 text-gray-400 border border-gray-500/10 cursor-not-allowed"
+                                    : "bg-emerald-500/5 text-emerald-700 hover:bg-emerald-500/10 border border-emerald-500/10"
                         )}
+                        title={!systemStatus.ai ? "ИИ-объяснения временно отключены" : ""}
                     >
-                        <Sparkles className={cn("w-3.5 h-3.5", isLoadingExplanation && "animate-spin")} />
-                        {explanation ? t('MuminAI.hide_meaning') : t('MuminAI.show_meaning')}
+                        <Sparkles className={cn("w-3.5 h-3.5", isLoadingExplanation && "animate-spin", !systemStatus.ai && "opacity-30")} />
+                        {explanation ? t('MuminAI.hide_meaning') : systemStatus.ai ? t('MuminAI.show_meaning') : "AI MAINTENANCE"}
                     </button>
                 )}
             </div>

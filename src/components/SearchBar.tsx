@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { useTranslations, useLocale } from 'next-intl';
 import { hadithApi } from '@/lib/api/client';
 import { useReadingSettings } from '@/store/useReadingSettings';
+import { useSystemStore } from '@/store/useSystemStore';
 
 export interface SearchBarProps {
     className?: string;
@@ -30,6 +31,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onCl
     const router = useRouter();
     const t = useTranslations('Navbar');
     const locale = useLocale();
+    const { status: systemStatus } = useSystemStore();
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     // Fetch history from localStorage
@@ -349,18 +351,30 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onCl
                         {query && (
                             <div className="p-2 border-b border-emerald-500/10">
                                 <button
-                                    onClick={() => handleSearch(query, true)}
-                                    className="flex items-center gap-3 w-full px-3 py-3 hover:bg-emerald-500/10 rounded-xl transition-all duration-200 text-left group border border-dashed border-emerald-500/20"
+                                    onClick={() => systemStatus.search && handleSearch(query, true)}
+                                    disabled={!systemStatus.search}
+                                    className={cn(
+                                        "flex items-center gap-3 w-full px-3 py-3 rounded-xl transition-all duration-200 text-left group border border-dashed",
+                                        systemStatus.search 
+                                            ? "hover:bg-emerald-500/10 border-emerald-500/20" 
+                                            : "opacity-40 cursor-not-allowed border-gray-500/20"
+                                    )}
                                 >
-                                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
-                                        <Sparkles className="w-4 h-4 text-emerald-500 animate-pulse" />
+                                    <div className={cn(
+                                        "w-8 h-8 rounded-lg flex items-center justify-center transition-colors",
+                                        systemStatus.search ? "bg-emerald-500/10 group-hover:bg-emerald-500/20" : "bg-gray-500/10"
+                                    )}>
+                                        <Sparkles className={cn("w-4 h-4", systemStatus.search ? "text-emerald-500 animate-pulse" : "text-gray-400")} />
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                                        <span className={cn("text-sm font-bold", systemStatus.search ? "text-emerald-600 dark:text-emerald-400" : "text-gray-400")}>
                                             {t('semantic_search') || 'Semantic Search'}
+                                            {!systemStatus.search && " (Временно недоступно)"}
                                         </span>
                                         <span className="text-[10px] opacity-50 leading-tight">
-                                            {t('semantic_search_desc') || 'Search by meaning using AI'}
+                                            {systemStatus.search 
+                                                ? (t('semantic_search_desc') || 'Search by meaning using AI')
+                                                : "Проводятся технические работы по улучшению точности поиска"}
                                         </span>
                                     </div>
                                 </button>

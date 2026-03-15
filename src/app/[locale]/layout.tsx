@@ -112,11 +112,11 @@ import { Analytics } from '@/components/Analytics';
 import { ClientOnly } from '@/components/ClientOnly';
 import { SpiritGate } from '@/components/SpiritGate';
 import { MobileTabBar } from '@/components/MobileTabBar';
+import { SystemStatusInitializer } from '@/components/SystemStatusInitializer';
 import { hadithApi } from '@/lib/api/client';
 import { CinematicBackground } from '@/components/CinematicBackground';
 import { CinematicNavbar } from '@/components/CinematicNavbar';
 import { Navbar } from '@/components/Navbar';
-import { MobileHeader } from '@/components/MobileHeader';
 import { LayoutWrapper } from '@/components/LayoutWrapper';
 
 export default async function RootLayout({
@@ -156,6 +156,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ClientOnly>
             <ThemeApplier />
+            <SystemStatusInitializer />
             <CinematicBackground />
             <Analytics />
             <GlobalPanels />
@@ -167,7 +168,6 @@ export default async function RootLayout({
           <LayoutWrapper 
             cinematicNavbar={<CinematicNavbar />} 
             classicNavbar={<Navbar />}
-            mobileHeader={<MobileHeader />}
           >
             {children}
           </LayoutWrapper>

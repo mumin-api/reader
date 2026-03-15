@@ -2,22 +2,23 @@
 
 import React from 'react';
 import { useReadingSettings } from '@/store/useReadingSettings';
+import { useSystemStore } from '@/store/useSystemStore';
+import { MaintenanceBanner } from './MaintenanceBanner';
 import { cn } from '@/lib/utils';
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
   cinematicNavbar: React.ReactNode;
   classicNavbar: React.ReactNode;
-  mobileHeader: React.ReactNode;
 }
 
 export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ 
   children, 
   cinematicNavbar, 
-  classicNavbar,
-  mobileHeader
+  classicNavbar
 }) => {
   const { uiVariant } = useReadingSettings();
+  const { status: systemStatus } = useSystemStore();
   const [mounted, setMounted] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
 
@@ -37,8 +38,18 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
   if (!mounted || isMobile || uiVariant === 'classic') {
     return (
       <>
-        {isMobile ? mobileHeader : classicNavbar}
-        <main className={cn(isMobile ? "pt-16 pb-24" : "pt-20")}>
+        {!isMobile && classicNavbar}
+        <main className={cn(isMobile ? "pb-24" : "pt-20")}>
+          {systemStatus.maintenance && (
+            <div className="max-w-7xl mx-auto px-4 mb-6">
+              <MaintenanceBanner 
+                isVisible={true}
+                featureName="Сервер"
+                type="error"
+                message="На сервере проводятся технические работы. Приносим извинения за временные неудобства. 🤲"
+              />
+            </div>
+          )}
           {children}
         </main>
       </>
