@@ -125,7 +125,7 @@ export const ShareImageModal: React.FC<ShareImageModalProps> = ({ hadith, isOpen
                                     {hadith.collection} #{hadith.hadithNumber}
                                 </span>
                                 <span className={cn("text-[9px] font-medium opacity-40", selectedBg.textColor)}>
-                                    mumin-api.ru
+                                    mumin.ink
                                 </span>
                             </div>
                         </div>
