@@ -625,10 +625,10 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                                     ? "bg-gray-500/5 text-gray-400 border border-gray-500/10 cursor-not-allowed"
                                     : "bg-emerald-500/5 text-emerald-700 hover:bg-emerald-500/10 border border-emerald-500/10"
                         )}
-                        title={!systemStatus.ai ? "ИИ-объяснения временно отключены" : ""}
+                        title={!systemStatus.ai ? t('MuminAI.maintenance_desc') : ""}
                     >
                         <Sparkles className={cn("w-3.5 h-3.5", isLoadingExplanation && "animate-spin", !systemStatus.ai && "opacity-30")} />
-                        {explanation ? t('MuminAI.hide_meaning') : systemStatus.ai ? t('MuminAI.show_meaning') : "AI MAINTENANCE"}
+                        {explanation ? t('MuminAI.hide_meaning') : systemStatus.ai ? t('MuminAI.show_meaning') : t('MuminAI.maintenance_short')}
                     </button>
                 )}
             </div>

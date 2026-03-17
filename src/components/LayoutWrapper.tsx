@@ -5,6 +5,7 @@ import { useReadingSettings } from '@/store/useReadingSettings';
 import { useSystemStore } from '@/store/useSystemStore';
 import { MaintenanceBanner } from './MaintenanceBanner';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
 }) => {
   const { uiVariant } = useReadingSettings();
   const { status: systemStatus } = useSystemStore();
+  const t = useTranslations('Errors');
   const [mounted, setMounted] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
 
@@ -44,9 +46,9 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
             <div className="max-w-7xl mx-auto px-4 mb-6">
               <MaintenanceBanner 
                 isVisible={true}
-                featureName="Сервер"
+                featureName={t('server')}
                 type="error"
-                message="На сервере проводятся технические работы. Приносим извинения за временные неудобства. 🤲"
+                message={t('maintenanceDescription')}
               />
             </div>
           )}

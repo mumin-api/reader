@@ -106,6 +106,9 @@
             "disclaimer": "MuminAI can make mistakes. Always verify the information.",
             "report_error": "Report an error",
             "certainty_level": "Certainty Level: {level}",
+            "maintenance_title": "(Temporarily Unavailable)",
+            "maintenance_desc": "System maintenance in progress to improve performance",
+            "maintenance_short": "MAINTENANCE",
             "sections": {
                 "meaning": "Meaning Explanation",
                 "context": "Context & Terms",
@@ -217,6 +220,9 @@
     "Errors": {
         "serviceUnavailableTitle": "Service Unavailable",
         "serviceUnavailableDescription": "We apologize, but Mumin Hadith Reader is currently not available in your region due to local regulations.",
-        "contactSupport": "If you believe this is an error, please contact support."
+        "contactSupport": "If you believe this is an error, please contact support.",
+        "maintenanceTitle": "Maintenance",
+        "maintenanceDescription": "The server is currently undergoing technical maintenance. We apologize for the temporary inconvenience.",
+        "server": "Server"
     }
 }

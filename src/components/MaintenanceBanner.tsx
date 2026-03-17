@@ -19,12 +19,12 @@ export const MaintenanceBanner: React.FC<MaintenanceBannerProps> = ({
 }) => {
   if (!isVisible) return null;
 
-  const defaultMessage = `Функция "${featureName}" временно недоступна из-за технических работ по улучшению точности поиска. 🤲`;
+  const defaultMessage = `Функция "${featureName}" временно недоступна из-за технических работ по улучшению системы.`;
 
   const colors = {
-    warning: 'from-amber-500/20 to-orange-500/20 border-amber-500/30 text-amber-200',
-    info: 'from-sky-500/20 to-indigo-500/20 border-sky-500/30 text-sky-200',
-    error: 'from-rose-500/20 to-red-500/20 border-rose-500/30 text-rose-200',
+    warning: 'from-amber-600 to-orange-600 border-amber-500/50 text-white',
+    info: 'from-sky-600 to-indigo-600 border-sky-500/50 text-white',
+    error: 'from-rose-600 to-red-600 border-rose-500/50 text-white',
   };
 
   const Icons = {
@@ -41,7 +41,7 @@ export const MaintenanceBanner: React.FC<MaintenanceBannerProps> = ({
         initial={{ height: 0, opacity: 0, y: -20 }}
         animate={{ height: 'auto', opacity: 1, y: 0 }}
         exit={{ height: 0, opacity: 0, y: -20 }}
-        className="w-full mb-6 pointer-events-none"
+        className="w-full mb-6"
       >
         <div className={`
           relative overflow-hidden
@@ -49,26 +49,26 @@ export const MaintenanceBanner: React.FC<MaintenanceBannerProps> = ({
           border backdrop-blur-xl bg-gradient-to-r
           ${colors[type]}
           flex items-center gap-4
-          shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]
+          shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]
         `}>
           {/* Subtle Glow Background */}
-          <div className="absolute inset-0 bg-white/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/10 pointer-events-none" />
           
           <div className="flex-shrink-0">
-            <div className="p-2 rounded-xl bg-white/10">
-              <Icon className="w-5 h-5" />
+            <div className="p-2 rounded-xl bg-white/20">
+              <Icon className="w-5 h-5 text-white" />
             </div>
           </div>
 
           <div className="flex-grow">
-            <p className="text-sm md:text-base font-medium leading-relaxed">
+            <p className="text-sm md:text-base font-bold leading-relaxed text-white drop-shadow-sm">
               {message || defaultMessage}
             </p>
           </div>
 
           {/* Decorative Elements */}
-          <div className="hidden md:block flex-shrink-0 opacity-30 select-none">
-            <Hammer className="w-12 h-12 -rotate-12 transform" />
+          <div className="hidden md:block flex-shrink-0 opacity-20 select-none">
+            <Hammer className="w-12 h-12 -rotate-12 transform text-white" />
           </div>
         </div>
       </motion.div>

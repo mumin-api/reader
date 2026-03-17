@@ -369,12 +369,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ className, autoFocus, onCl
                                     <div className="flex flex-col">
                                         <span className={cn("text-sm font-bold", systemStatus.search ? "text-emerald-600 dark:text-emerald-400" : "text-gray-400")}>
                                             {t('semantic_search') || 'Semantic Search'}
-                                            {!systemStatus.search && " (Временно недоступно)"}
+                                            {!systemStatus.search && ` ${t('MuminAI.maintenance_title')}`}
                                         </span>
                                         <span className="text-[10px] opacity-50 leading-tight">
                                             {systemStatus.search 
                                                 ? (t('semantic_search_desc') || 'Search by meaning using AI')
-                                                : "Проводятся технические работы по улучшению точности поиска"}
+                                                : t('MuminAI.maintenance_desc')}
                                         </span>
                                     </div>
                                 </button>

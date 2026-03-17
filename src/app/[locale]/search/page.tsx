@@ -29,6 +29,7 @@ export default function SearchResultsPage() {
     const locale = params.locale as string || 'en';
     const t = useTranslations('Search');
     const tNav = useTranslations('Navbar');
+    const tHadith = useTranslations('Hadith');
     const searchParams = useSearchParams();
     const query = searchParams.get('q') || '';
     const isSemantic = searchParams.get('semantic') === 'true';
@@ -157,8 +158,6 @@ export default function SearchResultsPage() {
         performSearch();
     }, [query, locale, page, activeFilters, searchParams]);
 
-    const tHadith = useTranslations('Hadith');
-
     return (
         <main className="min-h-screen relative bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-500 overflow-x-hidden">
             <StructuredData data={generateBreadcrumbSchema([
@@ -285,7 +284,8 @@ export default function SearchResultsPage() {
                         <div className="lg:col-span-3 space-y-8">
                             <MaintenanceBanner 
                                 isVisible={isSemantic && !systemStatus.search}
-                                featureName="Семантический поиск"
+                                featureName={tNav('semantic_search')}
+                                message={tHadith('MuminAI.maintenance_desc')}
                             />
 
                             {loading ? (
