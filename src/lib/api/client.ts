@@ -183,7 +183,7 @@ export const hadithApi = {
 
     getSystemStatus: async () => {
         const response = await apiClient.get<any>('/system/status');
-        return response.data;
+        return response.data.data || response.data;
     },
 };
 
