@@ -88,7 +88,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                 collection: hadith.collection,
                 bookNumber: hadith.bookNumber,
                 hadithNumber: hadith.hadithNumber,
-                textPreview: hadith.translation?.text.substring(0, 100) || '',
+                textPreview: hadith.translation?.text?.substring(0, 100) || '',
                 timestamp: Date.now(),
             });
         }
