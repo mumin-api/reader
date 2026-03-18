@@ -124,7 +124,13 @@ export const HadithCard: React.FC<HadithCardProps> = ({
     };
 
     const handleShare = async () => {
-        const url = `${window.location.origin}/collections/${hadith.collection}/${hadith.hadithNumber}`;
+        let url = `${window.location.origin}/collections/${hadith.collection}/${hadith.hadithNumber}`;
+        
+        // If AI explanation is currently active, we add the ?ai=1 parameter to the share link
+        if (explanation) {
+            url += '?ai=1';
+        }
+
         if (navigator.share) {
             try {
                 await navigator.share({
@@ -144,6 +150,16 @@ export const HadithCard: React.FC<HadithCardProps> = ({
             setTimeout(() => setShowCopyToast(false), 2000);
         }
     };
+
+    // Auto-load AI if ?ai=1 is in URL
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('ai') === '1' && !explanation && !isLoadingExplanation && systemStatus.ai) {
+                handleFetchExplanation();
+            }
+        }
+    }, [systemStatus.ai]);
 
     const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
 
@@ -727,6 +743,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                 {showImageModal && (
                     <ShareImageModal
                         hadith={hadith}
+                        explanation={explanation || undefined}
                         isOpen={showImageModal}
                         onClose={() => setShowImageModal(false)}
                     />

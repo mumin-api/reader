@@ -40,8 +40,8 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({
   if (!mounted || isMobile || uiVariant === 'classic') {
     return (
       <>
-        {!isMobile && classicNavbar}
-        <main className={cn(isMobile ? "pb-24" : "pt-20")}>
+        {classicNavbar}
+        <main className={cn(isMobile ? "pb-24 pt-16" : "pt-20")}>
           {systemStatus.maintenance && (
             <div className="max-w-7xl mx-auto px-4 mb-6">
               <MaintenanceBanner 
