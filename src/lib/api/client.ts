@@ -193,6 +193,7 @@ export interface HadithExplanation {
     languageCode: string;
     content: {
         short_meaning: string;
+        social_summary: string;
         long_meaning: string;
         meaning?: string; // Legacy support
         context: string;

@@ -168,7 +168,7 @@ export const ShareImageModal: React.FC<ShareImageModalProps> = ({ hadith, explan
                                             className={cn("italic leading-relaxed", selectedBg.textColor)}
                                             style={{ fontSize: `${fontSize * 0.8}px` }}
                                         >
-                                            {explanation.content.short_meaning || explanation.content.meaning}
+                                            {explanation.content.social_summary || explanation.content.short_meaning || explanation.content.meaning}
                                         </p>
                                     </div>
                                 )}
