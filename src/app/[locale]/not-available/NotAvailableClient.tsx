@@ -22,7 +22,7 @@ export default function NotAvailableClient({ title, description, supportLinkText
           <div className="w-10 h-10 bg-emerald-900 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-900/20">
             <BookOpen className="w-5 h-5 text-emerald-50" />
           </div>
-          <span className="text-xl font-display font-bold px-1 bg-gradient-to-r from-emerald-950 to-emerald-800 dark:from-emerald-50 dark:to-emerald-200 bg-clip-text text-transparent">
+          <span className="text-xl font-logo font-bold px-1 bg-gradient-to-r from-emerald-950 to-emerald-800 dark:from-emerald-50 dark:to-emerald-200 bg-clip-text text-transparent">
             Mumin
           </span>
         </div>

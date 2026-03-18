@@ -436,7 +436,7 @@ export const HadithCard: React.FC<HadithCardProps> = ({
                                 <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
                                     <Sparkles className="w-5 h-5 text-emerald-600 animate-pulse" />
                                 </div>
-                                <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-800 dark:text-emerald-400">
+                                <span className="text-sm font-logo font-black uppercase tracking-[0.2em] text-emerald-800 dark:text-emerald-400">
                                     {t('MuminAI.title')}
                                 </span>
                             </div>

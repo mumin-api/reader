@@ -251,7 +251,7 @@ export default function HomePageClient({ initialDailyHadith, initialFeaturedColl
                                     className="object-contain" 
                                 />
                             </div>
-                            <span className="text-xl font-display font-bold" style={{ color: 'var(--page-text)' }}>Mumin Hadith</span>
+                            <span className="text-xl font-logo font-bold" style={{ color: 'var(--page-text)' }}>Mumin Hadith</span>
                         </Link>
                         <p className="max-w-sm leading-relaxed mb-8 text-sm" style={{ color: 'var(--muted-text)' }}>
                             {tFooter('description')}

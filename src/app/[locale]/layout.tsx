@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, Amiri, Cairo } from "next/font/google";
+import { Inter, Playfair_Display, Amiri, Cairo, Outfit } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: 'swap',
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
   display: 'swap',
 });
 
@@ -148,6 +154,7 @@ export default async function RootLayout({
         className={cn(
           "min-h-screen font-body antialiased",
           inter.variable,
+          outfit.variable,
           playfair.variable,
           amiri.variable,
           cairo.variable

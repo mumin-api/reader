@@ -55,6 +55,7 @@ const config: Config = {
                 display: ['var(--font-playfair)', 'var(--font-amiri)', 'serif'],
                 body: ['var(--font-inter)', 'var(--font-cairo)', 'sans-serif'],
                 accent: ['var(--font-poppins)', 'var(--font-tajawal)', 'sans-serif'],
+                logo: ['var(--font-outfit)', 'sans-serif'],
             },
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-in-out',

@@ -181,6 +181,11 @@
   .gradient-text {
     @apply bg-gradient-to-r from-emerald-600 to-gold-500 text-transparent bg-clip-text;
   }
+
+  /* Centralized Logo Font */
+  .font-logo {
+    font-family: var(--font-outfit), sans-serif !important;
+  }
 }
 
 @layer utilities {

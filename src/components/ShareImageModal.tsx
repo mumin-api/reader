@@ -123,7 +123,7 @@ export const ShareImageModal: React.FC<ShareImageModalProps> = ({ hadith, explan
                                 <div className="w-10 h-10 bg-white dark:bg-emerald-950/30 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg border border-white/20">
                                     <img src="/icons/logo.svg" alt="Mumin" className="w-7 h-7" />
                                 </div>
-                                <span className={cn("text-xl font-display font-black tracking-tight", selectedBg.textColor)}>
+                                <span className={cn("text-xl font-logo font-black tracking-tight", selectedBg.textColor)}>
                                     Mumin
                                 </span>
                             </div>

@@ -75,7 +75,7 @@ export const MobileTabBar: React.FC = () => {
             style={{ backgroundColor: uiVariant === 'cinematic' ? 'transparent' : 'var(--page-bg)' }}
           >
             <div className="flex justify-between items-center mb-6">
-              <span className="text-xl font-display font-bold" style={{ color: 'var(--page-text)' }}>
+              <span className="text-xl font-logo font-bold" style={{ color: 'var(--page-text)' }}>
                 {t('search_title') || 'Search Library'}
               </span>
               <button 
